@@ -1,0 +1,520 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5E840FDD95C14B557961BA64 /* Pods_Fodinha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7803A1992AD8927090BB98 /* Pods_Fodinha.framework */; };
+		BB1939DD2449FF9300BA8210 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1939DC2449FF9300BA8210 /* AppDelegate.swift */; };
+		BB1939DF2449FF9300BA8210 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1939DE2449FF9300BA8210 /* SceneDelegate.swift */; };
+		BB1939E22449FF9300BA8210 /* Fodinha.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BB1939E02449FF9300BA8210 /* Fodinha.xcdatamodeld */; };
+		BB1939E42449FF9300BA8210 /* AvailableGamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1939E32449FF9300BA8210 /* AvailableGamesView.swift */; };
+		BB1939E62449FF9500BA8210 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB1939E52449FF9500BA8210 /* Assets.xcassets */; };
+		BB1939E92449FF9500BA8210 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB1939E82449FF9500BA8210 /* Preview Assets.xcassets */; };
+		BB1939EC2449FF9500BA8210 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB1939EA2449FF9500BA8210 /* LaunchScreen.storyboard */; };
+		BB1939F4244E202D00BA8210 /* AvailableGamesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1939F3244E202D00BA8210 /* AvailableGamesViewModel.swift */; };
+		BB1939F8244E209C00BA8210 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1939F7244E209C00BA8210 /* Game.swift */; };
+		BB3CB3E8244E2C5B0014A4C8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB3CB3E7244E2C5B0014A4C8 /* GoogleService-Info.plist */; };
+		BB82293A246388090076FD20 /* TableGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB822939246388090076FD20 /* TableGameView.swift */; };
+		BB94E0D124534624008DE1F4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB94E0D024534624008DE1F4 /* Extensions.swift */; };
+		BB94E0D32454B92B008DE1F4 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB94E0D22454B92B008DE1F4 /* Player.swift */; };
+		BBA160922465CA4700395E18 /* TableGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA160912465CA4700395E18 /* TableGameViewModel.swift */; };
+		BBA160942465D15900395E18 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA160932465D15900395E18 /* Card.swift */; };
+		BBA24F5A2464E2E800AF3001 /* PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA24F592464E2E800AF3001 /* PlayerItem.swift */; };
+		BBA24F5C2465A74400AF3001 /* CardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA24F5B2465A74400AF3001 /* CardItem.swift */; };
+		BBF0A93F246DFD6D00C682F8 /* HunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF0A93E246DFD6D00C682F8 /* HunchView.swift */; };
+		BBF0A941246E161A00C682F8 /* PlayerHunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF0A940246E161A00C682F8 /* PlayerHunchView.swift */; };
+		BBF0A943246E1AAC00C682F8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF0A942246E1AAB00C682F8 /* LoginView.swift */; };
+		BBF0A947246E217300C682F8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF0A946246E217300C682F8 /* LoginViewModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1F7803A1992AD8927090BB98 /* Pods_Fodinha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fodinha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACC16F05FDB47BFCB6661438 /* Pods-Fodinha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fodinha.debug.xcconfig"; path = "Target Support Files/Pods-Fodinha/Pods-Fodinha.debug.xcconfig"; sourceTree = "<group>"; };
+		BB1939D92449FF9300BA8210 /* Fodinha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fodinha.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB1939DC2449FF9300BA8210 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BB1939DE2449FF9300BA8210 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		BB1939E12449FF9300BA8210 /* Fodinha.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Fodinha.xcdatamodel; sourceTree = "<group>"; };
+		BB1939E32449FF9300BA8210 /* AvailableGamesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableGamesView.swift; sourceTree = "<group>"; };
+		BB1939E52449FF9500BA8210 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BB1939E82449FF9500BA8210 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BB1939EB2449FF9500BA8210 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BB1939ED2449FF9500BA8210 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB1939F3244E202D00BA8210 /* AvailableGamesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableGamesViewModel.swift; sourceTree = "<group>"; };
+		BB1939F7244E209C00BA8210 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		BB3CB3E7244E2C5B0014A4C8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BB822939246388090076FD20 /* TableGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableGameView.swift; sourceTree = "<group>"; };
+		BB94E0D024534624008DE1F4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		BB94E0D22454B92B008DE1F4 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		BBA160912465CA4700395E18 /* TableGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableGameViewModel.swift; sourceTree = "<group>"; };
+		BBA160932465D15900395E18 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		BBA24F592464E2E800AF3001 /* PlayerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerItem.swift; sourceTree = "<group>"; };
+		BBA24F5B2465A74400AF3001 /* CardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardItem.swift; sourceTree = "<group>"; };
+		BBF0A93E246DFD6D00C682F8 /* HunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HunchView.swift; sourceTree = "<group>"; };
+		BBF0A940246E161A00C682F8 /* PlayerHunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerHunchView.swift; sourceTree = "<group>"; };
+		BBF0A942246E1AAB00C682F8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		BBF0A946246E217300C682F8 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		DB5293B3611B3D510DDC6279 /* Pods-Fodinha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fodinha.release.xcconfig"; path = "Target Support Files/Pods-Fodinha/Pods-Fodinha.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BB1939D62449FF9300BA8210 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E840FDD95C14B557961BA64 /* Pods_Fodinha.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6C6EC5C8672BEBE4D00CB32B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1F7803A1992AD8927090BB98 /* Pods_Fodinha.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BB1939D02449FF9300BA8210 = {
+			isa = PBXGroup;
+			children = (
+				BB1939DB2449FF9300BA8210 /* Fodinha */,
+				BB1939DA2449FF9300BA8210 /* Products */,
+				ED26C96BDE3C645614067522 /* Pods */,
+				6C6EC5C8672BEBE4D00CB32B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		BB1939DA2449FF9300BA8210 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BB1939D92449FF9300BA8210 /* Fodinha.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BB1939DB2449FF9300BA8210 /* Fodinha */ = {
+			isa = PBXGroup;
+			children = (
+				BBF0A945246E215800C682F8 /* login */,
+				BB822938246387E80076FD20 /* tableGame */,
+				BB94E0CF24534612008DE1F4 /* helpers */,
+				BB1939F5244E203D00BA8210 /* availableGames */,
+				BB1939DC2449FF9300BA8210 /* AppDelegate.swift */,
+				BB1939DE2449FF9300BA8210 /* SceneDelegate.swift */,
+				BB1939E52449FF9500BA8210 /* Assets.xcassets */,
+				BB1939EA2449FF9500BA8210 /* LaunchScreen.storyboard */,
+				BB1939ED2449FF9500BA8210 /* Info.plist */,
+				BB3CB3E7244E2C5B0014A4C8 /* GoogleService-Info.plist */,
+				BB1939E02449FF9300BA8210 /* Fodinha.xcdatamodeld */,
+				BB1939E72449FF9500BA8210 /* Preview Content */,
+			);
+			path = Fodinha;
+			sourceTree = "<group>";
+		};
+		BB1939E72449FF9500BA8210 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				BB1939E82449FF9500BA8210 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BB1939F5244E203D00BA8210 /* availableGames */ = {
+			isa = PBXGroup;
+			children = (
+				BB1939E32449FF9300BA8210 /* AvailableGamesView.swift */,
+				BB1939F3244E202D00BA8210 /* AvailableGamesViewModel.swift */,
+				BB1939F7244E209C00BA8210 /* Game.swift */,
+				BB94E0D22454B92B008DE1F4 /* Player.swift */,
+				BBA160932465D15900395E18 /* Card.swift */,
+			);
+			path = availableGames;
+			sourceTree = "<group>";
+		};
+		BB822938246387E80076FD20 /* tableGame */ = {
+			isa = PBXGroup;
+			children = (
+				BB822939246388090076FD20 /* TableGameView.swift */,
+				BBA24F592464E2E800AF3001 /* PlayerItem.swift */,
+				BBA24F5B2465A74400AF3001 /* CardItem.swift */,
+				BBA160912465CA4700395E18 /* TableGameViewModel.swift */,
+				BBF0A93E246DFD6D00C682F8 /* HunchView.swift */,
+				BBF0A940246E161A00C682F8 /* PlayerHunchView.swift */,
+			);
+			path = tableGame;
+			sourceTree = "<group>";
+		};
+		BB94E0CF24534612008DE1F4 /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BB94E0D024534624008DE1F4 /* Extensions.swift */,
+			);
+			path = helpers;
+			sourceTree = "<group>";
+		};
+		BBF0A945246E215800C682F8 /* login */ = {
+			isa = PBXGroup;
+			children = (
+				BBF0A942246E1AAB00C682F8 /* LoginView.swift */,
+				BBF0A946246E217300C682F8 /* LoginViewModel.swift */,
+			);
+			path = login;
+			sourceTree = "<group>";
+		};
+		ED26C96BDE3C645614067522 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ACC16F05FDB47BFCB6661438 /* Pods-Fodinha.debug.xcconfig */,
+				DB5293B3611B3D510DDC6279 /* Pods-Fodinha.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BB1939D82449FF9300BA8210 /* Fodinha */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB1939F02449FF9500BA8210 /* Build configuration list for PBXNativeTarget "Fodinha" */;
+			buildPhases = (
+				AA0D18FEEFB75A6CDEC8504A /* [CP] Check Pods Manifest.lock */,
+				BB1939D52449FF9300BA8210 /* Sources */,
+				BB1939D62449FF9300BA8210 /* Frameworks */,
+				BB1939D72449FF9300BA8210 /* Resources */,
+				F186FA8BBD5ECBB817B05F0E /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Fodinha;
+			productName = Fodinha;
+			productReference = BB1939D92449FF9300BA8210 /* Fodinha.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BB1939D12449FF9300BA8210 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = "Vinicius Lima";
+				TargetAttributes = {
+					BB1939D82449FF9300BA8210 = {
+						CreatedOnToolsVersion = 11.4.1;
+					};
+				};
+			};
+			buildConfigurationList = BB1939D42449FF9300BA8210 /* Build configuration list for PBXProject "Fodinha" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BB1939D02449FF9300BA8210;
+			productRefGroup = BB1939DA2449FF9300BA8210 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BB1939D82449FF9300BA8210 /* Fodinha */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BB1939D72449FF9300BA8210 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB1939EC2449FF9500BA8210 /* LaunchScreen.storyboard in Resources */,
+				BB3CB3E8244E2C5B0014A4C8 /* GoogleService-Info.plist in Resources */,
+				BB1939E92449FF9500BA8210 /* Preview Assets.xcassets in Resources */,
+				BB1939E62449FF9500BA8210 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AA0D18FEEFB75A6CDEC8504A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Fodinha-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F186FA8BBD5ECBB817B05F0E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fodinha/Pods-Fodinha-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fodinha/Pods-Fodinha-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Fodinha/Pods-Fodinha-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BB1939D52449FF9300BA8210 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB1939DD2449FF9300BA8210 /* AppDelegate.swift in Sources */,
+				BBA160922465CA4700395E18 /* TableGameViewModel.swift in Sources */,
+				BB1939F8244E209C00BA8210 /* Game.swift in Sources */,
+				BB1939E22449FF9300BA8210 /* Fodinha.xcdatamodeld in Sources */,
+				BBA160942465D15900395E18 /* Card.swift in Sources */,
+				BB82293A246388090076FD20 /* TableGameView.swift in Sources */,
+				BB1939E42449FF9300BA8210 /* AvailableGamesView.swift in Sources */,
+				BBF0A93F246DFD6D00C682F8 /* HunchView.swift in Sources */,
+				BBA24F5C2465A74400AF3001 /* CardItem.swift in Sources */,
+				BB94E0D32454B92B008DE1F4 /* Player.swift in Sources */,
+				BBF0A947246E217300C682F8 /* LoginViewModel.swift in Sources */,
+				BB1939DF2449FF9300BA8210 /* SceneDelegate.swift in Sources */,
+				BBF0A941246E161A00C682F8 /* PlayerHunchView.swift in Sources */,
+				BBA24F5A2464E2E800AF3001 /* PlayerItem.swift in Sources */,
+				BB94E0D124534624008DE1F4 /* Extensions.swift in Sources */,
+				BBF0A943246E1AAC00C682F8 /* LoginView.swift in Sources */,
+				BB1939F4244E202D00BA8210 /* AvailableGamesViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BB1939EA2449FF9500BA8210 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BB1939EB2449FF9500BA8210 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BB1939EE2449FF9500BA8210 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BB1939EF2449FF9500BA8210 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BB1939F12449FF9500BA8210 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACC16F05FDB47BFCB6661438 /* Pods-Fodinha.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Fodinha/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Fodinha/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.games.Fodinha;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BB1939F22449FF9500BA8210 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB5293B3611B3D510DDC6279 /* Pods-Fodinha.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Fodinha/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Fodinha/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.games.Fodinha;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BB1939D42449FF9300BA8210 /* Build configuration list for PBXProject "Fodinha" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB1939EE2449FF9500BA8210 /* Debug */,
+				BB1939EF2449FF9500BA8210 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BB1939F02449FF9500BA8210 /* Build configuration list for PBXNativeTarget "Fodinha" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB1939F12449FF9500BA8210 /* Debug */,
+				BB1939F22449FF9500BA8210 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BB1939E02449FF9300BA8210 /* Fodinha.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BB1939E12449FF9300BA8210 /* Fodinha.xcdatamodel */,
+			);
+			currentVersion = BB1939E12449FF9300BA8210 /* Fodinha.xcdatamodel */;
+			path = Fodinha.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = BB1939D12449FF9300BA8210 /* Project object */;
+}

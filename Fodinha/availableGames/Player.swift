@@ -15,18 +15,17 @@ struct Player: Identifiable {
     init(document: QueryDocumentSnapshot) {
         self.active = document.get("active") as! Bool
         self.playerId = document.documentID
-        self.cardAmount = document.get("cardAmount") as? Int
         self.hunch = document.get("hunch") as? Int
         self.points = document.get("points") as? Int
         self.position = document.get("position") as? Int
         self.wins = document.get("wins") as? Int
-        self.name = document.get("name") as! String
+        self.name = document.get("name") as? String
         
-        let cards = document.data()["cards"]! as! [Any]
+        let cards = document.data()["cards"] as? [Any]
         
         self.cards = []
         
-        cards.forEach { card in
+        cards?.forEach { card in
             let cardObject = card as! [String: Any]
             
             self.cards.append(
@@ -51,13 +50,12 @@ struct Player: Identifiable {
     
     var id: ObjectIdentifier?
     var playerId: String = ""
-    var name: String = ""
+    var name: String? = ""
     var active: Bool = false
-    var cardAmount: Int?
     var hunch: Int?
     var points: Int?
     var position: Int?
     var wins: Int?
-    var cards: [Card] = []
+    var cards: [Card?] = []
     var currentCard: Card?
 }

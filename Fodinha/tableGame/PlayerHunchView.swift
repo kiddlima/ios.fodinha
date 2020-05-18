@@ -15,7 +15,7 @@ struct PlayerHunchView: View {
     var body: some View {
         VStack {
             if player.hunch != nil {
-                Text("Faz \(self.player.hunch!) - \(self.player.name)")
+                Text("Faz \(self.player.hunch!) - \(self.player.name!)")
                     .font(.caption)
                     .foregroundColor(Color("customLightGray"))
                     .padding(.top, 4)

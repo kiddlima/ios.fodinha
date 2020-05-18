@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "closure #3 in closure #2 in closure #1 in TableGameView.body.getter:TableGameView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.viewModel.currentPlayer.cards[0]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "GLOBAL">
          <PersistentStrings>
             <PersistentString
@@ -11,12 +19,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in AvailableGamesViewModel.listenToGames():AvailableGamesViewModel.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "error.debugDescription">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "closure #1 in TableGameViewModel.listenToPlayers():TableGameViewModel.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in Player.init(document:):Player.swift">
@@ -25,38 +28,66 @@
                value = "document.get(&quot;active&quot;) as! Bool">
             </PersistentString>
             <PersistentString
+               value = "cardObject[&quot;rank&quot;] as? Int">
+            </PersistentString>
+            <PersistentString
                value = "cardObject[&quot;value&quot;] as! Int">
             </PersistentString>
+            <PersistentString
+               value = "cardObject[&quot;suit&quot;] as? String">
+            </PersistentString>
+            <PersistentString
+               value = "document.data()[&quot;cards&quot;] as? [Any]">
+            </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in TableGameViewModel.listenToPlayers():TableGameViewModel.swift">
       </ContextState>
       <ContextState
          contextName = "Player.init(document:):Player.swift">
          <PersistentStrings>
             <PersistentString
-               value = "cards[0].playload_data_0">
+               value = "cards[0] as [String: Any][&quot;name&quot;]">
             </PersistentString>
             <PersistentString
                value = "document.data()![&quot;currentCard&quot;]! as [String : Any]">
             </PersistentString>
             <PersistentString
-               value = "cards[0] as [String: Any][&quot;name&quot;]">
+               value = "cards[0].playload_data_0">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #2 in closure #2 in closure #1 in TableGameView.body.getter:TableGameView.swift">
+         contextName = "LoginViewModel.login():LoginViewModel.swift">
          <PersistentStrings>
             <PersistentString
-               value = "viewModel.game.players[0]">
+               value = "self.email">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in closure #3 in closure #1 in closure #1 in LoginView.body.getter:LoginView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "authResult?.user.createProfileChangeRequest().displayName = self.name">
             </PersistentString>
             <PersistentString
-               value = "viewModel.game.players">
+               value = "error?.localizedDescription">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Card.init(rank:suit:value:):Card.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TableGameViewModel.init(game:):TableGameViewModel.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in LoginViewModel.login(email:password:):LoginViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "error?.localizedDescription">
             </PersistentString>
             <PersistentString
-               value = "viewModel.game.players[0].cards.count">
+               value = "authResult?.user.uid">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -72,13 +103,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in AvailableGamesViewModel.listenToGames():AvailableGamesViewModel.swift">
+         contextName = "closure #2 in closure #3 in closure #2 in closure #1 in TableGameView.body.getter:TableGameView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "games">
-            </PersistentString>
-            <PersistentString
-               value = "snap.get(&quot;name&quot;) as String">
+               value = "self.viewModel.currentPlayer.cards[index]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -90,6 +118,72 @@
             </PersistentString>
             <PersistentString
                value = "document.get(&quot;name&quot;)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in AvailableGamesViewModel.listenToGames():AvailableGamesViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "games">
+            </PersistentString>
+            <PersistentString
+               value = "snap.get(&quot;name&quot;) as String">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #3 in closure #1 in closure #1 in LoginView.body.getter:LoginView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "authResult?.user.displayName">
+            </PersistentString>
+            <PersistentString
+               value = "error?.localizedDescription">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in TableGameViewModel.addPlayerToGame():TableGameViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "error?.localizedDescription">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in AvailableGamesViewModel.listenToGames():AvailableGamesViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "error.debugDescription">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in CardItem.body.getter:CardItem.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "card?.suit">
+            </PersistentString>
+            <PersistentString
+               value = "card">
+            </PersistentString>
+            <PersistentString
+               value = "&quot;\(card?.suit!.lowercased())\(card?.value)&quot;">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #2 in closure #1 in TableGameView.body.getter:TableGameView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "viewModel.game.players">
+            </PersistentString>
+            <PersistentString
+               value = "viewModel.game.players[0].cards.count">
+            </PersistentString>
+            <PersistentString
+               value = "viewModel.game.players[0]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

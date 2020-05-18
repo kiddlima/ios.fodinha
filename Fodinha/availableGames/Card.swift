@@ -15,6 +15,7 @@ struct Card: Identifiable{
         self.rank = rank
         self.suit = suit
         self.value = value
+        self.imageName = self.suit!.lowercased() + String(self.value!)
     }
     
     init() {
@@ -25,5 +26,6 @@ struct Card: Identifiable{
     var rank: Int?
     var suit: String?
     var value: Int?
+    var imageName: String?
     
 }

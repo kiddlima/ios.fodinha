@@ -18,6 +18,7 @@
 		BB1939F4244E202D00BA8210 /* AvailableGamesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1939F3244E202D00BA8210 /* AvailableGamesViewModel.swift */; };
 		BB1939F8244E209C00BA8210 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1939F7244E209C00BA8210 /* Game.swift */; };
 		BB3CB3E8244E2C5B0014A4C8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB3CB3E7244E2C5B0014A4C8 /* GoogleService-Info.plist */; };
+		BB5AFF3B247090D40024824F /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5AFF3A247090D40024824F /* ActivityIndicator.swift */; };
 		BB82293A246388090076FD20 /* TableGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB822939246388090076FD20 /* TableGameView.swift */; };
 		BB94E0D124534624008DE1F4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB94E0D024534624008DE1F4 /* Extensions.swift */; };
 		BB94E0D32454B92B008DE1F4 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB94E0D22454B92B008DE1F4 /* Player.swift */; };
@@ -46,6 +47,7 @@
 		BB1939F3244E202D00BA8210 /* AvailableGamesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableGamesViewModel.swift; sourceTree = "<group>"; };
 		BB1939F7244E209C00BA8210 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		BB3CB3E7244E2C5B0014A4C8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BB5AFF3A247090D40024824F /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		BB822939246388090076FD20 /* TableGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableGameView.swift; sourceTree = "<group>"; };
 		BB94E0D024534624008DE1F4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BB94E0D22454B92B008DE1F4 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				BB94E0D024534624008DE1F4 /* Extensions.swift */,
+				BB5AFF3A247090D40024824F /* ActivityIndicator.swift */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				BBA24F5A2464E2E800AF3001 /* PlayerItem.swift in Sources */,
 				BB94E0D124534624008DE1F4 /* Extensions.swift in Sources */,
 				BBF0A943246E1AAC00C682F8 /* LoginView.swift in Sources */,
+				BB5AFF3B247090D40024824F /* ActivityIndicator.swift in Sources */,
 				BB1939F4244E202D00BA8210 /* AvailableGamesViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -447,6 +451,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Fodinha/Preview Content\"";
+				DEVELOPMENT_TEAM = 662Z4JVQ73;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Fodinha/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -467,6 +472,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Fodinha/Preview Content\"";
+				DEVELOPMENT_TEAM = 662Z4JVQ73;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Fodinha/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

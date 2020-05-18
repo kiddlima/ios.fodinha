@@ -15,13 +15,17 @@ struct CardItem: View {
     var body: some View {
         VStack{
             if card != nil {
-                Text("\(card!.value!) de \(card!.suit!)")
-                    .font(.callout)
+                Image((card?.imageName)!)
+                .resizable()
+                .cornerRadius(4)
+                .frame(width: 40, height: 67)
+                
             } else {
-                Text("Sem carta")
-                .font(.callout)
+                Image("verso")
+                .resizable()
+                .cornerRadius(4)
+                .frame(width: 40, height: 67)
             }
-            
         }
         .frame(width: 40, height: 67)
         .background(
@@ -34,6 +38,6 @@ struct CardItem: View {
 
 struct CardItem_Previews: PreviewProvider {
     static var previews: some View {
-        CardItem(card: nil)
+        CardItem(card: Card(rank: 4, suit: "paus", value: 4))
     }
 }

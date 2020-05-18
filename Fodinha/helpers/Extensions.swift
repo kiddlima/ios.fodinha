@@ -13,8 +13,13 @@ import UIKit
 extension Color{
     static let customDarkGray = Color("customDarkGray")
     static let customLighterGray = Color("customLighterGray")
-    static let tableDefaultRedColor =
-        Color("tableDefaultRedColor")
+    static let customLighter2Gray = Color("customLighter2Gray")
+    static let customLightGray = Color("customLightGray")
+    
+    static let tableDefaultGreen =
+        Color("tableDefaultGreen")
+    
+    static let yellowLight = Color("yellowLight")
 }
 
 extension UIColor{

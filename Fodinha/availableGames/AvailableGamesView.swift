@@ -10,7 +10,11 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @ObservedObject var viewModel = AvailableGamesViewModel()
+    @ObservedObject var loginViewModel = LoginViewModel()
+    
     @State var showingLogin = false
+    
     
     init() {
         UITableViewCell.appearance().backgroundColor = UIColor.customDarkGray
@@ -18,24 +22,40 @@ struct ContentView: View {
         UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
     }
-    
-    @ObservedObject var viewModel = AvailableGamesViewModel()
 
     var body: some View {
         NavigationView {
             List(viewModel.games, id: \.gameId){ game in
-                NavigationLink(destination: TableGameView(viewModel: TableGameViewModel(game: game))){
-                    RowView(game: game)
+                if self.loginViewModel.isLoggedIn {
+                    NavigationLink(destination: TableGameView(game: game)){
+                        RowView(game: game)
+                    }
+                } else {
+                    Button(action: {
+                        self.showingLogin.toggle()
+                    }) {
+                        RowView(game: game)
+                    }.sheet(isPresented: self.$showingLogin) {
+                        LoginView(viewModel: self.loginViewModel)
+                    }
                 }
             }
-            .navigationBarItems(trailing:
+            .navigationBarItems(leading: loginViewModel.isLoggedIn ? Text(UserDefaults.standard.string(forKey: "name")!) : Text(""),
+                trailing:
                 Button(action: {
-                    self.showingLogin.toggle()
-                    }) {
-                        Text("Acessar conta")
-                    }.sheet(isPresented: $showingLogin) {
-                        LoginView()
-            })
+                    if self.loginViewModel.isLoggedIn {
+                        UserDefaults.standard.set(nil, forKey: "uid")
+                        UserDefaults.standard.set(nil, forKey: "email")
+                        
+                        self.loginViewModel.isLoggedIn = false
+                    } else {
+                        self.showingLogin.toggle()
+                    }
+                }) {
+                    Text(loginViewModel.isLoggedIn ? "Sair" : "Entrar")
+                }.sheet(isPresented: $showingLogin) {
+                    LoginView(viewModel: self.loginViewModel)
+                })
             .navigationBarTitle(Text("Jogos disponíveis"))
             .listStyle(GroupedListStyle())
         }
@@ -58,6 +78,7 @@ struct RowView: View{
         
             if game.active! {
                 Image("activeIcon").resizable()
+                    .foregroundColor(Color.tableDefaultGreen)
                 .frame(width: 15, height:
                     15)
             }

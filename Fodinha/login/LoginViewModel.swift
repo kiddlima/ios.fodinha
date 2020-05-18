@@ -9,14 +9,22 @@
 import Foundation
 import Firebase
 import FirebaseAuth
+import SwiftUI
 
 class LoginViewModel: ObservableObject {
     
-    func login(email: String, password: String){
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-          guard let strongSelf = self else { return }
-          
-//            UserDefaults.standard.set(value: email, forKey: "email")
-        }
+    @Published var isLoggedIn: Bool = false
+    @Published var loading = false
+    
+    init() {
+        isLoggedIn = UserDefaults.standard.string(forKey: "uid") != nil
     }
+//    
+//    func login(email: String, password: String){
+//        
+//    }
+//    
+//    func singUp(email: String, password: String, name: String){
+////        
+//    }
 }

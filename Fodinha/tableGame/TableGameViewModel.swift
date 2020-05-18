@@ -8,17 +8,27 @@
 
 import SwiftUI
 import Firebase
+import FirebaseFirestore
+import SwiftUI
 
 class TableGameViewModel: ObservableObject {
     
     let db = Firestore.firestore()
     
     @Published var game: Game
+    @Published var currentPlayer: Player? = Player()
+    
+    @Published var loading: Bool
+    
+    var firstLoad: Bool = true
+    
+    var uid: String?
     
     init(game: Game) {
         self.game = game
+        uid = UserDefaults.standard.string(forKey: "uid")
         
-        listenToPlayers()
+        loading = firstLoad
     }
     
     func listenToPlayers(){
@@ -32,6 +42,23 @@ class TableGameViewModel: ObservableObject {
             }
             
             self.game.players = self.game.players.sorted(by: { $0.points! > $1.points! })
+            
+            // Find the current logged player inside the game
+            self.game.players.forEach { player in
+                if player.playerId == self.uid {
+                    self.currentPlayer = player
+                }
+            }
+            
+            if self.firstLoad && self.currentPlayer == nil {
+                self.addPlayerToGame()
+                
+                self.firstLoad = false
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                   self.loading = false
+                }
+            }
         }
     }
     
@@ -39,16 +66,19 @@ class TableGameViewModel: ObservableObject {
         
         for player in self.game.players {
             if player.playerId == self.game.turn {
-                return player.name
+                return player.name!
             }
         }
         
         return ""
     }
     
+    func isPlayerTurnByPosition(position: Int) -> Bool{
+        return game.turn! == getPlayerByPosition(position: position)!.playerId
+    }
+    
     func isPlayersTurnToHunch() -> Bool{
-        //TODO COMPARE WITH LOGGED PLAYER
-        return game.hunchTime!
+        return game.hunchTime! && game.turn == uid
     }
     
     func hasPlayerInThatPosition(position: Int) -> Bool{
@@ -74,6 +104,8 @@ class TableGameViewModel: ObservableObject {
     func shouldShowStartGameButton() -> Bool{
         return !game.active!
     }
+    
+    // Requests
     
     func setPlayerHunch(hunch: Int){
         guard let url = URL(string: "https://us-central1-fodinha-45405.cloudfunctions.net/hunch") else {
@@ -117,8 +149,27 @@ class TableGameViewModel: ObservableObject {
         }.resume()
     }
     
-//    func getUserCards() -> [Card]{
-//        //TODO
-//    }
+    func addPlayerToGame(){
+        db.collection("game")
+        .document(game.gameId!)
+        .collection("players")
+        .document(uid!)
+        .setData(
+            [
+                "active" : true,
+                "hunch": 0,
+                "points": 0,
+                "wins": 0,
+                "name": UserDefaults.standard.string(forKey: "name")!,
+                "position": game.players.count - 1
+        ])
+        {
+            error in
+            
+            if error == nil {
+                self.loading = false
+            }
+        }
+    }
     
 }

@@ -11,25 +11,27 @@ import SwiftUI
 struct PlayerItem: View {
     
     var player: Player
+    var isTurn: Bool
     
     var body: some View {
         HStack (spacing: -2){
             VStack (alignment: .leading, spacing: 2){
-                Text(player.name)
+                Text(player.name!)
                     .font(.callout)
                     .fontWeight(.regular)
+                    .foregroundColor(!isTurn ? Color.customLighter2Gray : Color.black)
                 Divider()
                 HStack{
                     if player.hunch != nil{
                         Text("Faz \(player.hunch!)")
                             .font(.caption)
                             .fontWeight(.light)
-                            .foregroundColor(Color("customLighterGray"))
+                            .foregroundColor(!isTurn ? Color.customLighter2Gray : Color.black)
                     } else {
                         Text("")
                         .font(.caption)
                         .fontWeight(.light)
-                            .foregroundColor(Color("customLighterGray")).hidden()
+                            .foregroundColor(Color.customLighter2Gray).hidden()
                     }
                     
                 }
@@ -39,7 +41,7 @@ struct PlayerItem: View {
             .frame(width: 104)
             .background(
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(Color.white)
+                    .fill(isTurn ? Color.yellowLight : Color.customLighterGray)
                 .shadow(radius: 4)
             )
             
@@ -50,7 +52,7 @@ struct PlayerItem: View {
 
 struct PlayerItem_Previews: PreviewProvider {
     static var previews: some View {
-        PlayerItem(player: Player())
+        PlayerItem(player: Player(), isTurn: true)
         .previewLayout(.fixed(width: 500, height: 200))
     }
 }

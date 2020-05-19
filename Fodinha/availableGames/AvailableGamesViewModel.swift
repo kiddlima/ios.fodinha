@@ -19,7 +19,7 @@ class AvailableGamesViewModel: ObservableObject {
     init() {
         listenToGames()
     }
-    
+
     func listenToGames(){
         db.collection("game").addSnapshotListener { documentSnapshot, error in
             

@@ -14,20 +14,13 @@ struct ContentView: View {
     @ObservedObject var loginViewModel = LoginViewModel()
     
     @State var showingLogin = false
+    @State var showingGame = false
     
-    
-    init() {
-        UITableViewCell.appearance().backgroundColor = UIColor.customDarkGray
-        UITableView.appearance().backgroundColor = UIColor.customLightGray
-        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
-    }
-
     var body: some View {
         NavigationView {
             List(viewModel.games, id: \.gameId){ game in
                 if self.loginViewModel.isLoggedIn {
-                    NavigationLink(destination: TableGameView(game: game)){
+                    NavigationLink(destination: NavigationLazyView(TableGameView(game: game))){
                         RowView(game: game)
                     }
                 } else {
@@ -58,6 +51,12 @@ struct ContentView: View {
                 })
             .navigationBarTitle(Text("Jogos disponíveis"))
             .listStyle(GroupedListStyle())
+        }
+        .onAppear(){
+            UITableViewCell.appearance().backgroundColor = UIColor.customDarkGray
+            UITableView.appearance().backgroundColor = UIColor.customLightGray
+            UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+            UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         }
     }
 }

@@ -19,6 +19,8 @@ struct CardItem: View {
                 .resizable()
                 .cornerRadius(4)
                 .frame(width: 40, height: 67)
+                .overlay(card!.selected ? RoundedRectangle(cornerRadius: 4)
+                    .stroke(Color.white, lineWidth: 3) : nil)
                 
             } else {
                 Image("verso")

@@ -102,6 +102,8 @@ struct LoginView: View {
                                         self.isSignUp = false
                                         self.loading = false
                                     }
+                                } else {
+                                    self.loading = false
                                 }
                             }
                         }

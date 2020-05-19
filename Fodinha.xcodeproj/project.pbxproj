@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5E840FDD95C14B557961BA64 /* Pods_Fodinha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7803A1992AD8927090BB98 /* Pods_Fodinha.framework */; };
+		BB1465222472D33C00609B48 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1465212472D33C00609B48 /* PrimaryButton.swift */; };
+		BB146524247348A800609B48 /* NavigationLazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB146523247348A800609B48 /* NavigationLazyView.swift */; };
 		BB1939DD2449FF9300BA8210 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1939DC2449FF9300BA8210 /* AppDelegate.swift */; };
 		BB1939DF2449FF9300BA8210 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1939DE2449FF9300BA8210 /* SceneDelegate.swift */; };
 		BB1939E22449FF9300BA8210 /* Fodinha.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BB1939E02449FF9300BA8210 /* Fodinha.xcdatamodeld */; };
@@ -35,6 +37,8 @@
 /* Begin PBXFileReference section */
 		1F7803A1992AD8927090BB98 /* Pods_Fodinha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fodinha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC16F05FDB47BFCB6661438 /* Pods-Fodinha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fodinha.debug.xcconfig"; path = "Target Support Files/Pods-Fodinha/Pods-Fodinha.debug.xcconfig"; sourceTree = "<group>"; };
+		BB1465212472D33C00609B48 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		BB146523247348A800609B48 /* NavigationLazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLazyView.swift; sourceTree = "<group>"; };
 		BB1939D92449FF9300BA8210 /* Fodinha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fodinha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB1939DC2449FF9300BA8210 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB1939DE2449FF9300BA8210 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -157,6 +161,8 @@
 			children = (
 				BB94E0D024534624008DE1F4 /* Extensions.swift */,
 				BB5AFF3A247090D40024824F /* ActivityIndicator.swift */,
+				BB1465212472D33C00609B48 /* PrimaryButton.swift */,
+				BB146523247348A800609B48 /* NavigationLazyView.swift */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -308,9 +314,11 @@
 				BBF0A947246E217300C682F8 /* LoginViewModel.swift in Sources */,
 				BB1939DF2449FF9300BA8210 /* SceneDelegate.swift in Sources */,
 				BBF0A941246E161A00C682F8 /* PlayerHunchView.swift in Sources */,
+				BB146524247348A800609B48 /* NavigationLazyView.swift in Sources */,
 				BBA24F5A2464E2E800AF3001 /* PlayerItem.swift in Sources */,
 				BB94E0D124534624008DE1F4 /* Extensions.swift in Sources */,
 				BBF0A943246E1AAC00C682F8 /* LoginView.swift in Sources */,
+				BB1465222472D33C00609B48 /* PrimaryButton.swift in Sources */,
 				BB5AFF3B247090D40024824F /* ActivityIndicator.swift in Sources */,
 				BB1939F4244E202D00BA8210 /* AvailableGamesViewModel.swift in Sources */,
 			);

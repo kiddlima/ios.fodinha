@@ -27,5 +27,6 @@ struct Card: Identifiable{
     var suit: String?
     var value: Int?
     var imageName: String?
+    var selected: Bool = false
     
 }

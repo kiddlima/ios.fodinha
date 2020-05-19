@@ -16,19 +16,21 @@ class TableGameViewModel: ObservableObject {
     let db = Firestore.firestore()
     
     @Published var game: Game
-    @Published var currentPlayer: Player? = Player()
+    @Published var currentPlayer: Player?
+    var selectedCard: Card?
     
-    @Published var loading: Bool
-    
+    @Published var loadingStartGame: Bool = false
+    @Published var loadingPlay: Bool = false
     var firstLoad: Bool = true
-    
+    var isPlayerInTheGameAlready: Bool = false
+       
     var uid: String?
     
     init(game: Game) {
         self.game = game
         uid = UserDefaults.standard.string(forKey: "uid")
         
-        loading = firstLoad
+        self.listenToPlayers()
     }
     
     func listenToPlayers(){
@@ -47,19 +49,26 @@ class TableGameViewModel: ObservableObject {
             self.game.players.forEach { player in
                 if player.playerId == self.uid {
                     self.currentPlayer = player
+                    self.isPlayerInTheGameAlready = true
                 }
             }
             
-            if self.firstLoad && self.currentPlayer == nil {
+            if !self.isPlayerInTheGameAlready {
                 self.addPlayerToGame()
-                
-                self.firstLoad = false
-            } else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                   self.loading = false
-                }
             }
         }
+    }
+    
+    func selectCard(position: Int){
+        // Unselect previous card
+        for index in 0 ..< ((currentPlayer?.cards.count)! - 1) {
+            currentPlayer?.cards[index]?.selected = false
+        }
+        
+        // Select new card
+        currentPlayer?.cards[position]?.selected = true
+        
+        selectedCard = currentPlayer?.cards[position]
     }
     
     func getTurnPlayerName() -> String{
@@ -130,6 +139,8 @@ class TableGameViewModel: ObservableObject {
     }
     
     func startGame(gameId: String) {
+        self.loadingStartGame = true
+        
         guard let url = URL(string: "https://us-central1-fodinha-45405.cloudfunctions.net/startGame") else {
             print("Invalid URL")
             return
@@ -145,7 +156,35 @@ class TableGameViewModel: ObservableObject {
         request.httpBody = finalBody
         
         URLSession.shared.dataTask(with: request) { data, response, error in
-            
+            self.loadingStartGame = false
+        }.resume()
+    }
+    
+    func playCard() {
+        self.loadingStartGame = true
+        
+        guard let url = URL(string: "https://us-central1-fodinha-45405.cloudfunctions.net/play") else {
+            print("Invalid URL")
+            return
+        }
+        
+        let cardObject: [String: Any] = ["rank": selectedCard!.rank! as Int,
+                                         "suit": selectedCard!.suit! as String,
+                                         "value": selectedCard!.value! as Int]
+        
+        let body: [String: Any] = ["gameId": game.gameId!,
+                                    "playerId": game.players[0].playerId,
+                                    "card": cardObject]
+
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = finalBody
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            self.loadingPlay = false
         }.resume()
     }
     
@@ -161,13 +200,13 @@ class TableGameViewModel: ObservableObject {
                 "points": 0,
                 "wins": 0,
                 "name": UserDefaults.standard.string(forKey: "name")!,
-                "position": game.players.count - 1
+                "position": game.players.count
         ])
         {
             error in
             
             if error == nil {
-                self.loading = false
+                
             }
         }
     }

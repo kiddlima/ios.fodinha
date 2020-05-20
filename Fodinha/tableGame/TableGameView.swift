@@ -190,20 +190,20 @@ struct TableGameView: View {
                 .edgesIgnoringSafeArea(.all)
             }.frame(maxHeight: .infinity)
         }
-        .onAppear {
+//        .onAppear {
 //            AppDelegate.orientationLock = UIInterfaceOrientationMask.landscapeLeft
 //            let rawValue = UIInterfaceOrientation.landscapeLeft.rawValue
 //
 //            UIDevice.current.setValue(rawValue, forKey: "orientation")
 //            UINavigationController.attemptRotationToDeviceOrientation()
-        }
-        .onDisappear {
+//        }
+//        .onDisappear {
 //            AppDelegate.orientationLock = UIInterfaceOrientationMask.portrait
 //            let rawValue = UIInterfaceOrientation.landscapeLeft.rawValue
 //
 //            UIDevice.current.setValue(rawValue, forKey: "orientation")
 //            UINavigationController.attemptRotationToDeviceOrientation()
-        }
+//        }
     }
 }
 

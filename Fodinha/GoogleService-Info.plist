@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>179511683789-n47ek8f5htrrocnbtori23a08krc7k9k.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.179511683789-n47ek8f5htrrocnbtori23a08krc7k9k</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAMRTgf1ed7MxPEKT2Up9b5eXQ4lLdNb3g</string>
+	<key>GCM_SENDER_ID</key>
+	<string>179511683789</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.games.Fodinha</string>
+	<key>PROJECT_ID</key>
+	<string>fodinha-45405</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fodinha-45405.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:179511683789:ios:5ffe63887fcfd362b1d784</string>
+	<key>DATABASE_URL</key>
+	<string>https://fodinha-45405.firebaseio.com</string>
+</dict>
+</plist>

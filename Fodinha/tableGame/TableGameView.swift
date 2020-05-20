@@ -21,7 +21,7 @@ struct TableGameView: View {
     }
 
     var body: some View {
-        ZStack (alignment: .bottomTrailing){
+        ZStack {
             Color.customLightGray.edgesIgnoringSafeArea(.all)
             
             ZStack{
@@ -192,16 +192,12 @@ struct TableGameView: View {
         }
 //        .onAppear {
 //            AppDelegate.orientationLock = UIInterfaceOrientationMask.landscapeLeft
-//            let rawValue = UIInterfaceOrientation.landscapeLeft.rawValue
-//
-//            UIDevice.current.setValue(rawValue, forKey: "orientation")
+//            UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
 //            UINavigationController.attemptRotationToDeviceOrientation()
 //        }
 //        .onDisappear {
 //            AppDelegate.orientationLock = UIInterfaceOrientationMask.portrait
-//            let rawValue = UIInterfaceOrientation.landscapeLeft.rawValue
-//
-//            UIDevice.current.setValue(rawValue, forKey: "orientation")
+//            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
 //            UINavigationController.attemptRotationToDeviceOrientation()
 //        }
     }

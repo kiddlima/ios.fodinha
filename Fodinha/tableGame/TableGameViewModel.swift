@@ -196,7 +196,6 @@ class TableGameViewModel: ObservableObject {
         .setData(
             [
                 "active" : true,
-                "hunch": 0,
                 "points": 0,
                 "wins": 0,
                 "name": UserDefaults.standard.string(forKey: "name")!,

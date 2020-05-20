@@ -192,13 +192,17 @@ struct TableGameView: View {
         }
         .onAppear {
             AppDelegate.orientationLock = UIInterfaceOrientationMask.landscapeLeft
-            UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
+            let rawValue = UIInterfaceOrientation.landscapeLeft.rawValue
+            
+            UIDevice.current.setValue(rawValue, forKey: "orientation")
             UINavigationController.attemptRotationToDeviceOrientation()
         }
         .onDisappear {
             AppDelegate.orientationLock = UIInterfaceOrientationMask.portrait
-                UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-                UINavigationController.attemptRotationToDeviceOrientation()
+            let rawValue = UIInterfaceOrientation.landscapeLeft.rawValue
+            
+            UIDevice.current.setValue(rawValue, forKey: "orientation")
+            UINavigationController.attemptRotationToDeviceOrientation()
         }
     }
 }

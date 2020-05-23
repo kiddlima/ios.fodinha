@@ -134,7 +134,7 @@ struct TableGameView: View {
                     }
                 }
                 
-                if viewModel.shouldShowStartGameButton(){
+                if viewModel.isPlayersTurnToPlay(){
                     HStack {
                         Button(action: {
                             self.viewModel.playCard()
@@ -142,7 +142,7 @@ struct TableGameView: View {
                             Text("Jogar carta")
                         }.buttonStyle(PrimaryButton())
                         
-                        ActivityIndicator(shouldAnimate: self.$viewModel.loadingStartGame)
+                        ActivityIndicator(shouldAnimate: self.$viewModel.loadingPlay)
                     }
                 }
                 
@@ -190,16 +190,16 @@ struct TableGameView: View {
                 .edgesIgnoringSafeArea(.all)
             }.frame(maxHeight: .infinity)
         }
-//        .onAppear {
-//            AppDelegate.orientationLock = UIInterfaceOrientationMask.landscapeLeft
-//            UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
-//            UINavigationController.attemptRotationToDeviceOrientation()
-//        }
-//        .onDisappear {
-//            AppDelegate.orientationLock = UIInterfaceOrientationMask.portrait
-//            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-//            UINavigationController.attemptRotationToDeviceOrientation()
-//        }
+        .onAppear {
+            AppDelegate.orientationLock = UIInterfaceOrientationMask.landscapeLeft
+            UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
+            UINavigationController.attemptRotationToDeviceOrientation()
+        }
+        .onDisappear {
+            AppDelegate.orientationLock = UIInterfaceOrientationMask.portrait
+            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+            UINavigationController.attemptRotationToDeviceOrientation()
+        }
     }
 }
 

@@ -15,12 +15,20 @@ struct CardItem: View {
     var body: some View {
         VStack{
             if card != nil {
-                Image((card?.imageName)!)
-                .resizable()
+                Text("\((card?.suit)!) \((card?.value)!)")
+                .font(.callout)
+                .foregroundColor(Color.customDarkGray)
                 .cornerRadius(4)
                 .frame(width: 40, height: 67)
                 .overlay(card!.selected ? RoundedRectangle(cornerRadius: 4)
-                    .stroke(Color.white, lineWidth: 3) : nil)
+                        .stroke(Color.white, lineWidth: 3) : nil)
+                
+//                Image((card?.imageName)!)
+//                .resizable()
+//                .cornerRadius(4)
+//                .frame(width: 40, height: 67)
+//                .overlay(card!.selected ? RoundedRectangle(cornerRadius: 4)
+//                    .stroke(Color.white, lineWidth: 3) : nil)
                 
             } else {
                 Image("verso")

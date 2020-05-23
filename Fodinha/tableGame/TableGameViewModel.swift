@@ -30,6 +30,8 @@ class TableGameViewModel: ObservableObject {
         self.game = game
         uid = UserDefaults.standard.string(forKey: "uid")
         
+        db.settings.isPersistenceEnabled = false
+        
         self.listenToPlayers()
     }
     
@@ -46,9 +48,14 @@ class TableGameViewModel: ObservableObject {
             self.game.players = self.game.players.sorted(by: { $0.points! > $1.points! })
             
             // Find the current logged player inside the game
-            self.game.players.forEach { player in
+            for (index, player) in self.game.players.enumerated() {
                 if player.playerId == self.uid {
                     self.currentPlayer = player
+                    
+                    if self.game.cardAmount == 1 {
+                        self.game.players[index].currentCard = nil
+                    }
+                    
                     self.isPlayerInTheGameAlready = true
                 }
             }
@@ -87,7 +94,17 @@ class TableGameViewModel: ObservableObject {
     }
     
     func isPlayersTurnToHunch() -> Bool{
-        return game.hunchTime! && game.turn == uid
+        var hasCards: Bool = true
+        
+        if game.cardAmount != 1 {
+            hasCards = !(currentPlayer?.cards.isEmpty)!
+        }
+        
+        return
+            game.hunchTime! &&
+            game.turn == uid &&
+            currentPlayer?.hunch == nil &&
+            hasCards
     }
     
     func hasPlayerInThatPosition(position: Int) -> Bool{
@@ -114,8 +131,11 @@ class TableGameViewModel: ObservableObject {
         return !game.active!
     }
     
-    // Requests
+    func isPlayersTurnToPlay() -> Bool{
+        return !game.hunchTime! && game.turn == currentPlayer?.playerId
+    }
     
+    // Requests
     func setPlayerHunch(hunch: Int){
         guard let url = URL(string: "https://us-central1-fodinha-45405.cloudfunctions.net/hunch") else {
             print("Invalid URL")
@@ -123,7 +143,7 @@ class TableGameViewModel: ObservableObject {
         }
         
         let body: [String: Any] = ["gameId": game.gameId!,
-                                      "playerRef": game.players[0].playerId,
+                                   "playerRef": currentPlayer!.playerId as String,
                                       "hunch": hunch]
 
         let finalBody = try! JSONSerialization.data(withJSONObject: body)
@@ -161,7 +181,7 @@ class TableGameViewModel: ObservableObject {
     }
     
     func playCard() {
-        self.loadingStartGame = true
+        self.loadingPlay = true
         
         guard let url = URL(string: "https://us-central1-fodinha-45405.cloudfunctions.net/play") else {
             print("Invalid URL")
@@ -173,7 +193,7 @@ class TableGameViewModel: ObservableObject {
                                          "value": selectedCard!.value! as Int]
         
         let body: [String: Any] = ["gameId": game.gameId!,
-                                    "playerId": game.players[0].playerId,
+                                   "playerId": currentPlayer!.playerId as String,
                                     "card": cardObject]
 
         let finalBody = try! JSONSerialization.data(withJSONObject: body)

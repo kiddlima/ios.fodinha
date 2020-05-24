@@ -15,7 +15,7 @@ class TableGameViewModel: ObservableObject {
     
     let db = Firestore.firestore()
     
-    @Published var game: Game
+    @Published var game: Game?
     @Published var currentPlayer: Player?
     var selectedCard: Card?
     
@@ -26,34 +26,43 @@ class TableGameViewModel: ObservableObject {
        
     var uid: String?
     
-    init(game: Game) {
-        self.game = game
-        uid = UserDefaults.standard.string(forKey: "uid")
+    init(gameId: String) {
+        uid = Auth.auth().currentUser?.uid
         
         db.settings.isPersistenceEnabled = false
         
-        self.listenToPlayers()
+        self.listenToGame(gameId: gameId)
+    }
+    
+    func listenToGame(gameId: String){
+        db.collection("game").document(gameId).addSnapshotListener { (documentSnapshot, error) in
+            if error == nil {
+                self.game = Game(document: documentSnapshot!)
+                
+                self.listenToPlayers()
+            }
+        }
     }
     
     func listenToPlayers(){
-        db.collection("game").document(game.gameId!).collection("players").addSnapshotListener { documentSnapshot, error in
+        db.collection("game").document(game!.gameId!).collection("players").addSnapshotListener { documentSnapshot, error in
         
-            self.game.players = []
+            self.game!.players = []
             
             for snap in (documentSnapshot?.documents)! {
                 
-                self.game.players.append(Player(document: snap))
+                self.game!.players.append(Player(document: snap))
             }
             
-            self.game.players = self.game.players.sorted(by: { $0.points! > $1.points! })
+            self.game!.players = self.game!.players.sorted(by: { $0.points! > $1.points! })
             
             // Find the current logged player inside the game
-            for (index, player) in self.game.players.enumerated() {
+            for (index, player) in self.game!.players.enumerated() {
                 if player.playerId == self.uid {
                     self.currentPlayer = player
                     
-                    if self.game.cardAmount == 1 {
-                        self.game.players[index].currentCard = nil
+                    if self.game!.cardAmount == 1 {
+                        self.game!.players[index].currentCard = nil
                     }
                     
                     self.isPlayerInTheGameAlready = true
@@ -80,8 +89,8 @@ class TableGameViewModel: ObservableObject {
     
     func getTurnPlayerName() -> String{
         
-        for player in self.game.players {
-            if player.playerId == self.game.turn {
+        for player in self.game!.players {
+            if player.playerId == self.game!.turn {
                 return player.name!
             }
         }
@@ -90,25 +99,22 @@ class TableGameViewModel: ObservableObject {
     }
     
     func isPlayerTurnByPosition(position: Int) -> Bool{
-        return game.turn! == getPlayerByPosition(position: position)!.playerId
+        return game!.turn! == getPlayerByPosition(position: position)!.playerId
     }
     
     func isPlayersTurnToHunch() -> Bool{
-        var hasCards: Bool = true
-        
-        if game.cardAmount != 1 {
-            hasCards = !(currentPlayer?.cards.isEmpty)!
-        }
+//          if game.cardAmount != 1 {
+//            hasCards = !(currentPlayer?.cards.isEmpty)!
+//        }
         
         return
-            game.hunchTime! &&
-            game.turn == uid &&
-            currentPlayer?.hunch == nil &&
-            hasCards
+            game!.hunchTime! &&
+            game!.turn == uid &&
+            currentPlayer?.hunch == nil
     }
     
     func hasPlayerInThatPosition(position: Int) -> Bool{
-        for player in self.game.players {
+        for player in self.game!.players {
             if player.position == position {
                 return true
             }
@@ -118,7 +124,7 @@ class TableGameViewModel: ObservableObject {
     }
     
     func getPlayerByPosition(position: Int) -> Player?{
-        for player in self.game.players {
+        for player in self.game!.players {
             if player.position == position {
                 return player
             }
@@ -128,11 +134,11 @@ class TableGameViewModel: ObservableObject {
     }
     
     func shouldShowStartGameButton() -> Bool{
-        return !game.active!
+        return !game!.active!
     }
     
     func isPlayersTurnToPlay() -> Bool{
-        return !game.hunchTime! && game.turn == currentPlayer?.playerId
+        return !game!.hunchTime! && game!.turn == currentPlayer?.playerId
     }
     
     // Requests
@@ -142,7 +148,7 @@ class TableGameViewModel: ObservableObject {
             return
         }
         
-        let body: [String: Any] = ["gameId": game.gameId!,
+        let body: [String: Any] = ["gameId": game!.gameId!,
                                    "playerRef": currentPlayer!.playerId as String,
                                       "hunch": hunch]
 
@@ -192,7 +198,7 @@ class TableGameViewModel: ObservableObject {
                                          "suit": selectedCard!.suit! as String,
                                          "value": selectedCard!.value! as Int]
         
-        let body: [String: Any] = ["gameId": game.gameId!,
+        let body: [String: Any] = ["gameId": game!.gameId!,
                                    "playerId": currentPlayer!.playerId as String,
                                     "card": cardObject]
 
@@ -210,7 +216,7 @@ class TableGameViewModel: ObservableObject {
     
     func addPlayerToGame(){
         db.collection("game")
-        .document(game.gameId!)
+        .document(game!.gameId!)
         .collection("players")
         .document(uid!)
         .setData(
@@ -219,7 +225,7 @@ class TableGameViewModel: ObservableObject {
                 "points": 0,
                 "wins": 0,
                 "name": UserDefaults.standard.string(forKey: "name")!,
-                "position": game.players.count
+                "position": game!.players.count
         ])
         {
             error in

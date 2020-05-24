@@ -20,7 +20,7 @@ struct ContentView: View {
         NavigationView {
             List(viewModel.games, id: \.gameId){ game in
                 if self.loginViewModel.isLoggedIn {
-                    NavigationLink(destination: NavigationLazyView(TableGameView(game: game))){
+                    NavigationLink(destination: NavigationLazyView(TableGameView(gameId: game.gameId!))){
                         RowView(game: game)
                     }
                 } else {

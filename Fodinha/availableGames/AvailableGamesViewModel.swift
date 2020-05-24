@@ -17,21 +17,20 @@ class AvailableGamesViewModel: ObservableObject {
     @Published var games: [Game] = []
     
     init() {
-        listenToGames()
+        getGames()
     }
 
-    func listenToGames(){
-        db.collection("game").addSnapshotListener { documentSnapshot, error in
-            
+    func getGames(){
+        db.collection("game").getDocuments(completion: { (querySnapshot, error) in
             self.games = []
             
-            for snap in (documentSnapshot?.documents)! {
+            for snap in (querySnapshot?.documents)! {
                 
                 DispatchQueue.main.async {
                     self.games.append(Game(document: snap))
                 }
                 
             }
-        }
+        })
     } 
 }

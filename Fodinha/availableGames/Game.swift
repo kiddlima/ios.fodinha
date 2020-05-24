@@ -23,8 +23,20 @@ struct Game: Identifiable {
         self.createdBy = document.get("createdBy") as? String
     }
     
+    init(document: DocumentSnapshot) {
+       self.gameId = document.documentID as String
+       self.active = document.get("active") as? Bool
+       self.name = document.get("name") as? String
+       self.hunchTime = document.get("hunchTime") as? Bool
+       self.winner = document.get("winner") as? String
+       self.turn = document.get("turn") as? String
+       self.currentRound = document.get("currentRound") as? Int
+       self.cardAmount = document.get("cardAmount") as? Int
+       self.createdBy = document.get("createdBy") as? String
+    }
+    
     init() {
-       
+
     }
     
     var id: ObjectIdentifier?

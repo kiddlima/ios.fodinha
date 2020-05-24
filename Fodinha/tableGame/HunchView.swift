@@ -15,7 +15,6 @@ struct HunchView: View {
     var viewModel: TableGameViewModel?
     
     var body: some View {
-        
         VStack (alignment: .leading) {
             Text("Quantas você faz?")
                 .font(.headline)
@@ -28,6 +27,7 @@ struct HunchView: View {
                     }) {
                         Text("\(choice + 1)")
                     }
+                    .buttonStyle(PrimaryButton())
                     .padding(8)
                 }
             }

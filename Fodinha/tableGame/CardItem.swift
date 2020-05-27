@@ -11,33 +11,24 @@ import SwiftUI
 struct CardItem: View {
     
     var card: Card?
+    var width: CGFloat
+    var height: CGFloat
     
     var body: some View {
         VStack{
             if card != nil {
-                Text("\((card?.suit)!) \((card?.value)!)")
-                .font(.callout)
-                .foregroundColor(Color.customDarkGray)
-                .cornerRadius(4)
-                .frame(width: 40, height: 67)
-                .overlay(card!.selected ? RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color.white, lineWidth: 3) : nil)
-                
-//                Image((card?.imageName)!)
-//                .resizable()
-//                .cornerRadius(4)
-//                .frame(width: 40, height: 67)
-//                .overlay(card!.selected ? RoundedRectangle(cornerRadius: 4)
-//                    .stroke(Color.white, lineWidth: 3) : nil)
-                
+                Image("verso")
+                    .resizable()
+                    .cornerRadius(4)
+                    .frame(width: width, height: height)
             } else {
                 Image("verso")
-                .resizable()
-                .cornerRadius(4)
-                .frame(width: 40, height: 67)
+                    .resizable()
+                    .cornerRadius(4)
+                    .frame(width: width, height: height)
             }
         }
-        .frame(width: 40, height: 67)
+        .frame(width: width, height: height)
         .background(
             RoundedRectangle(cornerRadius: 4)
             .fill(Color.white)
@@ -48,6 +39,6 @@ struct CardItem: View {
 
 struct CardItem_Previews: PreviewProvider {
     static var previews: some View {
-        CardItem(card: Card(rank: 4, suit: "paus", value: 4))
+        CardItem(card: Card(rank: 4, suit: "paus", value: 4), width: 40, height: 67)
     }
 }

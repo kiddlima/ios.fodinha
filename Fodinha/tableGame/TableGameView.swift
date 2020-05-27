@@ -26,14 +26,16 @@ struct TableGameView: View {
                 // Table
                 GeometryReader { geometry in
                     RoundedRectangle(cornerRadius: 150, style: .circular)
-                        .stroke(Color.white, lineWidth: 7)
+                        .fill(Color.tableDefaultGreen)
+                        .shadow(radius: 20)
                         .frame(width: geometry.size.width / 1.7, height: geometry.size.height / 1.6)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 150, style: .circular)
-                                .fill(Color.tableDefaultGreen)
-                                .shadow(radius: 20)
-                                .frame(width: geometry.size.width / 1.7, height: geometry.size.height / 1.6)
-                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 150, style: .circular)
+                            .stroke(Color(red: 236/255, green: 234/255, blue: 235/255), lineWidth: 10)
+                            .shadow(color: Color.black, radius: 25, x: 0, y: 0)
+                            .clipShape(
+                                RoundedRectangle(cornerRadius: 150, style: .circular)
+                   ))
                 }
 
                 // Players
@@ -42,30 +44,30 @@ struct TableGameView: View {
                         VStack{
                             HStack {
                                 if self.viewModel.hasPlayerInThatPosition(position: 1){
-                                    PlayerItem(player : self.viewModel.getPlayerByPosition(position: 1)!, isTurn: self.viewModel.isPlayerTurnByPosition(position: 1))
+                                    PlayerItem(player : self.viewModel.getPlayerByPosition(position: 1)!)
                                 } else {
-                                    PlayerItem(player: Player(), isTurn: false).hidden()
+                                    PlayerItem(player: Player()).hidden()
                                 }
 
                                 if self.viewModel.hasPlayerInThatPosition(position: 0){
-                                    PlayerItem(player : self.viewModel.getPlayerByPosition(position: 0)!, isTurn: self.viewModel.isPlayerTurnByPosition(position: 0))
+                                    PlayerItem(player : self.viewModel.getPlayerByPosition(position: 0)!)
                                 } else {
-                                    PlayerItem(player: Player(), isTurn: false).hidden()
+                                    PlayerItem(player: Player()).hidden()
                                 }
 
                             }.offset(y: geometry.size.height / -4.5)
 
                             HStack {
                                 if self.viewModel.hasPlayerInThatPosition(position: 4){
-                                    PlayerItem(player : self.viewModel.getPlayerByPosition(position: 4)!, isTurn: self.viewModel.isPlayerTurnByPosition(position: 4))
+                                    PlayerItem(player : self.viewModel.getPlayerByPosition(position: 4)!)
                                 } else {
-                                    PlayerItem(player: Player(), isTurn: false).hidden()
+                                    PlayerItem(player: Player()).hidden()
                                 }
 
                                 if self.viewModel.hasPlayerInThatPosition(position: 5){
-                                    PlayerItem(player : self.viewModel.getPlayerByPosition(position: 5)!, isTurn: self.viewModel.isPlayerTurnByPosition(position: 5))
+                                    PlayerItem(player : self.viewModel.getPlayerByPosition(position: 5)!)
                                 } else {
-                                    PlayerItem(player: Player(), isTurn: false).hidden()
+                                    PlayerItem(player: Player()).hidden()
                                 }
 
                             }.offset(y: geometry.size.height / 4.5)
@@ -73,30 +75,30 @@ struct TableGameView: View {
                             HStack{
                                 VStack (spacing: 20){
                                     if self.viewModel.hasPlayerInThatPosition(position: 2){
-                                        PlayerItem(player : self.viewModel.getPlayerByPosition(position: 2)!, isTurn: self.viewModel.isPlayerTurnByPosition(position: 2))
+                                        PlayerItem(player : self.viewModel.getPlayerByPosition(position: 2)!)
                                     } else {
-                                        PlayerItem(player: Player(), isTurn: false).hidden()
+                                        PlayerItem(player: Player()).hidden()
                                     }
 
                                     if self.viewModel.hasPlayerInThatPosition(position: 3){
-                                        PlayerItem(player : self.viewModel.getPlayerByPosition(position: 3)!, isTurn: self.viewModel.isPlayerTurnByPosition(position: 3))
+                                        PlayerItem(player : self.viewModel.getPlayerByPosition(position: 3)!)
                                     } else {
-                                        PlayerItem(player: Player(), isTurn: false).hidden()
+                                        PlayerItem(player: Player()).hidden()
                                     }
 
                                 }.offset(x: geometry.size.height / -2.5)
 
                                 VStack (spacing: 20){
                                     if self.viewModel.hasPlayerInThatPosition(position: 7){
-                                        PlayerItem(player : self.viewModel.getPlayerByPosition(position: 7)!, isTurn: self.viewModel.isPlayerTurnByPosition(position: 7))
+                                        PlayerItem(player : self.viewModel.getPlayerByPosition(position: 7)!)
                                     } else {
-                                        PlayerItem(player: Player(), isTurn: false).hidden()
+                                        PlayerItem(player: Player()).hidden()
                                     }
 
                                     if self.viewModel.hasPlayerInThatPosition(position: 5){
-                                        PlayerItem(player : self.viewModel.getPlayerByPosition(position: 5)!, isTurn: self.viewModel.isPlayerTurnByPosition(position: 5))
+                                        PlayerItem(player : self.viewModel.getPlayerByPosition(position: 5)!)
                                     } else {
-                                        PlayerItem(player: Player(), isTurn: false).hidden()
+                                        PlayerItem(player: Player()).hidden()
                                     }
                                 }.offset(x: geometry.size.height / 2.5)
                         })
@@ -105,21 +107,43 @@ struct TableGameView: View {
 
                 // Center Table
                 VStack {
-                    Text(viewModel.game!.hunchTime! ? "Rodade de palpítes" : "Rodada \(viewModel.game!.currentRound!)")
-                        .font(.headline)
-                        .foregroundColor(Color.white)
+                    if viewModel.smallRoundWinner == nil {
+                        Text(viewModel.game!.message!)
+                            .font(.headline)
+                            .foregroundColor(Color.white)
 
-                    Text(viewModel.getTurnPlayerName())
-                        .font(.body)
-                        .foregroundColor(Color.customLighter2Gray)
+                        Text(viewModel.game!.hunchTime! ? "Rodade de palpítes" : "Rodada \(viewModel.game!.currentRound!)")
+                            .font(.body)
+                            .foregroundColor(Color.customLighter2Gray)
 
+                    } else {
+                       GeometryReader { geometry in
+                           RoundedRectangle(cornerRadius: 150, style: .circular)
+                            .fill(Color.darkGreen)
+                            .frame(width: geometry.size.width / 3.2, height: geometry.size.height / 3.6)
+                            .overlay(
+                                HStack {
+                                    Text("\(self.viewModel.smallRoundWinner!.shortName!) venceu a rodada com")
+                                        .font(.subheadline)
+                                        .foregroundColor(Color.white)
+                                    
+                                    CardItem(
+                                        card: self.viewModel.smallRoundWinner?.currentCard,
+                                        width: 40,
+                                        height: 67)
+                                }.padding(24)
+                           )
+                        }
                     }
+                }
 
                 }.offset(x: -35, y: -15)
 
                 VStack (alignment: .trailing) {
+                    
                     Spacer().frame(maxHeight: .infinity)
                     
+                    // Start game button
                     if viewModel.shouldShowStartGameButton(){
                         HStack {
                             Button(action: {
@@ -132,6 +156,7 @@ struct TableGameView: View {
                         }
                     }
                     
+                    // Play card button
                     if viewModel.isPlayersTurnToPlay(){
                         HStack {
                             Button(action: {
@@ -144,15 +169,17 @@ struct TableGameView: View {
                         }
                     }
                     
+                    // Hunch view
                     if viewModel.isPlayersTurnToHunch() {
                         HunchView(
                             cardAmount: self.viewModel.game!.cardAmount,
                             players: self.viewModel.game!.players,
                             viewModel: self.viewModel)
-                            .padding(.trailing, 16)
-                        
                     }
+                    
+                    Spacer()
 
+                    // Footer with cards and points
                     HStack (alignment: .bottom){
                         ScrollView (.horizontal) {
                             HStack (alignment: .lastTextBaseline) {
@@ -172,20 +199,23 @@ struct TableGameView: View {
                         .background(RoundedRectangle(cornerRadius: 4)
                             .fill(Color.customLighterGray)
                             .shadow(radius: 3))
-
+                        
                         if self.viewModel.currentPlayer != nil {
                             HStack {
                                 ForEach(0 ..< (viewModel.currentPlayer?.cards.count)!, id: \.self) { index in
                                     Button(action: {
                                         self.viewModel.selectCard(position: index)
                                     }) {
-                                        CardItem(card: self.viewModel.currentPlayer?.cards[index])
+                                        CardItem(card: self.viewModel.currentPlayer?.cards[index],
+                                                 width: 55, height: 91)
+                                            .animation(.easeOut)
+                                            .offset(y: (self.viewModel.currentPlayer?.cards[index] != nil && self.viewModel.currentPlayer?.cards[index]!.selected == true) ? -10 : 0)
                                     }
                                 }
-                            }.padding(8)
+                            }
                         }
-                    }
-                    .edgesIgnoringSafeArea(.all)
+                    }.edgesIgnoringSafeArea(.leading)
+                    
                 }.frame(maxHeight: .infinity)
             }
         }

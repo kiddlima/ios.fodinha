@@ -15,7 +15,8 @@ struct PrimaryButton: ButtonStyle {
             .foregroundColor(Color.customLighter2Gray)
             .font(.callout)
             .padding(.init(top: 8, leading: 16, bottom: 8, trailing: 16))
-            .background(RoundedRectangle(cornerRadius: 4, style: .continuous)
+            .background(
+                RoundedRectangle(cornerRadius: 4, style: .continuous)
                 .stroke(Color.customLighter2Gray, lineWidth: 2))
     }
 }

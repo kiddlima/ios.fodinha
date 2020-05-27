@@ -10,4 +10,5 @@ target 'Fodinha' do
 	pod 'Firebase/Firestore'
 	pod 'FirebaseFirestoreSwift'
 	pod 'Firebase/Auth'
+	pod 'Firebase/Functions'
 end

@@ -17,7 +17,7 @@ struct PlayerHunchView: View {
             if player.hunch != nil {
                 Text("Faz \(self.player.hunch!) - \(self.player.name!)")
                     .font(.caption)
-                    .foregroundColor(Color("customLightGray"))
+                    .foregroundColor(Color.customLighter2Gray)
                     .padding(.top, 4)
             }
         }

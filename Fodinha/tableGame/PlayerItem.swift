@@ -11,22 +11,31 @@ import SwiftUI
 struct PlayerItem: View {
     
     var player: Player
-    var isTurn: Bool
     
     var body: some View {
         HStack (spacing: -2){
             VStack (alignment: .leading, spacing: 2){
-                Text(player.name!)
+                Text(player.shortName!)
                     .font(.callout)
                     .fontWeight(.regular)
-                    .foregroundColor(!isTurn ? Color.customLighter2Gray : Color.black)
+                    .foregroundColor(TableDesignHelper.getPlayerTextColor(player: self.player))
                 Divider()
                 HStack{
                     if player.hunch != nil{
                         Text("Faz \(player.hunch!)")
                             .font(.caption)
                             .fontWeight(.light)
-                            .foregroundColor(!isTurn ? Color.customLighter2Gray : Color.black)
+                            .foregroundColor(TableDesignHelper.getPlayerTextColor(player: self.player))
+                        
+                        Spacer()
+                        
+                        HStack (spacing: 1.5) {
+                            ForEach (0 ..< player.wins!, id: \.self) { wins in
+                                Circle()
+                                    .frame(width: 8, height: 8)
+                                    .foregroundColor(Color.lightGreen)
+                            }
+                        }.padding(.trailing, 4)
                     } else {
                         Text("")
                         .font(.caption)
@@ -39,20 +48,21 @@ struct PlayerItem: View {
             .cornerRadius(2)
             .padding(4)
             .frame(width: 104)
+            .animation(.easeIn)
             .background(
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(isTurn ? Color.yellowLight : Color.customLighterGray)
+                    .fill(TableDesignHelper.getPlayerBgColor(player: self.player))
                 .shadow(radius: 4)
             )
             
-            CardItem(card: player.currentCard)
+            CardItem(card: player.currentCard, width: 40, height: 67)
         }
     }
 }
 
 struct PlayerItem_Previews: PreviewProvider {
     static var previews: some View {
-        PlayerItem(player: Player(), isTurn: true)
+        PlayerItem(player: Player())
         .previewLayout(.fixed(width: 500, height: 200))
     }
 }

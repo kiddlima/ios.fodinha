@@ -21,6 +21,12 @@ struct Player: Identifiable {
         self.wins = document.get("wins") as? Int
         self.name = document.get("name") as? String
         
+        if let shortName = self.name!.components(separatedBy: " ").first {
+            self.shortName = shortName
+        } else {
+            self.shortName = self.name
+        }
+        
         let cards = document.data()["cards"] as? [Any]
         
         self.cards = []
@@ -58,4 +64,7 @@ struct Player: Identifiable {
     var wins: Int?
     var cards: [Card?] = []
     var currentCard: Card?
+    var shortName: String? = ""
+    var smallRoundWinner: Bool = false
+    var isTurn: Bool = false
 }

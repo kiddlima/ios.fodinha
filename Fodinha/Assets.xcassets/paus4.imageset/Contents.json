@@ -1,15 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "444 cópia.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "paus4.png",
+      "filename" : "444 cópia@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "444 cópia@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

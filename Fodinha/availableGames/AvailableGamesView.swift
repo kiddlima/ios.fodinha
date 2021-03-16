@@ -29,9 +29,9 @@ struct ContentView: View {
                                 self.showingGame.toggle()
                             }){
                                 RowView(game: game)
-//                                NavigationLink(destination: NavigationLazyView(TableGameView(gameId: game._id!))){
-//                                    RowView(game: game)
-//                                }
+                                //                                NavigationLink(destination: NavigationLazyView(TableGameView(gameId: game._id!))){
+                                //                                    RowView(game: game)
+                                //                                }
                             }.fullScreenCover(isPresented: self.$showingGame, content: {
                                 TableGameView(gameId: game._id!)
                             })
@@ -55,23 +55,34 @@ struct ContentView: View {
                 .listSeparatorStyle(.none)
                 .navigationBarItems(
                     trailing:
-                    Button(action: {
-                        if self.loginViewModel.isLoggedIn {
-                            do {
-                                try Auth.auth().signOut()
-                            } catch  {
+                        Group {
+                            if !self.loginViewModel.isLoggedIn {
+                                Button(action: {
+                                    withAnimation {
+                                        self.showingLogin.toggle()
+                                    }
+                                }) {
+                                    Text("Entrar")
+                                        .foregroundColor(.white)
+                                    
+                                }.sheet(isPresented: $showingLogin) {
+                                    LoginView(viewModel: self.loginViewModel)
+                                }
+                            } else {
+                                Menu {
+                                    Button("Sair", action: {
+                                            try? Auth.auth().signOut()
+                                            
+                                        self.loginViewModel.isLoggedIn = false
+                                    })
+                                }
+                                label: {
+                                    Label("\((Auth.auth().currentUser?.displayName)!)", systemImage: "person.circle.fill")
+                                        .foregroundColor(Color.dark4)
+                                }
                             }
-                            
-                            self.loginViewModel.isLoggedIn = false
-                        } else {
-                            self.showingLogin.toggle()
                         }
-                    }) {
-                        Text(loginViewModel.isLoggedIn ? "Sair" : "Acessar conta")
-                            .foregroundColor(.white)
-                    }.sheet(isPresented: $showingLogin) {
-                        LoginView(viewModel: self.loginViewModel)
-                    })
+                )
                 .navigationBarTitle(Text("Jogos disponíveis"))
             }
         }.overlay(
@@ -79,7 +90,7 @@ struct ContentView: View {
                 
             })
             {
-                Text("CRIAR JOGO")
+                Text("Criar jogo")
             }
             .cornerRadius(4)
             .buttonStyle(GoldenButtonStyle())

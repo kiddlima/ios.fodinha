@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E840FDD95C14B557961BA64 /* Pods_Fodinha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7803A1992AD8927090BB98 /* Pods_Fodinha.framework */; };
+		BB0F26EE26013CC100B92B97 /* PopupStateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0F26ED26013CC100B92B97 /* PopupStateHelper.swift */; };
 		BB1465222472D33C00609B48 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1465212472D33C00609B48 /* PrimaryButton.swift */; };
 		BB146524247348A800609B48 /* NavigationLazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB146523247348A800609B48 /* NavigationLazyView.swift */; };
 		BB1939DD2449FF9300BA8210 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1939DC2449FF9300BA8210 /* AppDelegate.swift */; };
@@ -26,6 +26,8 @@
 		BB58F3E0260000E800BFD314 /* ListSeparatorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB58F3DF260000E800BFD314 /* ListSeparatorHelper.swift */; };
 		BB58F3E32600065600BFD314 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB58F3E22600065600BFD314 /* ButtonStyles.swift */; };
 		BB5AFF3B247090D40024824F /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5AFF3A247090D40024824F /* ActivityIndicator.swift */; };
+		BB7CE48A2601338A00C7F42E /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7CE4892601338A00C7F42E /* PopupView.swift */; };
+		BB7CE48D2601360D00C7F42E /* ResponsePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7CE48C2601360D00C7F42E /* ResponsePopupView.swift */; };
 		BB82293A246388090076FD20 /* TableGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB822939246388090076FD20 /* TableGameView.swift */; };
 		BB8A2A6F25FEB3BA006074E2 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8A2A6E25FEB3BA006074E2 /* SocketIOManager.swift */; };
 		BB94E0D124534624008DE1F4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB94E0D024534624008DE1F4 /* Extensions.swift */; };
@@ -36,6 +38,7 @@
 		BBA160942465D15900395E18 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA160932465D15900395E18 /* Card.swift */; };
 		BBA24F5A2464E2E800AF3001 /* PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA24F592464E2E800AF3001 /* PlayerItem.swift */; };
 		BBA24F5C2465A74400AF3001 /* CardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA24F5B2465A74400AF3001 /* CardItem.swift */; };
+		BBCBC7962600E497000324B6 /* InputStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCBC7952600E497000324B6 /* InputStyles.swift */; };
 		BBD79F35247ECE1400B43E29 /* Choice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD79F34247ECE1400B43E29 /* Choice.swift */; };
 		BBD79F39247F36E200B43E29 /* HunchCheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD79F38247F36E100B43E29 /* HunchCheckButton.swift */; };
 		BBDBE755247595990076458A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BBDBE74F247593450076458A /* GoogleService-Info.plist */; };
@@ -43,14 +46,18 @@
 		BBF0A941246E161A00C682F8 /* PlayerHunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF0A940246E161A00C682F8 /* PlayerHunchView.swift */; };
 		BBF0A943246E1AAC00C682F8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF0A942246E1AAB00C682F8 /* LoginView.swift */; };
 		BBF0A947246E217300C682F8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF0A946246E217300C682F8 /* LoginViewModel.swift */; };
+		E4301F6ED0EA82F170D16139 /* Pods_Truquero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB7DB17A899930F32CE2D735 /* Pods_Truquero.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1F7803A1992AD8927090BB98 /* Pods_Fodinha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fodinha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D6D3A5D17C667562AC21DFB /* Pods-Truquero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Truquero.release.xcconfig"; path = "Target Support Files/Pods-Truquero/Pods-Truquero.release.xcconfig"; sourceTree = "<group>"; };
+		9BF75DCC293B326FD014CBFB /* Pods-Truquero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Truquero.debug.xcconfig"; path = "Target Support Files/Pods-Truquero/Pods-Truquero.debug.xcconfig"; sourceTree = "<group>"; };
+		AB7DB17A899930F32CE2D735 /* Pods_Truquero.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Truquero.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC16F05FDB47BFCB6661438 /* Pods-Fodinha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fodinha.debug.xcconfig"; path = "Target Support Files/Pods-Fodinha/Pods-Fodinha.debug.xcconfig"; sourceTree = "<group>"; };
+		BB0F26ED26013CC100B92B97 /* PopupStateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupStateHelper.swift; sourceTree = "<group>"; };
 		BB1465212472D33C00609B48 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		BB146523247348A800609B48 /* NavigationLazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLazyView.swift; sourceTree = "<group>"; };
-		BB1939D92449FF9300BA8210 /* Fodinha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fodinha.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB1939D92449FF9300BA8210 /* Truquero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Truquero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB1939DC2449FF9300BA8210 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB1939DE2449FF9300BA8210 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BB1939E12449FF9300BA8210 /* Fodinha.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Fodinha.xcdatamodel; sourceTree = "<group>"; };
@@ -68,6 +75,8 @@
 		BB58F3DF260000E800BFD314 /* ListSeparatorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSeparatorHelper.swift; sourceTree = "<group>"; };
 		BB58F3E22600065600BFD314 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		BB5AFF3A247090D40024824F /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		BB7CE4892601338A00C7F42E /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
+		BB7CE48C2601360D00C7F42E /* ResponsePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsePopupView.swift; sourceTree = "<group>"; };
 		BB822939246388090076FD20 /* TableGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableGameView.swift; sourceTree = "<group>"; };
 		BB8A2A6E25FEB3BA006074E2 /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		BB94E0D024534624008DE1F4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -78,6 +87,7 @@
 		BBA160932465D15900395E18 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		BBA24F592464E2E800AF3001 /* PlayerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerItem.swift; sourceTree = "<group>"; };
 		BBA24F5B2465A74400AF3001 /* CardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardItem.swift; sourceTree = "<group>"; };
+		BBCBC7952600E497000324B6 /* InputStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputStyles.swift; sourceTree = "<group>"; };
 		BBD79F34247ECE1400B43E29 /* Choice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
 		BBD79F38247F36E100B43E29 /* HunchCheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HunchCheckButton.swift; sourceTree = "<group>"; };
 		BBDBE74F247593450076458A /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -93,7 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E840FDD95C14B557961BA64 /* Pods_Fodinha.framework in Frameworks */,
+				E4301F6ED0EA82F170D16139 /* Pods_Truquero.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +113,7 @@
 		6C6EC5C8672BEBE4D00CB32B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1F7803A1992AD8927090BB98 /* Pods_Fodinha.framework */,
+				AB7DB17A899930F32CE2D735 /* Pods_Truquero.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -121,7 +131,7 @@
 		BB1939DA2449FF9300BA8210 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BB1939D92449FF9300BA8210 /* Fodinha.app */,
+				BB1939D92449FF9300BA8210 /* Truquero.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -180,6 +190,7 @@
 				BB38EDA8247DFD2000A02DC4 /* SelectedButton.swift */,
 				BB9BD58225FFCBD9001D7F7A /* ResizeButtonStyle.swift */,
 				BB58F3E22600065600BFD314 /* ButtonStyles.swift */,
+				BBCBC7952600E497000324B6 /* InputStyles.swift */,
 			);
 			path = styles;
 			sourceTree = "<group>";
@@ -198,9 +209,19 @@
 			path = tableGame;
 			sourceTree = "<group>";
 		};
+		BB921F8D2600F7EC008FE3B6 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				BB7CE4892601338A00C7F42E /* PopupView.swift */,
+				BB7CE48C2601360D00C7F42E /* ResponsePopupView.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
 		BB94E0CF24534612008DE1F4 /* helpers */ = {
 			isa = PBXGroup;
 			children = (
+				BB921F8D2600F7EC008FE3B6 /* views */,
 				BB22796325EFFD6100FFB90B /* socket */,
 				BB38EDA7247DFD0A00A02DC4 /* styles */,
 				BB94E0D024534624008DE1F4 /* Extensions.swift */,
@@ -209,6 +230,7 @@
 				BB964DB1247DEBCB00677574 /* TableDesignHelper.swift */,
 				BB22793625EF21D300FFB90B /* NetworkHelper.swift */,
 				BB58F3DF260000E800BFD314 /* ListSeparatorHelper.swift */,
+				BB0F26ED26013CC100B92B97 /* PopupStateHelper.swift */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -238,6 +260,8 @@
 			children = (
 				ACC16F05FDB47BFCB6661438 /* Pods-Fodinha.debug.xcconfig */,
 				DB5293B3611B3D510DDC6279 /* Pods-Fodinha.release.xcconfig */,
+				9BF75DCC293B326FD014CBFB /* Pods-Truquero.debug.xcconfig */,
+				8D6D3A5D17C667562AC21DFB /* Pods-Truquero.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -245,9 +269,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BB1939D82449FF9300BA8210 /* Fodinha */ = {
+		BB1939D82449FF9300BA8210 /* Truquero */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BB1939F02449FF9500BA8210 /* Build configuration list for PBXNativeTarget "Fodinha" */;
+			buildConfigurationList = BB1939F02449FF9500BA8210 /* Build configuration list for PBXNativeTarget "Truquero" */;
 			buildPhases = (
 				AA0D18FEEFB75A6CDEC8504A /* [CP] Check Pods Manifest.lock */,
 				BB1939D52449FF9300BA8210 /* Sources */,
@@ -259,9 +283,9 @@
 			);
 			dependencies = (
 			);
-			name = Fodinha;
+			name = Truquero;
 			productName = Fodinha;
-			productReference = BB1939D92449FF9300BA8210 /* Fodinha.app */;
+			productReference = BB1939D92449FF9300BA8210 /* Truquero.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -292,7 +316,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BB1939D82449FF9300BA8210 /* Fodinha */,
+				BB1939D82449FF9300BA8210 /* Truquero */,
 			);
 		};
 /* End PBXProject section */
@@ -328,7 +352,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Fodinha-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Truquero-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -341,15 +365,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Fodinha/Pods-Fodinha-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Truquero/Pods-Truquero-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Fodinha/Pods-Fodinha-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Truquero/Pods-Truquero-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Fodinha/Pods-Fodinha-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Truquero/Pods-Truquero-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -360,6 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB1939DD2449FF9300BA8210 /* AppDelegate.swift in Sources */,
+				BB7CE48D2601360D00C7F42E /* ResponsePopupView.swift in Sources */,
 				BB58F3E0260000E800BFD314 /* ListSeparatorHelper.swift in Sources */,
 				BBD79F39247F36E200B43E29 /* HunchCheckButton.swift in Sources */,
 				BBA160922465CA4700395E18 /* TableGameViewModel.swift in Sources */,
@@ -376,6 +401,7 @@
 				BBF0A947246E217300C682F8 /* LoginViewModel.swift in Sources */,
 				BB8A2A6F25FEB3BA006074E2 /* SocketIOManager.swift in Sources */,
 				BB1939DF2449FF9300BA8210 /* SceneDelegate.swift in Sources */,
+				BBCBC7962600E497000324B6 /* InputStyles.swift in Sources */,
 				BBF0A941246E161A00C682F8 /* PlayerHunchView.swift in Sources */,
 				BB146524247348A800609B48 /* NavigationLazyView.swift in Sources */,
 				BBA24F5A2464E2E800AF3001 /* PlayerItem.swift in Sources */,
@@ -383,6 +409,8 @@
 				BB94E0D124534624008DE1F4 /* Extensions.swift in Sources */,
 				BBF0A943246E1AAC00C682F8 /* LoginView.swift in Sources */,
 				BB9BD58325FFCBD9001D7F7A /* ResizeButtonStyle.swift in Sources */,
+				BB0F26EE26013CC100B92B97 /* PopupStateHelper.swift in Sources */,
+				BB7CE48A2601338A00C7F42E /* PopupView.swift in Sources */,
 				BB964DB2247DEBCB00677574 /* TableDesignHelper.swift in Sources */,
 				BB1465222472D33C00609B48 /* PrimaryButton.swift in Sources */,
 				BB22796125EFF7C300FFB90B /* GameListSocket.swift in Sources */,
@@ -522,7 +550,7 @@
 		};
 		BB1939F12449FF9500BA8210 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ACC16F05FDB47BFCB6661438 /* Pods-Fodinha.debug.xcconfig */;
+			baseConfigurationReference = 9BF75DCC293B326FD014CBFB /* Pods-Truquero.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -546,7 +574,7 @@
 		};
 		BB1939F22449FF9500BA8210 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DB5293B3611B3D510DDC6279 /* Pods-Fodinha.release.xcconfig */;
+			baseConfigurationReference = 8D6D3A5D17C667562AC21DFB /* Pods-Truquero.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -580,7 +608,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BB1939F02449FF9500BA8210 /* Build configuration list for PBXNativeTarget "Fodinha" */ = {
+		BB1939F02449FF9500BA8210 /* Build configuration list for PBXNativeTarget "Truquero" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BB1939F12449FF9500BA8210 /* Debug */,

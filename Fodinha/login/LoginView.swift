@@ -20,10 +20,14 @@ struct LoginView: View {
     
     @State var email: String = ""
     @State var name: String = ""
-    @State var username: String = ""
+    @State var confirmPassword: String = ""
     @State var password: String = ""
     
-    var shouldDissmiss: Bool = false {
+    @State var showPopup: Bool = false
+    @State var popupMessage: String = ""
+    @State var popupType: ResponsePopupView.ResponseType = .normal
+    
+    @State var shouldDissmiss: Bool = false {
         didSet {
             self.presentationMode.wrappedValue.dismiss()
         }
@@ -31,94 +35,215 @@ struct LoginView: View {
     
     var body: some View {
         ZStack (alignment: .top){
-            Color.customDarkGray
+            Color.dark6
                 .edgesIgnoringSafeArea(.all)
             
-            VStack (alignment: .leading){
-                Text("Login")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.white)
-                
-                TextField("Email", text: $email)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.emailAddress)
-                    .autocapitalization(.none)
-                    .textContentType(.emailAddress)
-                    .padding(8)
-                
-                if self.isSignUp {
-                    TextField("Nome", text: $name)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+            ScrollView {
+                VStack (alignment: .center){
+                    
+                    Image("brand")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 70)
+                        .padding(32)
+                    
+                    TextField("Email", text: $email)
+                        .textFieldStyle(PrimaryInput())
                         .keyboardType(.emailAddress)
                         .autocapitalization(.none)
-                        .textContentType(.name)
-                        .padding(8)
+                        .textContentType(.emailAddress)
                     
-                    TextField("Username", text: $username)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .keyboardType(.emailAddress)
+                    if self.isSignUp {
+                        TextField("Nome", text: $name)
+                            .textFieldStyle(PrimaryInput())
+                            .keyboardType(.emailAddress)
+                            .autocapitalization(.none)
+                            .textContentType(.name)
+                    }
+                    
+                    SecureField("Senha", text: $password)
+                        .textFieldStyle(PrimaryInput())
+                        .textContentType(.password)
                         .autocapitalization(.none)
-                        .textContentType(.username)
-                        .padding(8)
-                }
                     
-                SecureField("Senha", text: $password)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .textContentType(.password)
-                    .autocapitalization(.none)
-                    .padding(8)
-                
-                if !self.isSignUp {
-                    Button(action: {
-                        self.isSignUp = true
-                    }) {
-                        Text("Criar conta")
-                    }.padding()
-                }
-                
-                HStack {
-                    Button(action: {
+                    
+                    if self.isSignUp {
+                        SecureField("Confirmar senha", text: $confirmPassword)
+                            .textFieldStyle(PrimaryInput())
+                            .textContentType(.password)
+                            .autocapitalization(.none)
+                    }
+                    
+                    VStack {
+                        Button(action: {
+                            
+                            UIApplication.shared.endEditing()
+                            
+                            if !self.isSignUp {
+                                withAnimation {
+                                    self.loading = true
+                                }
+                                
+                                Auth.auth().signIn(withEmail: self.email, password: self.password) { data, error in
+                                    if error == nil {
+                                        
+                                        self.viewModel.isLoggedIn = true
+                                        
+                                        self.presentationMode.wrappedValue.dismiss()
+                                    } else {
+                                        self.popupMessage = "Email ou senha inválidos"
+                                        self.popupType = .error
+                                        self.showPopup = true
+                                        
+                                        self.viewModel.isLoggedIn = false
+                                    }
+                                    
+                                    withAnimation {
+                                        self.loading = false
+                                    }
+                                }
+                                
+                            } else {
+                                withAnimation {
+                                    self.loading = true
+                                }
+                                
+                                NetworkHelper().register(name: name, email: email, password: password, username: confirmPassword) { (response: String?) in
+                                    
+                                    if response != nil {
+                                        withAnimation {
+                                            self.isSignUp = false
+                                            self.loading = false
+                                        }
+                                    } else {
+                                        withAnimation {
+                                            self.loading = false
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                            
+                        }) {
+                            Text(!self.isSignUp ? "Entrar" : "Cadastrar")
+                        }
+                        .cornerRadius(8)
+                        .buttonStyle(GoldenButtonStyle())
+                        .padding()
                         
                         if !self.isSignUp {
-                            self.loading = true
                             
-                            NetworkHelper().login(user: self.email, password: self.password) { (response: String?) in
-                                if response != nil {
-                                    self.viewModel.isLoggedIn = true
+                            Button(action: {
+                                self.loading = true
+                                
+                                UIApplication.shared.endEditing()
+                                
+                                Auth.auth().sendPasswordReset(withEmail: self.email) { error in
+                                    self.loading = false
                                     
-                                    self.presentationMode.wrappedValue.dismiss()
-                                } else {
-                                    self.viewModel.isLoggedIn = false
+                                    if error != nil {
+                                        self.popupMessage = "Erro ao redefinir senha"
+                                        self.popupType = .error
+                                        self.showPopup = true
+                                        
+                                    } else {
+                                        self.popupMessage = "Enviado email para redefinir senha"
+                                        self.popupType = .success
+                                        self.showPopup = true
+                                    }
+                                    
+                                    self.showPopup = true
                                 }
-                                
-                                self.loading = false
+                            }) {
+                                Text("Esqueci a senha")
                             }
-
-                        } else {
-                            self.loading = true
-                            
-                            NetworkHelper().register(name: name, email: email, password: password, username: username) { (response: String?) in
-                                
-                                if response != nil {
-                                    self.isSignUp = false
-                                    self.loading = false
-                                } else {
-                                    self.loading = false
-                                }
-                                
-                            }
+                            .buttonStyle(SecondaryButtonStyle())
                         }
                         
-                    }) {
-                        Text(!self.isSignUp ? "Entrar" : "Cadastrar")
-                    }.padding()
-
-                    ActivityIndicator(shouldAnimate: $loading)
-                }
+                        ActivityIndicator(shouldAnimate: $loading)
+                    }
+                    
+                    
+                    if !self.isSignUp {
+                        Divider()
+                            .background(Color.dark4)
+                            .padding(.bottom, 16)
+                        
+                        Button(action: {
+                            
+                        }){
+                            Image("google-icon")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 24)
+                                .padding(.trailing, 8)
+                            
+                            Text("Continuar com Google")
+                                .font(Font.custom("Avenir-Medium", size: 16))
+                                .foregroundColor(Color.customLightGray)
+                        }
+                        .frame(minWidth: 0, maxWidth: 300, minHeight: 40, idealHeight: 40, maxHeight: 40,
+                               alignment: .center)
+                        .background(Color.white)
+                        .cornerRadius(4)
+                        
+                        Button(action: {
+                            
+                        }){
+                            Image("facebook-icon")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 24)
+                                .padding(.trailing, 8)
+                            
+                            Text("Continuar com Facebook")
+                                .font(Font.custom("Avenir-Medium", size: 16))
+                                .foregroundColor(Color.white)
+                        }
+                        .frame(minWidth: 0, maxWidth: 300, minHeight: 40, idealHeight: 40, maxHeight: 40,
+                               alignment: .center)
+                        .background(Color.facebookBlue)
+                        .cornerRadius(4)
+                        
+                        Button(action: {
+                            
+                        }){
+                            Image("apple-icon")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 24)
+                                .padding(.trailing, 8)
+                            
+                            Text("Continuar com Apple")
+                                .font(Font.custom("Avenir-Medium", size: 16))
+                                .foregroundColor(Color.white)
+                        }
+                        .frame(minWidth: 0, maxWidth: 300, minHeight: 40, idealHeight: 40, maxHeight: 40,
+                               alignment: .center)
+                        .background(Color.black)
+                        .cornerRadius(4)
+                        
+                    }
                 
+                    Button(action: {
+                        withAnimation {
+                            self.isSignUp.toggle()
+                        }
+                    }) {
+                        if self.isSignUp {
+                            Text("Já possuo conta")
+                        } else {
+                            Text("Criar conta")
+                        }
+                    }
+                    .buttonStyle(SecondaryButtonStyle())
+                    .padding()
+                    
+                }
+                .padding()
             }
-            .padding()
+        }.popup(isPresented: self.$showPopup, type: .floater(verticalPadding: 48), autohideIn: 3){
+            ResponsePopupView(message: self.popupMessage, type: self.popupType)
         }
     }
 }

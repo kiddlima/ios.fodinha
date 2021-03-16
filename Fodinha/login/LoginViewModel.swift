@@ -14,9 +14,4 @@ class LoginViewModel: ObservableObject {
     
     @Published var isLoggedIn: Bool = false
     @Published var loading = false
-    
-    init() {
-//        isLoggedIn = Auth.auth().currentUser != nil
-        isLoggedIn = true
-    }
 }

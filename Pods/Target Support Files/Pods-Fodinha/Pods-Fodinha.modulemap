@@ -1,6 +1,0 @@
-framework module Pods_Fodinha {
-  umbrella header "Pods-Fodinha-umbrella.h"
-
-  export *
-  module * { export * }
-}

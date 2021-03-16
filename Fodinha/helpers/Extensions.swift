@@ -17,7 +17,11 @@ extension Color{
     static let dark5 = Color("dark-5")
     static let dark4 = Color("dark-4")
     
+    static let notificationGreen = Color("notification-green")
+    static let notificationRed = Color("notification-red")
+    
     static let golden0 = Color("golden-0")
+    static let facebookBlue = Color("facebook-blue")
     
     static let customDarkGray = Color("customDarkGray")
     static let customBlack = Color("customBlack")
@@ -39,6 +43,12 @@ extension UIColor{
     
     static let dark8 = UIColor(named: "dark-8")
     
+}
+
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }
 
 

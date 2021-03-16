@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_FodinhaVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_FodinhaVersionString[];
+FOUNDATION_EXPORT double Pods_TruqueroVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_TruqueroVersionString[];
 

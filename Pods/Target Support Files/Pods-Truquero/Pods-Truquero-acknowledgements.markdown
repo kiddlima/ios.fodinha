@@ -1,20 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>PreferenceSpecifiers</key>
-	<array>
-		<dict>
-			<key>FooterText</key>
-			<string>This application makes use of the following third party libraries:</string>
-			<key>Title</key>
-			<string>Acknowledgements</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>Copyright (c) 2014 Alamofire Software Foundation (http://alamofire.org/)
+# Acknowledgements
+This application makes use of the following third party libraries:
+
+## Alamofire
+
+Copyright (c) 2014 Alamofire Software Foundation (http://alamofire.org/)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -33,17 +22,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-</string>
-			<key>License</key>
-			<string>MIT</string>
-			<key>Title</key>
-			<string>Alamofire</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>Copyright (c) 2016 Konstantin Kabanov &lt;konstantin@rktstudio.ru&gt;
+
+
+## AlamofireNetworkActivityLogger
+
+Copyright (c) 2016 Konstantin Kabanov <konstantin@rktstudio.ru>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -62,17 +45,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-</string>
-			<key>License</key>
-			<string>MIT</string>
-			<key>Title</key>
-			<string>AlamofireNetworkActivityLogger</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>The MIT License (MIT)
+
+
+## AlamofireObjectMapper
+
+The MIT License (MIT)
 
 Copyright (c) 2015 Tristan Himmelman
 
@@ -94,17 +71,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-</string>
-			<key>License</key>
-			<string>MIT</string>
-			<key>Title</key>
-			<string>AlamofireObjectMapper</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>BoringSSL is a fork of OpenSSL. As such, large parts of it fall under OpenSSL
+
+
+## BoringSSL-GRPC
+
+BoringSSL is a fork of OpenSSL. As such, large parts of it fall under OpenSSL
 licensing. Files that are completely new have a Google copyright and an ISC
 license. This license is reproduced at the bottom of this file.
 
@@ -355,17 +326,34 @@ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-</string>
-			<key>License</key>
-			<string>Mixed</string>
-			<key>Title</key>
-			<string>BoringSSL-GRPC</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>
+
+
+## ExytePopupView
+
+Copyright (c) 2019 exyte <info@exyte.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+
+## Firebase
+
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -567,27 +555,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-</string>
-			<key>License</key>
-			<string>Apache</string>
-			<key>Title</key>
-			<string>Firebase</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>Copyright 2020 Google</string>
-			<key>License</key>
-			<string>Copyright</string>
-			<key>Title</key>
-			<string>FirebaseAnalytics</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>
+
+
+## FirebaseAnalytics
+
+Copyright 2020 Google
+
+## FirebaseAuth
+
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -789,17 +765,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-</string>
-			<key>License</key>
-			<string>Apache</string>
-			<key>Title</key>
-			<string>FirebaseAuth</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>
+
+
+## FirebaseAuthInterop
+
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -1001,17 +971,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-</string>
-			<key>License</key>
-			<string>Apache</string>
-			<key>Title</key>
-			<string>FirebaseAuthInterop</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>
+
+
+## FirebaseCore
+
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -1213,17 +1177,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-</string>
-			<key>License</key>
-			<string>Apache</string>
-			<key>Title</key>
-			<string>FirebaseCore</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>
+
+
+## FirebaseCoreDiagnostics
+
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -1425,17 +1383,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-</string>
-			<key>License</key>
-			<string>Apache</string>
-			<key>Title</key>
-			<string>FirebaseCoreDiagnostics</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>
+
+
+## FirebaseCoreDiagnosticsInterop
+
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -1637,17 +1589,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-</string>
-			<key>License</key>
-			<string>Apache</string>
-			<key>Title</key>
-			<string>FirebaseCoreDiagnosticsInterop</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>
+
+
+## FirebaseFirestore
+
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -1849,17 +1795,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-</string>
-			<key>License</key>
-			<string>Apache</string>
-			<key>Title</key>
-			<string>FirebaseFirestore</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>
+
+
+## FirebaseFirestoreSwift
+
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -2061,17 +2001,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-</string>
-			<key>License</key>
-			<string>Apache</string>
-			<key>Title</key>
-			<string>FirebaseFirestoreSwift</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>
+
+
+## FirebaseFunctions
+
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -2273,17 +2207,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-</string>
-			<key>License</key>
-			<string>Apache</string>
-			<key>Title</key>
-			<string>FirebaseFunctions</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>
+
+
+## FirebaseInstallations
+
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -2485,17 +2413,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-</string>
-			<key>License</key>
-			<string>Apache</string>
-			<key>Title</key>
-			<string>FirebaseInstallations</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>
+
+
+## GTMSessionFetcher
+
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -2697,27 +2619,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-</string>
-			<key>License</key>
-			<string>Apache</string>
-			<key>Title</key>
-			<string>GTMSessionFetcher</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>Copyright 2020 Google</string>
-			<key>License</key>
-			<string>Copyright</string>
-			<key>Title</key>
-			<string>GoogleAppMeasurement</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>
+
+
+## GoogleAppMeasurement
+
+Copyright 2020 Google
+
+## GoogleDataTransport
+
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -2919,17 +2829,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-</string>
-			<key>License</key>
-			<string>Apache</string>
-			<key>Title</key>
-			<string>GoogleDataTransport</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>
+
+
+## GoogleDataTransportCCTSupport
+
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -3131,17 +3035,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-</string>
-			<key>License</key>
-			<string>Apache</string>
-			<key>Title</key>
-			<string>GoogleDataTransportCCTSupport</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>
+
+
+## GoogleUtilities
+
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -3349,7 +3247,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 The following copyright from Landon J. Fuller applies to the isAppEncrypted
 function in Environment/third_party/GULAppEnvironmentUtil.m.
 
-Copyright (c) 2017 Landon J. Fuller &lt;landon@landonf.org&gt;
+Copyright (c) 2017 Landon J. Fuller <landon@landonf.org>
 All rights reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -3370,8 +3268,8 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 Comment from
-&lt;a href="http://iphonedevwiki.net/index.php/Crack_prevention"&gt;iPhone Dev Wiki
-Crack Prevention&lt;/a&gt;: App Store binaries are signed by both their developer
+<a href="http://iphonedevwiki.net/index.php/Crack_prevention">iPhone Dev Wiki
+Crack Prevention</a>: App Store binaries are signed by both their developer
 and Apple. This encrypts the binary so that decryption keys are needed in order
 to make the binary readable. When iOS executes the binary, the decryption keys
 are used to decrypt the binary into a readable state where it is then loaded
@@ -3386,19 +3284,13 @@ Resigning takes place because while the codesignature doesn't have to be valid
 thanks to the jailbreak, it does have to be in place unless you have AppSync or
 similar to disable codesignature checks.
 
-More information at &lt;a href="http://landonf.org/2009/02/index.html"&gt;Landon
-Fuller's blog&lt;/a&gt;
-</string>
-			<key>License</key>
-			<string>Apache</string>
-			<key>Title</key>
-			<string>GoogleUtilities</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>The MIT License (MIT)
+More information at <a href="http://landonf.org/2009/02/index.html">Landon
+Fuller's blog</a>
+
+
+## ObjectMapper
+
+The MIT License (MIT)
 Copyright (c) 2014 Hearst
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -3406,17 +3298,11 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-</string>
-			<key>License</key>
-			<string>MIT</string>
-			<key>Title</key>
-			<string>ObjectMapper</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>
+
+
+## PromisesObjC
+
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -3618,17 +3504,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-</string>
-			<key>License</key>
-			<string>Apache</string>
-			<key>Title</key>
-			<string>PromisesObjC</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>The MIT License (MIT)
+
+
+## Socket.IO-Client-Swift
+
+The MIT License (MIT)
 
 Copyright (c) 2014-2015 Erik Little
 
@@ -3858,17 +3738,11 @@ Apache License
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-</string>
-			<key>License</key>
-			<string>MIT</string>
-			<key>Title</key>
-			<string>Socket.IO-Client-Swift</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>                              Apache License
+
+
+## Starscream
+
+                              Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
 
@@ -4043,17 +3917,11 @@ Apache License
       of any other Contributor, and only if You agree to indemnify,
       defend, and hold each Contributor harmless for any liability
       incurred by, or claims asserted against, such Contributor by reason
-      of your accepting any such warranty or additional liability.</string>
-			<key>License</key>
-			<string>Apache License, Version 2.0</string>
-			<key>Title</key>
-			<string>Starscream</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>The MIT License (MIT)
+      of your accepting any such warranty or additional liability.
+
+## SwiftyJSON
+
+The MIT License (MIT)
 
 Copyright (c) 2017 Ruoyu Fu
 
@@ -4074,17 +3942,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-</string>
-			<key>License</key>
-			<string>MIT</string>
-			<key>Title</key>
-			<string>SwiftyJSON</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>
+
+
+## abseil
+
+
                                  Apache License
                            Version 2.0, January 2004
                         https://www.apache.org/licenses/
@@ -4287,17 +4149,11 @@ THE SOFTWARE.
    See the License for the specific language governing permissions and
    limitations under the License.
 
-</string>
-			<key>License</key>
-			<string>Apache License, Version 2.0</string>
-			<key>Title</key>
-			<string>abseil</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>
+
+
+## gRPC-C++
+
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -4499,17 +4355,11 @@ THE SOFTWARE.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-</string>
-			<key>License</key>
-			<string>Apache License, Version 2.0</string>
-			<key>Title</key>
-			<string>gRPC-C++</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>
+
+
+## gRPC-Core
+
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -4711,17 +4561,11 @@ THE SOFTWARE.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-</string>
-			<key>License</key>
-			<string>Apache License, Version 2.0</string>
-			<key>Title</key>
-			<string>gRPC-Core</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>Copyright (c) 2011 The LevelDB Authors. All rights reserved.
+
+
+## leveldb-library
+
+Copyright (c) 2011 The LevelDB Authors. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -4748,17 +4592,11 @@ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-</string>
-			<key>License</key>
-			<string>New BSD</string>
-			<key>Title</key>
-			<string>leveldb-library</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>Copyright (c) 2011 Petteri Aimonen &lt;jpa at nanopb.mail.kapsi.fi&gt;
+
+
+## nanopb
+
+Copyright (c) 2011 Petteri Aimonen <jpa at nanopb.mail.kapsi.fi>
 
 This software is provided 'as-is', without any express or 
 implied warranty. In no event will the authors be held liable 
@@ -4778,26 +4616,5 @@ redistribute it freely, subject to the following restrictions:
 
 3. This notice may not be removed or altered from any source 
    distribution.
-</string>
-			<key>License</key>
-			<string>zlib</string>
-			<key>Title</key>
-			<string>nanopb</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>Generated by CocoaPods - https://cocoapods.org</string>
-			<key>Title</key>
-			<string></string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-	</array>
-	<key>StringsTable</key>
-	<string>Acknowledgements</string>
-	<key>Title</key>
-	<string>Acknowledgements</string>
-</dict>
-</plist>
+
+Generated by CocoaPods - https://cocoapods.org

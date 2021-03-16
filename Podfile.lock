@@ -170,6 +170,7 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
+  - ExytePopupView (0.0.12)
   - Firebase/Auth (6.22.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.5.1)
@@ -297,6 +298,7 @@ DEPENDENCIES:
   - Alamofire
   - AlamofireNetworkActivityLogger (~> 2.0)
   - AlamofireObjectMapper (~> 5.2)
+  - ExytePopupView
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
@@ -312,6 +314,7 @@ SPEC REPOS:
     - AlamofireNetworkActivityLogger
     - AlamofireObjectMapper
     - BoringSSL-GRPC
+    - ExytePopupView
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -344,6 +347,7 @@ SPEC CHECKSUMS:
   AlamofireNetworkActivityLogger: 6d3398c692d2c5d83b0c58793537860aca1e383d
   AlamofireObjectMapper: 1989f690e982b71921b9253f53a4f33a9bc00d88
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
+  ExytePopupView: 93525e88546df6001e7f68f90b66b2e21a27f887
   Firebase: 32f9520684e87c7af3f0704f7f88042626d6b536
   FirebaseAnalytics: 83f822fd0d33a46f49f89b8c3ab16ab4d89df08a
   FirebaseAuth: 7047aec89c0b17ecd924a550c853f0c27ac6015e
@@ -370,6 +374,6 @@ SPEC CHECKSUMS:
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 49f027b8041a9bcd1385dec5960ac74a157b6bee
+PODFILE CHECKSUM: 23a71fcf4832bc9bbce90f7f6d4b3334c01436a6
 
 COCOAPODS: 1.9.1

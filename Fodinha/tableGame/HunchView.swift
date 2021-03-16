@@ -10,9 +10,9 @@ import SwiftUI
 
 struct HunchView: View {
     
-    var cardAmount: Int?
+    var choices: [Choice]?
     var players: [Player]?
-    var viewModel: TableGameViewModel?
+    var viewModel: TableGameViewModel
     
     var body: some View {
         VStack (alignment: .leading) {
@@ -22,59 +22,51 @@ struct HunchView: View {
             
             Spacer()
             
-            HStack (spacing: 0) {
-                ForEach (-1 ..< cardAmount!, id: \.self) { choice in
-                    Button(action: {
-                        self.viewModel?.userHunchChoice = choice + 1
-                    }) {
-                        Text("\(choice + 1)")
-                    }
-                    .padding(2)
-                    .buttonStyle(PrimaryButton())
-                    .background(
-                        (self.viewModel?.userHunchChoice != nil &&
-                        (self.viewModel?.userHunchChoice! == choice + 1))
-                            ? Color.customLightGray
-                            : nil)
-                }
-            }
+//            HStack (spacing: 0) {
+//                ForEach(0 ..< self.choices!.count) { index in
+//                    Button(action: {
+//                        self.viewModel.setChoice(selectedChoice: self.choices![index])
+//                    }) {
+//                        Text("\(self.choices![index].number)")
+//                    }
+//                    .padding(2)
+//                    .disabled(!self.choices![index].available!)
+//                    .buttonStyle(SelectedButton(selected: self.choices![index].selected, disabled: !self.choices![index].available!))
+//                }
+//            }
             
             Spacer()
-
-            VStack (alignment: .leading) {
-                ForEach (players!, id: \.playerId) { player in
-                    PlayerHunchView(player: player)
-                }
-            }
+            
+//            VStack (alignment: .leading) {
+//                ForEach (players!, id: \.playerId) { player in
+//                    PlayerHunchView(player: player)
+//                }
+//            }
             
             Spacer()
             
             Button(action: {
-                self.viewModel?.setPlayerHunch(hunch: (self.viewModel?.userHunchChoice)!)
+                self.viewModel.setPlayerHunch()
             }) {
                 Text("Confirmar")
             }
             .padding(2)
             .buttonStyle(PrimaryButton())
-            
-            
-            
         }
         .transition(.slide)
         .cornerRadius(8)
         .padding(16)
         .background(
-               RoundedRectangle(cornerRadius: 4)
+            RoundedRectangle(cornerRadius: 4)
                 .fill(Color.customDarkGray)
-               .shadow(radius: 4)
-           )
-        
+                .shadow(radius: 4)
+        )
     }
-   
+    
 }
 
 struct HunchView_Previews: PreviewProvider {
     static var previews: some View {
-        HunchView(cardAmount: 5)
+        HunchView(choices: [], players: [], viewModel: TableGameViewModel(gameId: ""))
     }
 }

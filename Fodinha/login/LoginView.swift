@@ -20,6 +20,7 @@ struct LoginView: View {
     
     @State var email: String = ""
     @State var name: String = ""
+    @State var username: String = ""
     @State var password: String = ""
     
     var shouldDissmiss: Bool = false {
@@ -51,7 +52,14 @@ struct LoginView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.emailAddress)
                         .autocapitalization(.none)
-                        .textContentType(.emailAddress)
+                        .textContentType(.name)
+                        .padding(8)
+                    
+                    TextField("Username", text: $username)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .keyboardType(.emailAddress)
+                        .autocapitalization(.none)
+                        .textContentType(.username)
                         .padding(8)
                 }
                     
@@ -74,37 +82,31 @@ struct LoginView: View {
                         
                         if !self.isSignUp {
                             self.loading = true
-
-                            Auth.auth().signIn(withEmail: self.email, password: self.password) { authResult, error in
-                                if error == nil {
-                                    UserDefaults.standard.set(authResult?.user.uid, forKey: "uid")
-                                    UserDefaults.standard.set(authResult?.user.email, forKey: "email")
-                                    UserDefaults.standard.set(authResult?.user.displayName, forKey: "name")
-
+                            
+                            NetworkHelper().login(user: self.email, password: self.password) { (response: String?) in
+                                if response != nil {
                                     self.viewModel.isLoggedIn = true
                                     
                                     self.presentationMode.wrappedValue.dismiss()
-
                                 } else {
                                     self.viewModel.isLoggedIn = false
                                 }
-
+                                
                                 self.loading = false
                             }
+
                         } else {
                             self.loading = true
                             
-                            Auth.auth().createUser(withEmail: self.email, password: self.password) { authResult, error in
-                                if error == nil {
-                                    let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-                                    changeRequest?.displayName = self.name
-                                    changeRequest?.commitChanges { (error) in
-                                        self.isSignUp = false
-                                        self.loading = false
-                                    }
+                            NetworkHelper().register(name: name, email: email, password: password, username: username) { (response: String?) in
+                                
+                                if response != nil {
+                                    self.isSignUp = false
+                                    self.loading = false
                                 } else {
                                     self.loading = false
                                 }
+                                
                             }
                         }
                         

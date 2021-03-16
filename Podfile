@@ -11,4 +11,10 @@ target 'Fodinha' do
 	pod 'FirebaseFirestoreSwift'
 	pod 'Firebase/Auth'
 	pod 'Firebase/Functions'
+	pod 'Socket.IO-Client-Swift', '~> 16.0.0'
+  
+  pod 'Alamofire'
+  pod 'AlamofireObjectMapper', '~> 5.2'
+  pod 'AlamofireNetworkActivityLogger', '~> 2.0'
+  pod 'SwiftyJSON'
 end

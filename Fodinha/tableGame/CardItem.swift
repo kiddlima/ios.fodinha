@@ -17,7 +17,7 @@ struct CardItem: View {
     var body: some View {
         VStack{
             if card != nil {
-                Image("verso")
+                Image(card!.imageName!)
                     .resizable()
                     .cornerRadius(4)
                     .frame(width: width, height: height)
@@ -31,8 +31,8 @@ struct CardItem: View {
         .frame(width: width, height: height)
         .background(
             RoundedRectangle(cornerRadius: 4)
-            .fill(Color.white)
-            .shadow(radius: 4)
+                .fill(Color.white)
+                .shadow(radius: 4)
         )
     }
 }

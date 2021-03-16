@@ -11,6 +11,14 @@ import SwiftUI
 import UIKit
 
 extension Color{
+    static let dark8 = Color("dark-8")
+    static let dark7 = Color("dark-7")
+    static let dark6 = Color("dark-6")
+    static let dark5 = Color("dark-5")
+    static let dark4 = Color("dark-4")
+    
+    static let golden0 = Color("golden-0")
+    
     static let customDarkGray = Color("customDarkGray")
     static let customBlack = Color("customBlack")
     static let customLighterGray = Color("customLighterGray")
@@ -28,6 +36,8 @@ extension Color{
 extension UIColor{
     static let customDarkGray = UIColor(named: "customDarkGray")
     static let customLightGray = UIColor(named: "customLightGray")
+    
+    static let dark8 = UIColor(named: "dark-8")
     
 }
 

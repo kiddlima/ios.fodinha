@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct ContentView: View {
     
@@ -16,47 +17,84 @@ struct ContentView: View {
     @State var showingLogin = false
     @State var showingGame = false
     
+    @State var isNavigationBarHidden: Bool = true
+    
     var body: some View {
-        NavigationView {
-            List(viewModel.games, id: \.gameId){ game in
-                if self.loginViewModel.isLoggedIn {
-                    NavigationLink(destination: NavigationLazyView(TableGameView(gameId: game.gameId!))){
-                        RowView(game: game)
-                    }
-                } else {
-                    Button(action: {
-                        self.showingLogin.toggle()
-                    }) {
-                        RowView(game: game)
-                    }.sheet(isPresented: self.$showingLogin) {
-                        LoginView(viewModel: self.loginViewModel)
+        ZStack {
+            NavigationView {
+                List {
+                    ForEach(self.viewModel.games, id: \._id) { game in
+                        if self.loginViewModel.isLoggedIn {
+                            Button(action: {
+                                self.showingGame.toggle()
+                            }){
+                                RowView(game: game)
+//                                NavigationLink(destination: NavigationLazyView(TableGameView(gameId: game._id!))){
+//                                    RowView(game: game)
+//                                }
+                            }.fullScreenCover(isPresented: self.$showingGame, content: {
+                                TableGameView(gameId: game._id!)
+                            })
+                            .buttonStyle(ResizeButtonStyle())
+                            .listRowBackground(Color.dark8)
+                            
+                        } else {
+                            Button(action: {
+                                self.showingLogin.toggle()
+                            }) {
+                                RowView(game: game)
+                            }.sheet(isPresented: self.$showingLogin) {
+                                LoginView(viewModel: self.loginViewModel)
+                            }
+                            .buttonStyle(ResizeButtonStyle())
+                            .listRowBackground(Color.dark8)
+                        }
                     }
                 }
+                .listStyle(PlainListStyle())
+                .listSeparatorStyle(.none)
+                .navigationBarItems(
+                    trailing:
+                    Button(action: {
+                        if self.loginViewModel.isLoggedIn {
+                            do {
+                                try Auth.auth().signOut()
+                            } catch  {
+                            }
+                            
+                            self.loginViewModel.isLoggedIn = false
+                        } else {
+                            self.showingLogin.toggle()
+                        }
+                    }) {
+                        Text(loginViewModel.isLoggedIn ? "Sair" : "Acessar conta")
+                            .foregroundColor(.white)
+                    }.sheet(isPresented: $showingLogin) {
+                        LoginView(viewModel: self.loginViewModel)
+                    })
+                .navigationBarTitle(Text("Jogos disponíveis"))
             }
-            .navigationBarItems(leading: loginViewModel.isLoggedIn ? Text(UserDefaults.standard.string(forKey: "name")!) : Text(""),
-                trailing:
-                Button(action: {
-                    if self.loginViewModel.isLoggedIn {
-                        UserDefaults.standard.set(nil, forKey: "uid")
-                        UserDefaults.standard.set(nil, forKey: "email")
-                        
-                        self.loginViewModel.isLoggedIn = false
-                    } else {
-                        self.showingLogin.toggle()
-                    }
-                }) {
-                    Text(loginViewModel.isLoggedIn ? "Sair" : "Entrar")
-                }.sheet(isPresented: $showingLogin) {
-                    LoginView(viewModel: self.loginViewModel)
-                })
-            .navigationBarTitle(Text("Jogos disponíveis"))
-            .listStyle(GroupedListStyle())
-        }
+        }.overlay(
+            Button(action: {
+                
+            })
+            {
+                Text("CRIAR JOGO")
+            }
+            .cornerRadius(4)
+            .buttonStyle(GoldenButtonStyle())
+            , alignment: .bottom
+        )
+        
         .onAppear(){
-            UITableViewCell.appearance().backgroundColor = UIColor.customDarkGray
-            UITableView.appearance().backgroundColor = UIColor.customLightGray
+            UITableView.appearance().backgroundColor = UIColor.dark8
             UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
             UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+            UITableViewCell.appearance().backgroundColor = .clear
+            UITableView.appearance().separatorStyle = .none
+            UITableView.appearance().separatorColor = UIColor.dark8
+            
+            self.isNavigationBarHidden = true
         }
     }
 }
@@ -65,24 +103,45 @@ struct RowView: View{
     var game: Game
     
     var body: some View {
-        HStack{
-            VStack(alignment: .leading){
-                Text(game.name!)
-                    .foregroundColor(.white)
-                Text("Criado por: \(game.createdBy!)")
-                    .foregroundColor(Color.customLighterGray)
-            }
-            
-            Spacer()
         
-            if game.active! {
-                Image("activeIcon").resizable()
-                    .foregroundColor(Color.tableDefaultGreen)
-                .frame(width: 15, height:
-                    15)
+        LazyVStack{
+            HStack{
+                VStack(alignment: .leading){
+                    Text(game.name!)
+                        .foregroundColor(.white)
+                        .font(Font.custom("Avenir-Medium", size: 16))
+                        .fontWeight(.bold)
+                    Text("\(game.players!.count)/8")
+                        .font(Font.custom("Avenir-Regular", size: 14))
+                        .foregroundColor(Color.customLighter2Gray)
+                }
+                .padding(16)
+                
+                Spacer()
+                
+                if game.hasPassword! {
+                    if game.isPlayerInTheGame() {
+                        Image("open_padlock").resizable()
+                            .frame(width: 15, height: 20)
+                            .padding(.trailing, 16)
+                    } else {
+                        Image("padlock").resizable()
+                            .frame(width: 15, height: 20)
+                            .padding(.trailing, 16)
+                    }
+                } else {
+                    if game.active! {
+                        Image("activeIcon").resizable()
+                            .frame(width: 15, height: 15)
+                            .padding(.trailing, 16)
+                    }
+                }
+                
             }
         }
-        .frame(height: 56)
+        .background(Color.dark6)
+        .cornerRadius(8.0)
+        .frame(height: 70)
     }
 }
 

@@ -14,23 +14,37 @@ class AvailableGamesViewModel: ObservableObject {
     
     let db = Firestore.firestore()
     
+    let socket = SocketIOManager.sharedInstance.socket!
+    
     @Published var games: [Game] = []
+    @Published var error: String?
     
     init() {
-        getGames()
+        NetworkHelper().getGames(networkDelegate: self)
+        
+        listenToGames()
     }
-
-    func getGames(){
-        db.collection("game").getDocuments(completion: { (querySnapshot, error) in
-            self.games = []
+    
+    func listenToGames(){
+        self.socket.on(clientEvent: .connect) { data, act in
+            self.socket.emit("joinHome")
             
-            for snap in (querySnapshot?.documents)! {
-                
-                DispatchQueue.main.async {
-                    self.games.append(Game(document: snap))
-                }
-                
+            self.socket.on("attGame") { data, ack in
+                NetworkHelper().getGames(networkDelegate: self)
             }
-        })
-    } 
+        }
+    }
+}
+
+extension AvailableGamesViewModel: NetworkRequestDelegate {
+    
+    func fail(errorMessage: String) {
+        error = errorMessage
+    }
+    
+    func success(response: Any?) {
+        self.games = response as? [Game] ?? []
+        print(self.games)
+    }
+    
 }

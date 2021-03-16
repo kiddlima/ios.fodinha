@@ -158,6 +158,12 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - Alamofire (4.9.1)
+  - AlamofireNetworkActivityLogger (2.4.0):
+    - Alamofire (~> 4.8)
+  - AlamofireObjectMapper (5.2.1):
+    - Alamofire (~> 4.7)
+    - ObjectMapper (~> 3.4)
   - BoringSSL-GRPC (0.0.3):
     - BoringSSL-GRPC/Implementation (= 0.0.3)
     - BoringSSL-GRPC/Interface (= 0.0.3)
@@ -280,18 +286,31 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
+  - ObjectMapper (3.5.3)
   - PromisesObjC (1.2.8)
+  - Socket.IO-Client-Swift (16.0.1):
+    - Starscream (~> 4.0)
+  - Starscream (4.0.4)
+  - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
+  - Alamofire
+  - AlamofireNetworkActivityLogger (~> 2.0)
+  - AlamofireObjectMapper (~> 5.2)
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
   - Firebase/Functions
   - FirebaseFirestoreSwift
+  - Socket.IO-Client-Swift (~> 16.0.0)
+  - SwiftyJSON
 
 SPEC REPOS:
   trunk:
     - abseil
+    - Alamofire
+    - AlamofireNetworkActivityLogger
+    - AlamofireObjectMapper
     - BoringSSL-GRPC
     - Firebase
     - FirebaseAnalytics
@@ -313,10 +332,17 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
+    - ObjectMapper
     - PromisesObjC
+    - Socket.IO-Client-Swift
+    - Starscream
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  AlamofireNetworkActivityLogger: 6d3398c692d2c5d83b0c58793537860aca1e383d
+  AlamofireObjectMapper: 1989f690e982b71921b9253f53a4f33a9bc00d88
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
   Firebase: 32f9520684e87c7af3f0704f7f88042626d6b536
   FirebaseAnalytics: 83f822fd0d33a46f49f89b8c3ab16ab4d89df08a
@@ -338,8 +364,12 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
+  ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  Socket.IO-Client-Swift: c116d6dc9fd6be9c259bacfe143f8725bce7d79e
+  Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 3440df6f2d696974dc9df31886456bc249ba9dce
+PODFILE CHECKSUM: 49f027b8041a9bcd1385dec5960ac74a157b6bee
 
 COCOAPODS: 1.9.1

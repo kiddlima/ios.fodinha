@@ -38,8 +38,8 @@ struct PlayerItem: View {
                         }.padding(.trailing, 4)
                     } else {
                         Text("")
-                        .font(.caption)
-                        .fontWeight(.light)
+                            .font(.caption)
+                            .fontWeight(.light)
                             .foregroundColor(Color.customLighter2Gray).hidden()
                     }
                     
@@ -52,7 +52,7 @@ struct PlayerItem: View {
             .background(
                 RoundedRectangle(cornerRadius: 4)
                     .fill(TableDesignHelper.getPlayerBgColor(player: self.player))
-                .shadow(radius: 4)
+                    .shadow(radius: 4)
             )
             
             CardItem(card: player.currentCard, width: 40, height: 67)
@@ -63,6 +63,6 @@ struct PlayerItem: View {
 struct PlayerItem_Previews: PreviewProvider {
     static var previews: some View {
         PlayerItem(player: Player())
-        .previewLayout(.fixed(width: 500, height: 200))
+            .previewLayout(.fixed(width: 500, height: 200))
     }
 }

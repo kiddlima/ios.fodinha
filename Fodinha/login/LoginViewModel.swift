@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Firebase
 import FirebaseAuth
 import SwiftUI
 
@@ -17,14 +16,7 @@ class LoginViewModel: ObservableObject {
     @Published var loading = false
     
     init() {
-        isLoggedIn = UserDefaults.standard.string(forKey: "uid") != nil
+//        isLoggedIn = Auth.auth().currentUser != nil
+        isLoggedIn = true
     }
-//    
-//    func login(email: String, password: String){
-//        
-//    }
-//    
-//    func singUp(email: String, password: String, name: String){
-////        
-//    }
 }

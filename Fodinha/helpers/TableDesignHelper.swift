@@ -13,11 +13,11 @@ import SwiftUI
 class TableDesignHelper {
     
     static func getPlayerBgColor(player: Player) -> Color {
-        if player.smallRoundWinner {
+        if player.smallRoundWinner! {
             return Color.lighterGreen
         }
         
-        if player.isTurn {
+        if player.isTurn! {
             return Color.yellowLight
         }
         
@@ -25,7 +25,7 @@ class TableDesignHelper {
     }
     
     static func getPlayerTextColor(player: Player) -> Color {
-        if player.isTurn || player.smallRoundWinner {
+        if player.isTurn! || player.smallRoundWinner! {
             return Color.black
         }
         

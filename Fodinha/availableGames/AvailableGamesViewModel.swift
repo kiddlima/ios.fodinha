@@ -16,10 +16,14 @@ class AvailableGamesViewModel: ObservableObject {
     
     let socket = SocketIOManager.sharedInstance.socket!
     
+    @Published var loading: Bool
+    
     @Published var games: [Game] = []
     @Published var error: String?
     
     init() {
+        self.loading = true
+        
         NetworkHelper().getGames(networkDelegate: self)
         
         listenToGames()
@@ -39,12 +43,17 @@ class AvailableGamesViewModel: ObservableObject {
 extension AvailableGamesViewModel: NetworkRequestDelegate {
     
     func fail(errorMessage: String) {
-        error = errorMessage
+        withAnimation {
+            self.loading = false
+        }
     }
     
     func success(response: Any?) {
+        withAnimation {
+            self.loading = false
+        }
+        
         self.games = response as? [Game] ?? []
-        print(self.games)
     }
     
 }

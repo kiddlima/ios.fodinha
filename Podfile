@@ -9,10 +9,15 @@ target 'Truquero' do
 	pod 'Firebase/Core'
 	pod 'Firebase/Firestore'
 	pod 'FirebaseFirestoreSwift'
-	pod 'Firebase/Auth'
+	
 	pod 'Firebase/Functions'
 	pod 'Socket.IO-Client-Swift', '~> 16.0.0'
   pod 'ExytePopupView'
+  pod 'ValidatedPropertyKit'
+  
+  pod 'Firebase/Auth'
+  pod 'GoogleSignIn'
+  pod 'FBSDKLoginKit'
   
   pod 'Alamofire'
   pod 'AlamofireObjectMapper', '~> 5.2'

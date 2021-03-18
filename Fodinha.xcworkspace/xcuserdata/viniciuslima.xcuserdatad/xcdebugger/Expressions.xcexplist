@@ -71,6 +71,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in LoginViewModel.facebookLogin(callback:):LoginViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "AccessToken.current">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "SelectedButton.makeBody(configuration:):SelectedButton.swift">
       </ContextState>
       <ContextState
@@ -100,6 +108,28 @@
             </PersistentString>
             <PersistentString
                value = "self.games">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LoginView.isFormValid(isSignUp:):LoginView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self._email.isValid">
+            </PersistentString>
+            <PersistentString
+               value = "self.email">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in AppleLoginButton.AppleSignInCoordinator.authorizationController(controller:didCompleteWithAuthorization:):AppleLoginButton.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "error.localizedDescription">
+            </PersistentString>
+            <PersistentString
+               value = "error.debugDescription">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -200,13 +230,13 @@
          contextName = "closure #1 in TableGameViewModel.listenToPlayers():TableGameViewModel.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.game">
-            </PersistentString>
-            <PersistentString
                value = "self.currentPlayer">
             </PersistentString>
             <PersistentString
                value = "self.choices">
+            </PersistentString>
+            <PersistentString
+               value = "self.game">
             </PersistentString>
             <PersistentString
                value = "self.isPlayerInTheGameAlready">
@@ -228,13 +258,21 @@
          contextName = "closure #1 in TableGameViewModel.setPlayerHunch():TableGameViewModel.swift">
       </ContextState>
       <ContextState
+         contextName = "LoginViewModel.isFormValid(isSignUp:):LoginViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.email">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "Player.init(document:):Player.swift">
          <PersistentStrings>
             <PersistentString
-               value = "cards[0].playload_data_0">
+               value = "document.data()![&quot;currentCard&quot;]! as [String : Any]">
             </PersistentString>
             <PersistentString
-               value = "document.data()![&quot;currentCard&quot;]! as [String : Any]">
+               value = "cards[0].playload_data_0">
             </PersistentString>
             <PersistentString
                value = "cards[0] as [String: Any][&quot;name&quot;]">
@@ -334,10 +372,10 @@
                value = "&quot;\(card?.suit!.lowercased())\(card?.value)&quot;">
             </PersistentString>
             <PersistentString
-               value = "card?.suit">
+               value = "card">
             </PersistentString>
             <PersistentString
-               value = "card">
+               value = "card?.suit">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -351,10 +389,10 @@
                value = "viewModel.game.players[0]">
             </PersistentString>
             <PersistentString
-               value = "viewModel.game.players">
+               value = "viewModel.game.players[0].cards.count">
             </PersistentString>
             <PersistentString
-               value = "viewModel.game.players[0].cards.count">
+               value = "viewModel.game.players">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

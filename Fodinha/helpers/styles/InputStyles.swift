@@ -10,6 +10,12 @@ import Foundation
 import SwiftUI
 
 struct PrimaryInput: TextFieldStyle {
+    @State var invalid: Bool = false
+    
+    init(invalid: Bool) {
+        self.invalid = invalid
+    }
+    
     func _body(configuration: TextField<_Label>) -> some View {
         configuration
         .padding(16)
@@ -17,6 +23,6 @@ struct PrimaryInput: TextFieldStyle {
         .foregroundColor(.white)
         .background(
             RoundedRectangle(cornerRadius: 8)
-              .strokeBorder(Color.white, lineWidth: 1))
+                .strokeBorder(self.invalid ? Color.notificationRed : Color.white, lineWidth: 1))
     }
 }

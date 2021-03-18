@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import AlamofireObjectMapper
+import FirebaseAuth
 
 protocol NetworkRequestDelegate {
     func success(response: Any?)
@@ -21,17 +22,31 @@ class NetworkHelper: NSObject {
     let URL = "http://api.truquero.com.br/api/v1"
     
     let defaultHeader: HTTPHeaders = [
-                "Content-Type":"application/json"]
+        "Content-Type":"application/json"]
     
-    func register(name: String, email: String, password: String, username: String, callback: @escaping ((String?) -> Void)) {
+    func getAuthHeader(completion: @escaping (([String: String]?) -> Void)){
+        var map = [String: String]()
+        
+        Auth.auth().currentUser?.getIDToken(completion: { (token, error) in
+            if error == nil {
+                map["Authorization"] = "Bearer \(token!)"
+                map["Content-Type"] = "application/json"
+                
+                completion(map)
+            } else {
+                completion(nil)
+            }
+        })
+    }
+    
+    func register(name: String, email: String, password: String, callback: @escaping ((String?) -> Void)) {
         
         let parameters: Parameters =
-        [
+            [
                 "name": name,
                 "email": email,
-                "password": password,
-                "username": username
-        ]
+                "password": password
+            ]
         
         Alamofire.request(
             "\(URL)/user",
@@ -48,7 +63,7 @@ class NetworkHelper: NSObject {
                 case .failure( _):
                     callback(nil)
                 }
-        }
+            }
     }
     
     func getGames(networkDelegate: NetworkRequestDelegate) {
@@ -74,13 +89,31 @@ class NetworkHelper: NSObject {
             }
     }
     
+    func socialLogin(networkDelegate: NetworkRequestDelegate) {
+        getAuthHeader { authHeader in
+            Alamofire.request(
+                "\(self.URL)/login/social",
+                method: .post,
+                headers: authHeader)
+                .responseString { response in
+                    
+                    if response.response!.statusCode >= 400 {
+                        networkDelegate.fail(errorMessage: "Erro ao logar")
+                    } else {
+                        networkDelegate.success(response: nil)
+                    }
+                }
+        }
+        
+    }
+    
     func login (user: String, password: String, callback: @escaping ((String?) -> Void)) {
         
         let parameters: Parameters =
-        [
+            [
                 "user": user,
                 "password": password
-        ]
+            ]
         
         Alamofire.request(
             "\(URL)/login",
@@ -97,7 +130,7 @@ class NetworkHelper: NSObject {
                 case .failure( _):
                     callback(nil)
                 }
-        }
+            }
     }
     
     

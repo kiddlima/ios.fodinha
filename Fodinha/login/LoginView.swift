@@ -8,6 +8,10 @@
 
 import SwiftUI
 import FirebaseAuth
+import GoogleSignIn
+import ValidatedPropertyKit
+import FBSDKLoginKit
+import FBSDKCoreKit
 
 struct LoginView: View {
     
@@ -15,13 +19,20 @@ struct LoginView: View {
     
     @ObservedObject var viewModel: LoginViewModel
     
+    @Validated(.isEmail)
+    var email = String()
+    
+    @Validated(!.isEmpty)
+    var password = String()
+    
+    @Validated(.range(3...))
+    var name = String()
+    
+    @Validated(.range(3...))
+    var confirmPassword = String()
+    
     @State var loading: Bool = false
     @State var isSignUp: Bool = false
-    
-    @State var email: String = ""
-    @State var name: String = ""
-    @State var confirmPassword: String = ""
-    @State var password: String = ""
     
     @State var showPopup: Bool = false
     @State var popupMessage: String = ""
@@ -33,10 +44,34 @@ struct LoginView: View {
         }
     }
     
+    init(viewModel: LoginViewModel) {
+        self.viewModel = viewModel
+        
+        GIDSignIn.sharedInstance().presentingViewController = UIApplication.shared.windows.first?.rootViewController
+        
+        let mutating = self
+        
+        Auth.auth().addStateDidChangeListener { auth, user in
+            mutating.presentationMode.wrappedValue.dismiss()
+        }
+    }
+    
     var body: some View {
         ZStack (alignment: .top){
             Color.dark6
                 .edgesIgnoringSafeArea(.all)
+            
+            AuthDelegates { error in
+                if error != nil {
+                    self.popupMessage = "Erro ao autenticar com Google"
+                    self.popupType = .error
+                    self.showPopup = true
+                    
+                    self.loading = false
+                } else {
+                    self.loading = true
+                }
+            }
             
             ScrollView {
                 VStack (alignment: .center){
@@ -47,122 +82,136 @@ struct LoginView: View {
                         .frame(height: 70)
                         .padding(32)
                     
-                    TextField("Email", text: $email)
-                        .textFieldStyle(PrimaryInput())
+                    TextField("Email", text: self.$email)
+                        .textFieldStyle(PrimaryInput(invalid: !self._email.isValid))
                         .keyboardType(.emailAddress)
                         .autocapitalization(.none)
                         .textContentType(.emailAddress)
                     
                     if self.isSignUp {
-                        TextField("Nome", text: $name)
-                            .textFieldStyle(PrimaryInput())
+                        TextField("Nome", text: self.$name)
+                            .textFieldStyle(PrimaryInput(invalid: !self._name.isValid))
                             .keyboardType(.emailAddress)
                             .autocapitalization(.none)
                             .textContentType(.name)
                     }
                     
-                    SecureField("Senha", text: $password)
-                        .textFieldStyle(PrimaryInput())
+                    SecureField("Senha", text: self.$password)
+                        .textFieldStyle(PrimaryInput(invalid: !self._password.isValid))
                         .textContentType(.password)
                         .autocapitalization(.none)
                     
                     
                     if self.isSignUp {
-                        SecureField("Confirmar senha", text: $confirmPassword)
-                            .textFieldStyle(PrimaryInput())
+                        SecureField("Confirmar senha", text: self.$confirmPassword)
+                            .textFieldStyle(PrimaryInput(invalid: false))
                             .textContentType(.password)
                             .autocapitalization(.none)
                     }
                     
                     VStack {
                         Button(action: {
-                            
                             UIApplication.shared.endEditing()
                             
-                            if !self.isSignUp {
-                                withAnimation {
-                                    self.loading = true
-                                }
-                                
-                                Auth.auth().signIn(withEmail: self.email, password: self.password) { data, error in
-                                    if error == nil {
-                                        
-                                        self.viewModel.isLoggedIn = true
-                                        
-                                        self.presentationMode.wrappedValue.dismiss()
-                                    } else {
-                                        self.popupMessage = "Email ou senha inválidos"
-                                        self.popupType = .error
-                                        self.showPopup = true
-                                        
-                                        self.viewModel.isLoggedIn = false
-                                    }
-                                    
+                            if self.isFormValid(isSignUp: isSignUp){
+                                if !self.isSignUp {
                                     withAnimation {
-                                        self.loading = false
+                                        self.loading = true
+                                    }
+                                    
+                                    self.viewModel.login(email: self.email, password: self.password) { error in
+                                        if error == nil {
+                                            
+                                            self.viewModel.isLoggedIn = true
+                                            
+                                            self.presentationMode.wrappedValue.dismiss()
+                                        } else {
+                                            self.popupMessage = "Email ou senha inválidos"
+                                            self.popupType = .error
+                                            self.showPopup = true
+                                            
+                                            self.viewModel.isLoggedIn = false
+                                        }
+                                        
+                                        withAnimation {
+                                            self.loading = false
+                                        }
+                                    }
+                                    
+                                } else {
+                                    withAnimation {
+                                        self.loading = true
+                                    }
+                                    
+                                    NetworkHelper().register(name: name, email: email, password: password) { (response: String?) in
+    
+                                        self.viewModel.login(email: self.email, password: self.password) { error in
+                                            
+                                            if error == nil {
+                                                withAnimation {
+                                                    self.viewModel.isLoggedIn = true
+                                                    
+                                                    self.presentationMode.wrappedValue.dismiss()
+                                                }
+                                            } else {
+                                                withAnimation {
+                                                    self.loading = false
+                                                }
+                                            }
+                                        }
                                     }
                                 }
-                                
                             } else {
-                                withAnimation {
-                                    self.loading = true
-                                }
-                                
-                                NetworkHelper().register(name: name, email: email, password: password, username: confirmPassword) { (response: String?) in
-                                    
-                                    if response != nil {
-                                        withAnimation {
-                                            self.isSignUp = false
-                                            self.loading = false
-                                        }
-                                    } else {
-                                        withAnimation {
-                                            self.loading = false
-                                        }
-                                    }
-                                    
-                                }
+                                self.popupMessage = "Campos inválidos"
+                                self.popupType = .error
+                                self.showPopup = true
                             }
-                            
                         }) {
                             Text(!self.isSignUp ? "Entrar" : "Cadastrar")
                         }
+                        .goldenStyle()
                         .cornerRadius(8)
-                        .buttonStyle(GoldenButtonStyle())
                         .padding()
                         
                         if !self.isSignUp {
                             
                             Button(action: {
-                                self.loading = true
                                 
-                                UIApplication.shared.endEditing()
-                                
-                                Auth.auth().sendPasswordReset(withEmail: self.email) { error in
-                                    self.loading = false
+                                if self._email.isValid {
+                                    self.loading = true
                                     
-                                    if error != nil {
-                                        self.popupMessage = "Erro ao redefinir senha"
-                                        self.popupType = .error
-                                        self.showPopup = true
+                                    UIApplication.shared.endEditing()
+                                    
+                                    Auth.auth().sendPasswordReset(withEmail: self.email) { error in
+                                        self.loading = false
                                         
-                                    } else {
-                                        self.popupMessage = "Enviado email para redefinir senha"
-                                        self.popupType = .success
+                                        if error != nil {
+                                            self.popupMessage = "Erro ao redefinir senha"
+                                            self.popupType = .error
+                                            self.showPopup = true
+                                            
+                                        } else {
+                                            self.popupMessage = "Enviado email para redefinir senha"
+                                            self.popupType = .success
+                                            self.showPopup = true
+                                        }
+                                        
                                         self.showPopup = true
                                     }
-                                    
+                                } else {
+                                    self.popupMessage = "Email inválido"
+                                    self.popupType = .error
                                     self.showPopup = true
                                 }
                             }) {
                                 Text("Esqueci a senha")
                             }
+                            .disabled(!self._email.isValid)
                             .buttonStyle(SecondaryButtonStyle())
                         }
                         
                         ActivityIndicator(shouldAnimate: $loading)
                     }
-                    
                     
                     if !self.isSignUp {
                         Divider()
@@ -170,16 +219,16 @@ struct LoginView: View {
                             .padding(.bottom, 16)
                         
                         Button(action: {
-                            
+                            GIDSignIn.sharedInstance().signIn()
                         }){
                             Image("google-icon")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(height: 24)
+                                .frame(height: 16)
                                 .padding(.trailing, 8)
                             
                             Text("Continuar com Google")
-                                .font(Font.custom("Avenir-Medium", size: 16))
+                                .font(Font.custom("Avenir-Medium", size: 18))
                                 .foregroundColor(Color.customLightGray)
                         }
                         .frame(minWidth: 0, maxWidth: 300, minHeight: 40, idealHeight: 40, maxHeight: 40,
@@ -188,16 +237,26 @@ struct LoginView: View {
                         .cornerRadius(4)
                         
                         Button(action: {
-                            
+                            self.viewModel.facebookLogin { error in
+                                if error != nil {
+                                    self.popupMessage = error!
+                                    self.popupType = .error
+                                    self.showPopup = true
+                                    
+                                    self.loading = false
+                                } else {
+                                    self.loading = true
+                                }
+                            }
                         }){
                             Image("facebook-icon")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(height: 24)
+                                .frame(height: 16)
                                 .padding(.trailing, 8)
-                            
+
                             Text("Continuar com Facebook")
-                                .font(Font.custom("Avenir-Medium", size: 16))
+                                .font(Font.custom("Avenir-Medium", size: 18))
                                 .foregroundColor(Color.white)
                         }
                         .frame(minWidth: 0, maxWidth: 300, minHeight: 40, idealHeight: 40, maxHeight: 40,
@@ -205,26 +264,21 @@ struct LoginView: View {
                         .background(Color.facebookBlue)
                         .cornerRadius(4)
                         
-                        Button(action: {
-                            
-                        }){
-                            Image("apple-icon")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: 24)
-                                .padding(.trailing, 8)
-                            
-                            Text("Continuar com Apple")
-                                .font(Font.custom("Avenir-Medium", size: 16))
-                                .foregroundColor(Color.white)
-                        }
-                        .frame(minWidth: 0, maxWidth: 300, minHeight: 40, idealHeight: 40, maxHeight: 40,
-                               alignment: .center)
-                        .background(Color.black)
-                        .cornerRadius(4)
+                        AppleLoginButton(didComplete: { error in
+                            if error != nil {
+                                self.popupMessage = "Erro ao autenticar com Apple"
+                                self.popupType = .error
+                                self.showPopup = true
+                                
+                                self.loading = false
+                            } else {
+                                self.loading = true
+                            }
+                        })
+                            .frame(minWidth: 0, maxWidth: 300, minHeight: 45, idealHeight: 45, maxHeight: 45, alignment: .center)
                         
                     }
-                
+                    
                     Button(action: {
                         withAnimation {
                             self.isSignUp.toggle()
@@ -245,6 +299,24 @@ struct LoginView: View {
         }.popup(isPresented: self.$showPopup, type: .floater(verticalPadding: 48), autohideIn: 3){
             ResponsePopupView(message: self.popupMessage, type: self.popupType)
         }
+    }
+    
+    func isFormValid(isSignUp: Bool) -> Bool {
+        var formValid = false
+        
+        if isSignUp {
+            let fieldsValid = self._email.isValid && self._password.isValid && self._name.isValid
+            
+            if fieldsValid {
+                if self.password == self.confirmPassword {
+                    formValid = true
+                }
+            }
+        } else {
+            formValid = self._email.isValid && self._password.isValid
+        }
+        
+        return formValid
     }
 }
 

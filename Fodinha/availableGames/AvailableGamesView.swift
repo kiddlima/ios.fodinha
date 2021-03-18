@@ -11,16 +11,19 @@ import FirebaseAuth
 
 struct ContentView: View {
     
-    @ObservedObject var viewModel = AvailableGamesViewModel()
     @ObservedObject var loginViewModel = LoginViewModel()
     
     @State var showingLogin = false
     @State var showingGame = false
     
+    @ObservedObject var viewModel = AvailableGamesViewModel()
+    
     @State var isNavigationBarHidden: Bool = true
     
     var body: some View {
         ZStack {
+            ActivityIndicator(shouldAnimate: self.$viewModel.loading)
+            
             NavigationView {
                 List {
                     ForEach(self.viewModel.games, id: \._id) { game in
@@ -71,13 +74,13 @@ struct ContentView: View {
                             } else {
                                 Menu {
                                     Button("Sair", action: {
-                                            try? Auth.auth().signOut()
+                                        try? Auth.auth().signOut()
                                             
                                         self.loginViewModel.isLoggedIn = false
                                     })
                                 }
                                 label: {
-                                    Label("\((Auth.auth().currentUser?.displayName)!)", systemImage: "person.circle.fill")
+                                    Label("\((Auth.auth().currentUser?.displayName ?? ""))", systemImage: "person.circle.fill")
                                         .foregroundColor(Color.dark4)
                                 }
                             }

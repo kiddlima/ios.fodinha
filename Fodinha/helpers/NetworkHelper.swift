@@ -107,7 +107,7 @@ class NetworkHelper: NSObject {
         
     }
     
-    func createGame(name: String, password: String?, callback: @escaping (String?) -> Void) {
+    func createGame(name: String, password: String?, callback: @escaping (String?, String?) -> Void) {
         
         let parameters: Parameters
         
@@ -130,15 +130,19 @@ class NetworkHelper: NSObject {
                 encoding: JSONEncoding.default,
                 headers: authHeader)
                 .validate()
-                .responseString { response in
+                .responseJSON(completionHandler: { response in
                     
                     switch response.result {
                     case .success( _):
-                        callback(nil)
+                        if let gameId = try? JSONDecoder().decode(String.self, from: response.data!) {
+                            callback(gameId, nil)
+                        } else {
+                            callback(nil, "Erro ao criar jogo")
+                        }
                     case .failure( _):
-                        callback("Erro ao criar jogo")
+                        callback(nil, "Erro ao criar jogo")
                     }
-                }
+                })
         }
     }
     

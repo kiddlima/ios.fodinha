@@ -27,6 +27,10 @@ struct ContentView: View {
     
     @State var isNavigationBarHidden: Bool = true
     
+    @State var showPopup: Bool = false
+    @State var popupMessage: String = ""
+    @State var popupType: ResponsePopupView.ResponseType = .normal
+    
     var body: some View {
         ZStack {
             ActivityIndicator(shouldAnimate: self.$viewModel.loading)
@@ -38,24 +42,28 @@ struct ContentView: View {
                             Button(action: {
                                 self.selectedGame = game
                                 
-                                if game.hasPassword ?? false {
+                                if game.hasPassword ?? false && !game.isPlayerInTheGame() {
                                     withAnimation {
                                         self.showJoinGameBlur = true
                                         self.showJoinGamePassword = true
                                     }
                                 } else {
-                                    self.showJoinGamePassword = false
-                                    
-                                    withAnimation {
-                                        self.showJoinGameBlur = true
-                                    }
-                                    
-                                    NetworkHelper().joinGame(gameId: (self.selectedGame?._id)!, password: nil) { error in
-                                        if error == nil {
-                                            self.showingGame = true
-                                        } else {
-                                            self.showJoinGameBlur = false
+                                    if !game.isPlayerInTheGame() {
+                                        self.showJoinGamePassword = false
+                                        
+                                        withAnimation {
+                                            self.showJoinGameBlur = true
                                         }
+                                        
+                                        NetworkHelper().joinGame(gameId: (self.selectedGame?._id)!, password: nil) { error in
+                                            if error == nil {
+                                                self.showingGame = true
+                                            } else {
+                                                self.showJoinGameBlur = false
+                                            }
+                                        }
+                                    } else {
+                                        self.showingGame = true
                                     }
                                 }
                                 
@@ -111,15 +119,20 @@ struct ContentView: View {
                             }
                         }
                     }, trailing:
-                        Button(action: {
-                            self.showCreateGame = true
-                        }){
-                            Image(systemName: "plus.circle.fill")
-                                .foregroundColor(Color.golden0)
-                                .imageScale(.large)
-                        }.sheet(isPresented: self.$showCreateGame) {
-                            CreateGameView()
+                        Group {
+                            if self.loginViewModel.isLoggedIn {
+                                Button(action: {
+                                    self.showCreateGame = true
+                                }){
+                                    Image(systemName: "plus.circle.fill")
+                                        .foregroundColor(Color.golden0)
+                                        .imageScale(.large)
+                                }.sheet(isPresented: self.$showCreateGame) {
+                                    CreateGameView()
+                                }
+                            }
                         }
+                    
                 )
                 .navigationBarTitle(Text("Jogos"))
                 
@@ -167,6 +180,12 @@ struct ContentView: View {
                                             NetworkHelper().joinGame(gameId: (self.selectedGame?._id)!, password: self.joinGamePassword) { error in
                                                 if error == nil {
                                                     self.showingGame = true
+                                                } else {
+                                                    withAnimation {
+                                                        self.showJoinGameBlur = false
+                                                    }
+                                                    
+                                                    self.showPopup(message: "Erro ao entrar no jogo", type: .error)
                                                 }
                                             }
                                         }
@@ -194,6 +213,9 @@ struct ContentView: View {
                 }
             }
         }
+        .popup(isPresented: self.$showPopup, type: .floater(verticalPadding: 48), autohideIn: 3){
+            ResponsePopupView(message: self.popupMessage, type: self.popupType)
+        }
         .onAppear() {
             UITableView.appearance().backgroundColor = UIColor.dark8
             UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
@@ -203,6 +225,14 @@ struct ContentView: View {
             UITableView.appearance().separatorColor = UIColor.dark8
             
             self.isNavigationBarHidden = true
+        }
+    }
+    
+    func showPopup(message: String, type: ResponsePopupView.ResponseType) {
+        self.popupMessage = message
+        self.popupType = type
+        withAnimation {
+            self.showPopup = true
         }
     }
 }

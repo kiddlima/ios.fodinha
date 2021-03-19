@@ -16,6 +16,7 @@ extension Color{
     static let dark6 = Color("dark-6")
     static let dark5 = Color("dark-5")
     static let dark4 = Color("dark-4")
+    static let dark3 = Color("dark-3")
     
     static let notificationGreen = Color("notification-green")
     static let notificationRed = Color("notification-red")
@@ -51,4 +52,12 @@ extension UIApplication {
     }
 }
 
+
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif
 

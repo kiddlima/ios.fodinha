@@ -107,31 +107,71 @@ class NetworkHelper: NSObject {
         
     }
     
-    func login (user: String, password: String, callback: @escaping ((String?) -> Void)) {
+    func createGame(name: String, password: String?, callback: @escaping (String?) -> Void) {
         
-        let parameters: Parameters =
-            [
-                "user": user,
-                "password": password
+        let parameters: Parameters
+        
+        if password != nil || ((password?.isEmpty) != nil){
+            parameters = [
+                "name": name,
+                "password": password!
             ]
+        } else {
+            parameters = [
+                "name": name
+            ]
+        }
         
-        Alamofire.request(
-            "\(URL)/login",
-            method: .post,
-            parameters: parameters,
-            encoding: JSONEncoding.default,
-            headers: defaultHeader)
-            .validate()
-            .responseString { response in
-                
-                switch response.result{
-                case .success( _):
-                    callback("Usuário logado com sucesso")
-                case .failure( _):
-                    callback(nil)
+        getAuthHeader { authHeader in
+            Alamofire.request(
+                "\(self.URL)/game",
+                method: .post,
+                parameters: parameters,
+                encoding: JSONEncoding.default,
+                headers: authHeader)
+                .validate()
+                .responseString { response in
+                    
+                    switch response.result {
+                    case .success( _):
+                        callback(nil)
+                    case .failure( _):
+                        callback("Erro ao criar jogo")
+                    }
                 }
-            }
+        }
     }
     
-    
+    func joinGame(gameId: String, password: String?, callback: @escaping (String?) -> Void ) {
+        
+        let parameters: Parameters
+        
+        if password != nil || ((password?.isEmpty) != nil){
+            parameters = [
+                "gameId": gameId,
+                "password": password!
+            ]
+        } else {
+            parameters = [
+                "gameId": gameId
+            ]
+        }
+        
+        getAuthHeader { authHeader in
+            Alamofire.request(
+                "\(self.URL)/game/player",
+                method: .post,
+                parameters: parameters,
+                encoding: JSONEncoding.default,
+                headers: authHeader)
+                .responseString { response in
+                    
+                    if response.response!.statusCode >= 400 {
+                        callback("Erro ao entrar no jogo")
+                    } else {
+                        callback(nil)
+                    }
+                }
+        }
+    }
 }

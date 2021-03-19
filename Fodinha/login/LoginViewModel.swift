@@ -14,7 +14,7 @@ import GoogleSignIn
 import FBSDKLoginKit
 
 class LoginViewModel: ObservableObject{
-   
+    
     @Published var isLoggedIn: Bool = false
     @Published var loading = false
     
@@ -67,6 +67,8 @@ class LoginViewModel: ObservableObject{
         }
     }
 }
+
+
 
 extension LoginViewModel: NetworkRequestDelegate {
     func success(response: Any?) {

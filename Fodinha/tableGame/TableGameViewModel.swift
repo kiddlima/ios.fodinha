@@ -8,15 +8,13 @@
 
 import SwiftUI
 import Firebase
-import FirebaseFirestore
 import SwiftUI
-import FirebaseFunctions
 import FirebaseAuth
 
 class TableGameViewModel: ObservableObject {
     
-    lazy var functions = Functions.functions()
-    let db = Firestore.firestore()
+//    lazy var functions = Functions.functions()
+//    let db = Firestore.firestore()
     var uid: String?
     
     @Published var game: Game?
@@ -39,7 +37,7 @@ class TableGameViewModel: ObservableObject {
         
         
         
-        db.settings.isPersistenceEnabled = false
+//        db.settings.isPersistenceEnabled = false
         
 //        self.listenToGame(gameId: gameId)
     }
@@ -237,10 +235,10 @@ class TableGameViewModel: ObservableObject {
     func startGame(gameId: String) {
         self.loadingStartGame = true
         
-        functions.httpsCallable("startGame").call(
-        ["gameId": gameId as Any]) { (result, error) in
-            
-        }
+//        functions.httpsCallable("startGame").call(
+//        ["gameId": gameId as Any]) { (result, error) in
+//
+//        }
     }
     
     func playCard() {

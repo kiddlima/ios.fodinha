@@ -15,6 +15,13 @@ struct ContentView: View {
     
     @State var showingLogin = false
     @State var showingGame = false
+    @State var showCreateGame = false
+    
+    @State var showJoinGamePassword = false
+    @State var showJoinGameBlur = false
+    @State var joinGamePassword = String()
+    
+    @State var selectedGame: Game?
     
     @ObservedObject var viewModel = AvailableGamesViewModel()
     
@@ -29,12 +36,31 @@ struct ContentView: View {
                     ForEach(self.viewModel.games, id: \._id) { game in
                         if self.loginViewModel.isLoggedIn {
                             Button(action: {
-                                self.showingGame.toggle()
+                                self.selectedGame = game
+                                
+                                if game.hasPassword ?? false {
+                                    withAnimation {
+                                        self.showJoinGameBlur = true
+                                        self.showJoinGamePassword = true
+                                    }
+                                } else {
+                                    self.showJoinGamePassword = false
+                                    
+                                    withAnimation {
+                                        self.showJoinGameBlur = true
+                                    }
+                                    
+                                    NetworkHelper().joinGame(gameId: (self.selectedGame?._id)!, password: nil) { error in
+                                        if error == nil {
+                                            self.showingGame = true
+                                        } else {
+                                            self.showJoinGameBlur = false
+                                        }
+                                    }
+                                }
+                                
                             }){
                                 RowView(game: game)
-                                //                                NavigationLink(destination: NavigationLazyView(TableGameView(gameId: game._id!))){
-                                //                                    RowView(game: game)
-                                //                                }
                             }.fullScreenCover(isPresented: self.$showingGame, content: {
                                 TableGameView(gameId: game._id!)
                             })
@@ -57,50 +83,118 @@ struct ContentView: View {
                 .listStyle(PlainListStyle())
                 .listSeparatorStyle(.none)
                 .navigationBarItems(
-                    trailing:
-                        Group {
-                            if !self.loginViewModel.isLoggedIn {
-                                Button(action: {
-                                    withAnimation {
-                                        self.showingLogin.toggle()
-                                    }
-                                }) {
-                                    Text("Entrar")
-                                        .foregroundColor(.white)
+                    leading: Group {
+                        if !self.loginViewModel.isLoggedIn {
+                            Button(action: {
+                                withAnimation {
+                                    self.showingLogin.toggle()
+                                }
+                            }) {
+                                Text("Entrar")
+                                    .foregroundColor(Color.dark3)
+                                
+                            }.sheet(isPresented: $showingLogin) {
+                                LoginView(viewModel: self.loginViewModel)
+                            }
+                            
+                        } else {
+                            Menu {
+                                Button("Sair", action: {
+                                    try? Auth.auth().signOut()
                                     
-                                }.sheet(isPresented: $showingLogin) {
-                                    LoginView(viewModel: self.loginViewModel)
-                                }
-                            } else {
-                                Menu {
-                                    Button("Sair", action: {
-                                        try? Auth.auth().signOut()
-                                            
-                                        self.loginViewModel.isLoggedIn = false
-                                    })
-                                }
-                                label: {
-                                    Label("\((Auth.auth().currentUser?.displayName ?? ""))", systemImage: "person.circle.fill")
-                                        .foregroundColor(Color.dark4)
-                                }
+                                    self.loginViewModel.isLoggedIn = false
+                                })
+                            }
+                            label: {
+                                Label("\((Auth.auth().currentUser?.displayName ?? ""))", systemImage: "person.circle.fill")
+                                    .foregroundColor(Color.dark3)
                             }
                         }
+                    }, trailing:
+                        Button(action: {
+                            self.showCreateGame = true
+                        }){
+                            Image(systemName: "plus.circle.fill")
+                                .foregroundColor(Color.golden0)
+                                .imageScale(.large)
+                        }.sheet(isPresented: self.$showCreateGame) {
+                            CreateGameView()
+                        }
                 )
-                .navigationBarTitle(Text("Jogos disponíveis"))
-            }
-        }.overlay(
-            Button(action: {
+                .navigationBarTitle(Text("Jogos"))
                 
-            })
-            {
-                Text("Criar jogo")
+            }.blur(radius: self.showJoinGameBlur ? 25 : 0)
+            
+            if self.showJoinGameBlur {
+                ZStack {
+                    ZStack {
+                        Color.dark3.opacity(0.1).edgesIgnoringSafeArea(.all)
+                    }.onTapGesture {
+                        withAnimation {
+                            self.showJoinGameBlur.toggle()
+                        }
+                    }
+                    ZStack {
+                        VStack {
+                            if self.showJoinGamePassword {
+                                VStack {
+                                    VStack (alignment: .leading){
+                                        HStack {
+                                            Text("Jogo com senha")
+                                                .foregroundColor(Color.white)
+                                                .font(.title)
+                                                .fontWeight(.bold)
+                                            
+                                            Spacer()
+
+                                            Image(systemName: "lock.fill")
+                                                .foregroundColor(Color.dark5)
+                                                .imageScale(.large)
+                                        }
+                                        .padding(.top, 8)
+                                        .padding(.bottom, 16)
+                                        
+                                        TextField("Senha", text: self.$joinGamePassword)
+                                            .textFieldStyle(PrimaryInput(invalid: false))
+                                    }
+                                    .padding(24)
+                                    
+                                    Button(action: {
+                                        if !self.joinGamePassword.isEmpty {
+                                            
+                                            self.showJoinGamePassword = false
+                                            
+                                            NetworkHelper().joinGame(gameId: (self.selectedGame?._id)!, password: self.joinGamePassword) { error in
+                                                if error == nil {
+                                                    self.showingGame = true
+                                                }
+                                            }
+                                        }
+                                    }){
+                                        Text("Entrar")
+                                    }
+                                    .padding(.bottom, 32)
+                                    .buttonStyle(GoldenButtonStyle())
+                                }
+                                .background(Color.dark8.opacity(0.5))
+                                .cornerRadius(24)
+                                .padding(24)
+                                
+                            } else {
+                                Text("Entrando no jogo \(self.selectedGame?.name ?? "")")
+                                    .font(Font.custom("Avenir-Medium", size: 18))
+                                    .foregroundColor(Color.dark3)
+                                    .padding(.bottom, 16)
+                                
+                                ActivityIndicator(shouldAnimate: .constant(true))
+                                    .foregroundColor(Color.white)
+                            }
+                        }
+                    }
+                }
             }
-            .cornerRadius(4)
-            .buttonStyle(GoldenButtonStyle())
-            , alignment: .bottom
-        )
-        
-        .onAppear(){
+        }
+        .onAppear() {
             UITableView.appearance().backgroundColor = UIColor.dark8
             UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
             UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
@@ -110,6 +204,13 @@ struct ContentView: View {
             
             self.isNavigationBarHidden = true
         }
+    }
+}
+
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
     }
 }
 
@@ -159,8 +260,5 @@ struct RowView: View{
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+
+

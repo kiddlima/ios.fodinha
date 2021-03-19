@@ -7,10 +7,7 @@ target 'Truquero' do
 
   # Pods for Fodinha
 	pod 'Firebase/Core'
-	pod 'Firebase/Firestore'
-	pod 'FirebaseFirestoreSwift'
 	
-	pod 'Firebase/Functions'
 	pod 'Socket.IO-Client-Swift', '~> 16.0.0'
   pod 'ExytePopupView'
   pod 'ValidatedPropertyKit'

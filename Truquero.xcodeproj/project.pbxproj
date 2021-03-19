@@ -28,6 +28,7 @@
 		BB6A2BC226027DF800EDA439 /* AppleAuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A2BC126027DF800EDA439 /* AppleAuthHelper.swift */; };
 		BB6A2BC726027FCB00EDA439 /* AuthDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A2BC626027FCB00EDA439 /* AuthDelegates.swift */; };
 		BB6A2BCA26028C4E00EDA439 /* AppleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A2BC926028C4E00EDA439 /* AppleLoginButton.swift */; };
+		BB6A2BD32602DE2300EDA439 /* CreateGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A2BD22602DE2300EDA439 /* CreateGameView.swift */; };
 		BB7CE48A2601338A00C7F42E /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7CE4892601338A00C7F42E /* PopupView.swift */; };
 		BB7CE48D2601360D00C7F42E /* ResponsePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7CE48C2601360D00C7F42E /* ResponsePopupView.swift */; };
 		BB82293A246388090076FD20 /* TableGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB822939246388090076FD20 /* TableGameView.swift */; };
@@ -81,6 +82,7 @@
 		BB6A2BC626027FCB00EDA439 /* AuthDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDelegates.swift; sourceTree = "<group>"; };
 		BB6A2BC926028C4E00EDA439 /* AppleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginButton.swift; sourceTree = "<group>"; };
 		BB6A2BCE2602A1AC00EDA439 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		BB6A2BD22602DE2300EDA439 /* CreateGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGameView.swift; sourceTree = "<group>"; };
 		BB7CE4892601338A00C7F42E /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		BB7CE48C2601360D00C7F42E /* ResponsePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsePopupView.swift; sourceTree = "<group>"; };
 		BB822939246388090076FD20 /* TableGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableGameView.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 		BB1939DB2449FF9300BA8210 /* Fodinha */ = {
 			isa = PBXGroup;
 			children = (
+				BB6A2BD12602DE0000EDA439 /* creategame */,
 				BB58F39925FFDD1700BFD314 /* fonts */,
 				BBD79F33247ECD6A00B43E29 /* models */,
 				BBF0A945246E215800C682F8 /* login */,
@@ -200,6 +203,14 @@
 				BBCBC7952600E497000324B6 /* InputStyles.swift */,
 			);
 			path = styles;
+			sourceTree = "<group>";
+		};
+		BB6A2BD12602DE0000EDA439 /* creategame */ = {
+			isa = PBXGroup;
+			children = (
+				BB6A2BD22602DE2300EDA439 /* CreateGameView.swift */,
+			);
+			path = creategame;
 			sourceTree = "<group>";
 		};
 		BB822938246387E80076FD20 /* tableGame */ = {
@@ -294,6 +305,8 @@
 			dependencies = (
 			);
 			name = Truquero;
+			packageProductDependencies = (
+			);
 			productName = Fodinha;
 			productReference = BB1939D92449FF9300BA8210 /* Truquero.app */;
 			productType = "com.apple.product-type.application";
@@ -323,6 +336,8 @@
 				"pt-BR",
 			);
 			mainGroup = BB1939D02449FF9300BA8210;
+			packageReferences = (
+			);
 			productRefGroup = BB1939DA2449FF9300BA8210 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -437,6 +452,7 @@
 				BBA24F5A2464E2E800AF3001 /* PlayerItem.swift in Sources */,
 				BB22793725EF21D300FFB90B /* NetworkHelper.swift in Sources */,
 				BB6A2BC726027FCB00EDA439 /* AuthDelegates.swift in Sources */,
+				BB6A2BD32602DE2300EDA439 /* CreateGameView.swift in Sources */,
 				BB94E0D124534624008DE1F4 /* Extensions.swift in Sources */,
 				BBF0A943246E1AAC00C682F8 /* LoginView.swift in Sources */,
 				BB9BD58325FFCBD9001D7F7A /* ResizeButtonStyle.swift in Sources */,
@@ -589,7 +605,7 @@
 				CODE_SIGN_ENTITLEMENTS = Truquero.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Fodinha/Preview Content\"";
 				DEVELOPMENT_TEAM = 662Z4JVQ73;
 				ENABLE_PREVIEWS = YES;
@@ -615,7 +631,7 @@
 				CODE_SIGN_ENTITLEMENTS = Truquero.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Fodinha/Preview Content\"";
 				DEVELOPMENT_TEAM = 662Z4JVQ73;
 				ENABLE_PREVIEWS = YES;

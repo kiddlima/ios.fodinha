@@ -7,12 +7,8 @@
 //
 
 import SwiftUI
-import Firebase
-import FirebaseFirestore
 
 class AvailableGamesViewModel: ObservableObject {
-    
-    let db = Firestore.firestore()
     
     let socket = SocketIOManager.sharedInstance.socket!
     

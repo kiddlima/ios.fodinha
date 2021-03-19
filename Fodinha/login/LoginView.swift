@@ -296,7 +296,11 @@ struct LoginView: View {
                 }
                 .padding()
             }
-        }.popup(isPresented: self.$showPopup, type: .floater(verticalPadding: 48), autohideIn: 3){
+        }
+        .onTapGesture {
+            self.hideKeyboard()
+        }
+        .popup(isPresented: self.$showPopup, type: .floater(verticalPadding: 48), autohideIn: 3){
             ResponsePopupView(message: self.popupMessage, type: self.popupType)
         }
     }

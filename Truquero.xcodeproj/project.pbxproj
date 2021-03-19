@@ -29,6 +29,8 @@
 		BB6A2BC726027FCB00EDA439 /* AuthDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A2BC626027FCB00EDA439 /* AuthDelegates.swift */; };
 		BB6A2BCA26028C4E00EDA439 /* AppleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A2BC926028C4E00EDA439 /* AppleLoginButton.swift */; };
 		BB6A2BD32602DE2300EDA439 /* CreateGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A2BD22602DE2300EDA439 /* CreateGameView.swift */; };
+		BB71C27A2604E98600E72BA4 /* TableMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB71C2792604E98600E72BA4 /* TableMenuItem.swift */; };
+		BB71C2822605058C00E72BA4 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB71C2812605058C00E72BA4 /* Message.swift */; };
 		BB7CE48A2601338A00C7F42E /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7CE4892601338A00C7F42E /* PopupView.swift */; };
 		BB7CE48D2601360D00C7F42E /* ResponsePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7CE48C2601360D00C7F42E /* ResponsePopupView.swift */; };
 		BB82293A246388090076FD20 /* TableGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB822939246388090076FD20 /* TableGameView.swift */; };
@@ -45,6 +47,9 @@
 		BBD79F35247ECE1400B43E29 /* Choice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD79F34247ECE1400B43E29 /* Choice.swift */; };
 		BBD79F39247F36E200B43E29 /* HunchCheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD79F38247F36E100B43E29 /* HunchCheckButton.swift */; };
 		BBDBE755247595990076458A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BBDBE74F247593450076458A /* GoogleService-Info.plist */; };
+		BBE6555526050A3600A0082F /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE6555426050A3600A0082F /* ChatMessageView.swift */; };
+		BBE655582605119F00A0082F /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE655572605119F00A0082F /* ChatViewModel.swift */; };
+		BBE6555B2605207B00A0082F /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE6555A2605207B00A0082F /* KeyboardHelper.swift */; };
 		BBF0A93F246DFD6D00C682F8 /* HunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF0A93E246DFD6D00C682F8 /* HunchView.swift */; };
 		BBF0A941246E161A00C682F8 /* PlayerHunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF0A940246E161A00C682F8 /* PlayerHunchView.swift */; };
 		BBF0A943246E1AAC00C682F8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF0A942246E1AAB00C682F8 /* LoginView.swift */; };
@@ -83,6 +88,8 @@
 		BB6A2BC926028C4E00EDA439 /* AppleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginButton.swift; sourceTree = "<group>"; };
 		BB6A2BCE2602A1AC00EDA439 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		BB6A2BD22602DE2300EDA439 /* CreateGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGameView.swift; sourceTree = "<group>"; };
+		BB71C2792604E98600E72BA4 /* TableMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableMenuItem.swift; sourceTree = "<group>"; };
+		BB71C2812605058C00E72BA4 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		BB7CE4892601338A00C7F42E /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		BB7CE48C2601360D00C7F42E /* ResponsePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsePopupView.swift; sourceTree = "<group>"; };
 		BB822939246388090076FD20 /* TableGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableGameView.swift; sourceTree = "<group>"; };
@@ -99,6 +106,9 @@
 		BBD79F34247ECE1400B43E29 /* Choice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
 		BBD79F38247F36E100B43E29 /* HunchCheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HunchCheckButton.swift; sourceTree = "<group>"; };
 		BBDBE74F247593450076458A /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BBE6555426050A3600A0082F /* ChatMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageView.swift; sourceTree = "<group>"; };
+		BBE655572605119F00A0082F /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		BBE6555A2605207B00A0082F /* KeyboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
 		BBF0A93E246DFD6D00C682F8 /* HunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HunchView.swift; sourceTree = "<group>"; };
 		BBF0A940246E161A00C682F8 /* PlayerHunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerHunchView.swift; sourceTree = "<group>"; };
 		BBF0A942246E1AAB00C682F8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -223,6 +233,9 @@
 				BBF0A93E246DFD6D00C682F8 /* HunchView.swift */,
 				BBF0A940246E161A00C682F8 /* PlayerHunchView.swift */,
 				BBD79F38247F36E100B43E29 /* HunchCheckButton.swift */,
+				BB71C2792604E98600E72BA4 /* TableMenuItem.swift */,
+				BBE6555426050A3600A0082F /* ChatMessageView.swift */,
+				BBE655572605119F00A0082F /* ChatViewModel.swift */,
 			);
 			path = tableGame;
 			sourceTree = "<group>";
@@ -249,6 +262,7 @@
 				BB22793625EF21D300FFB90B /* NetworkHelper.swift */,
 				BB58F3DF260000E800BFD314 /* ListSeparatorHelper.swift */,
 				BB6A2BC126027DF800EDA439 /* AppleAuthHelper.swift */,
+				BBE6555A2605207B00A0082F /* KeyboardHelper.swift */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -260,6 +274,7 @@
 				BB94E0D22454B92B008DE1F4 /* Player.swift */,
 				BBA160932465D15900395E18 /* Card.swift */,
 				BBD79F34247ECE1400B43E29 /* Choice.swift */,
+				BB71C2812605058C00E72BA4 /* Message.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -426,14 +441,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBE6555526050A3600A0082F /* ChatMessageView.swift in Sources */,
 				BB1939DD2449FF9300BA8210 /* AppDelegate.swift in Sources */,
 				BB7CE48D2601360D00C7F42E /* ResponsePopupView.swift in Sources */,
 				BB58F3E0260000E800BFD314 /* ListSeparatorHelper.swift in Sources */,
 				BBD79F39247F36E200B43E29 /* HunchCheckButton.swift in Sources */,
 				BBA160922465CA4700395E18 /* TableGameViewModel.swift in Sources */,
 				BB1939F8244E209C00BA8210 /* Game.swift in Sources */,
+				BB71C27A2604E98600E72BA4 /* TableMenuItem.swift in Sources */,
 				BB1939E22449FF9300BA8210 /* Fodinha.xcdatamodeld in Sources */,
 				BBA160942465D15900395E18 /* Card.swift in Sources */,
+				BB71C2822605058C00E72BA4 /* Message.swift in Sources */,
 				BB82293A246388090076FD20 /* TableGameView.swift in Sources */,
 				BB38EDA9247DFD2000A02DC4 /* SelectedButton.swift in Sources */,
 				BB1939E42449FF9300BA8210 /* AvailableGamesView.swift in Sources */,
@@ -453,6 +471,7 @@
 				BB22793725EF21D300FFB90B /* NetworkHelper.swift in Sources */,
 				BB6A2BC726027FCB00EDA439 /* AuthDelegates.swift in Sources */,
 				BB6A2BD32602DE2300EDA439 /* CreateGameView.swift in Sources */,
+				BBE6555B2605207B00A0082F /* KeyboardHelper.swift in Sources */,
 				BB94E0D124534624008DE1F4 /* Extensions.swift in Sources */,
 				BBF0A943246E1AAC00C682F8 /* LoginView.swift in Sources */,
 				BB9BD58325FFCBD9001D7F7A /* ResizeButtonStyle.swift in Sources */,
@@ -462,6 +481,7 @@
 				BB22796125EFF7C300FFB90B /* GameListSocket.swift in Sources */,
 				BBD79F35247ECE1400B43E29 /* Choice.swift in Sources */,
 				BB5AFF3B247090D40024824F /* ActivityIndicator.swift in Sources */,
+				BBE655582605119F00A0082F /* ChatViewModel.swift in Sources */,
 				BB1939F4244E202D00BA8210 /* AvailableGamesViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -605,7 +625,7 @@
 				CODE_SIGN_ENTITLEMENTS = Truquero.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Fodinha/Preview Content\"";
 				DEVELOPMENT_TEAM = 662Z4JVQ73;
 				ENABLE_PREVIEWS = YES;
@@ -631,7 +651,7 @@
 				CODE_SIGN_ENTITLEMENTS = Truquero.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Fodinha/Preview Content\"";
 				DEVELOPMENT_TEAM = 662Z4JVQ73;
 				ENABLE_PREVIEWS = YES;

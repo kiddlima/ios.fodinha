@@ -89,6 +89,32 @@ class NetworkHelper: NSObject {
             }
     }
     
+    func getGame(gameId: String, callback: @escaping (Game?, String?) -> Void) {
+        getAuthHeader { authHeader in
+            Alamofire.request(
+                "\(self.URL)/game/\(gameId)",
+                method: .get,
+                headers: authHeader)
+                .validate()
+                .responseJSON { response in
+                    
+                    switch response.result{
+                    
+                    case .success( _):
+                        
+                        if let gameResponse = try? JSONDecoder().decode(Game.self, from: response.data!){
+                            callback(gameResponse, nil)
+                        } else {
+                            callback(nil, "Erro ao carregar jogo")
+                        }
+                    case .failure( _):
+                        callback(nil, "Erro ao carregar jogo")
+                    }
+                }
+        }
+        
+    }
+    
     func socialLogin(networkDelegate: NetworkRequestDelegate) {
         getAuthHeader { authHeader in
             Alamofire.request(

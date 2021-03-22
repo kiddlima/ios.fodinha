@@ -18,6 +18,7 @@ class TableGameViewModel: ObservableObject {
     var uid: String?
     
     @Published var game: Game?
+    @Published var players: [Player]?
     @Published var currentPlayer: Player?
     @Published var smallRoundWinner: Player?
     
@@ -35,64 +36,12 @@ class TableGameViewModel: ObservableObject {
     init(gameId: String) {
         uid = Auth.auth().currentUser?.uid
         
-        
-        
-//        db.settings.isPersistenceEnabled = false
-        
-//        self.listenToGame(gameId: gameId)
-    }
-    
-    func listenToGame(gameId: String){
-//        db.collection("game").document(gameId).addSnapshotListener { (documentSnapshot, error) in
-//            if error == nil {
-//                self.game = Game(document: documentSnapshot!)
-//
-//                self.listenToPlayers()
-//            }
-//        }
-    }
-    
-    func listenToPlayers(){
-//        db.collection("game").document(game!.gameId!).collection("players").addSnapshotListener { documentSnapshot, error in
-            
-//            self.game!.players = []
-//
-//            for snap in (documentSnapshot?.documents)! {
-//
-////                self.game!.players.append(Player(document: snap))
-//            }
-//
-//            self.game!.players = self.game!.players.sorted(by: { $0.points! > $1.points! })
-//
-//            // Find the current logged player inside the game
-//            for (index, player) in self.game!.players.enumerated() {
-//                if player.playerId == self.uid {
-//                    self.currentPlayer = player
-//
-//                    if self.choices.isEmpty {
-//                        self.populateChoices(cardAmount: self.game!.cardAmount!)
-//                    }
-//
-//                    if self.game!.cardAmount == 1 {
-//                        self.game!.players[index].currentCard = nil
-//                    }
-//
-//                    self.isPlayerInTheGameAlready = true
-//                }
-//            }
-//
-//            if self.game!.smallRoundWinner != nil {
-//                self.smallRoundWinner = self.getSmallWinnerPlayer()
-//            } else {
-//                self.smallRoundWinner = nil
-//            }
-//
-//            self.setTurnAndWinnerPlayer()
-//
-//            if !self.isPlayerInTheGameAlready {
-//                self.addPlayerToGame()
-//            }
-//        }
+        NetworkHelper().getGame(gameId: gameId) { game, error in
+            if error == nil {
+                self.game = game
+                self.players = game?.players
+            }
+        }
     }
     
     func populateChoices(cardAmount: Int){

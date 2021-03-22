@@ -11,6 +11,8 @@ import FirebaseAuth
 
 struct ContentView: View {
     
+    @Environment(\.presentationMode) var presentation
+    
     @ObservedObject var loginViewModel = LoginViewModel()
     
     @State var showingLogin = false
@@ -20,8 +22,6 @@ struct ContentView: View {
     @State var showJoinGamePassword = false
     @State var showJoinGameBlur = false
     @State var joinGamePassword = String()
-    
-    @State var selectedGame: Game?
     
     @ObservedObject var viewModel = AvailableGamesViewModel()
     
@@ -40,7 +40,7 @@ struct ContentView: View {
                     ForEach(self.viewModel.games, id: \._id) { game in
                         if self.loginViewModel.isLoggedIn {
                             Button(action: {
-                                self.selectedGame = game
+                                self.viewModel.selectedGame = game
                                 
                                 if game.hasPassword ?? false && !game.isPlayerInTheGame() {
                                     withAnimation {
@@ -55,7 +55,7 @@ struct ContentView: View {
                                             self.showJoinGameBlur = true
                                         }
                                         
-                                        NetworkHelper().joinGame(gameId: (self.selectedGame?._id)!, password: nil) { error in
+                                        NetworkHelper().joinGame(gameId: (self.viewModel.selectedGame?._id)!, password: nil) { error in
                                             if error == nil {
                                                 self.showingGame = true
                                             } else {
@@ -69,9 +69,7 @@ struct ContentView: View {
                                 
                             }){
                                 RowView(game: game)
-                            }.fullScreenCover(isPresented: self.$showingGame, content: {
-                                TableGameView(gameId: game._id!)
-                            })
+                            }
                             .buttonStyle(ResizeButtonStyle())
                             .listRowBackground(Color.dark8)
                             
@@ -88,6 +86,7 @@ struct ContentView: View {
                         }
                     }
                 }
+                
                 .listStyle(PlainListStyle())
                 .listSeparatorStyle(.none)
                 .navigationBarItems(
@@ -135,8 +134,11 @@ struct ContentView: View {
                     
                 )
                 .navigationBarTitle(Text("Jogos"))
-                
-            }.blur(radius: self.showJoinGameBlur ? 25 : 0)
+            }
+            .fullScreenCover(isPresented: self.$showingGame, content: {
+                TableGameView(gameId: (self.viewModel.selectedGame?._id)!)
+            })
+            .blur(radius: self.showJoinGameBlur ? 25 : 0)
             
             if self.showJoinGameBlur {
                 ZStack {
@@ -177,7 +179,7 @@ struct ContentView: View {
                                             
                                             self.showJoinGamePassword = false
                                             
-                                            NetworkHelper().joinGame(gameId: (self.selectedGame?._id)!, password: self.joinGamePassword) { error in
+                                            NetworkHelper().joinGame(gameId: (self.viewModel.selectedGame?._id)!, password: self.joinGamePassword) { error in
                                                 if error == nil {
                                                     self.showingGame = true
                                                 } else {
@@ -200,7 +202,7 @@ struct ContentView: View {
                                 .padding(24)
                                 
                             } else {
-                                Text("Entrando no jogo \(self.selectedGame?.name ?? "")")
+                                Text("Entrando no jogo \(self.viewModel.selectedGame?.name ?? "")")
                                     .font(Font.custom("Avenir-Medium", size: 18))
                                     .foregroundColor(Color.dark3)
                                     .padding(.bottom, 16)

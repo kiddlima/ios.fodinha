@@ -14,6 +14,8 @@ class AvailableGamesViewModel: ObservableObject {
     
     @Published var loading: Bool
     
+    var selectedGame: Game?
+    
     @Published var games: [Game] = []
     @Published var error: String?
     

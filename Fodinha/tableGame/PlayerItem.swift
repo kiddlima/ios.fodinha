@@ -22,19 +22,19 @@ struct PlayerItem: View {
                 Divider()
                 HStack{
                     if player.hunch != nil{
-                        Text("Faz \(player.hunch!)")
-                            .font(.caption)
-                            .fontWeight(.light)
-                            .foregroundColor(TableDesignHelper.getPlayerTextColor(player: self.player))
+//                        Text("Faz \(player.hunch!)")
+//                            .font(.caption)
+//                            .fontWeight(.light)
+//                            .foregroundColor(TableDesignHelper.getPlayerTextColor(player: self.player))
                         
                         Spacer()
                         
                         HStack (spacing: 1.5) {
-                            ForEach (0 ..< player.wins!, id: \.self) { wins in
-                                Circle()
-                                    .frame(width: 8, height: 8)
-                                    .foregroundColor(Color.lightGreen)
-                            }
+//                            ForEach (0 ..< player.wins!, id: \.self) { wins in
+//                                Circle()
+//                                    .frame(width: 8, height: 8)
+//                                    .foregroundColor(Color.lightGreen)
+//                            }
                         }.padding(.trailing, 4)
                     } else {
                         Text("")

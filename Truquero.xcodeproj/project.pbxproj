@@ -44,6 +44,10 @@
 		BBA24F5A2464E2E800AF3001 /* PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA24F592464E2E800AF3001 /* PlayerItem.swift */; };
 		BBA24F5C2465A74400AF3001 /* CardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA24F5B2465A74400AF3001 /* CardItem.swift */; };
 		BBCBC7962600E497000324B6 /* InputStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCBC7952600E497000324B6 /* InputStyles.swift */; };
+		BBCE40232607A9D90056C4D3 /* ChatTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCE40222607A9D90056C4D3 /* ChatTextField.swift */; };
+		BBCE4026260805AC0056C4D3 /* StandingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCE4025260805AC0056C4D3 /* StandingsView.swift */; };
+		BBCE4029260831A00056C4D3 /* SelfPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCE4028260831A00056C4D3 /* SelfPlayerView.swift */; };
+		BBCE402C260841A00056C4D3 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCE402B260841A00056C4D3 /* RoundedCorners.swift */; };
 		BBD79F35247ECE1400B43E29 /* Choice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD79F34247ECE1400B43E29 /* Choice.swift */; };
 		BBD79F39247F36E200B43E29 /* HunchCheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD79F38247F36E100B43E29 /* HunchCheckButton.swift */; };
 		BBDBE755247595990076458A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BBDBE74F247593450076458A /* GoogleService-Info.plist */; };
@@ -103,6 +107,10 @@
 		BBA24F592464E2E800AF3001 /* PlayerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerItem.swift; sourceTree = "<group>"; };
 		BBA24F5B2465A74400AF3001 /* CardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardItem.swift; sourceTree = "<group>"; };
 		BBCBC7952600E497000324B6 /* InputStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputStyles.swift; sourceTree = "<group>"; };
+		BBCE40222607A9D90056C4D3 /* ChatTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTextField.swift; sourceTree = "<group>"; };
+		BBCE4025260805AC0056C4D3 /* StandingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsView.swift; sourceTree = "<group>"; };
+		BBCE4028260831A00056C4D3 /* SelfPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfPlayerView.swift; sourceTree = "<group>"; };
+		BBCE402B260841A00056C4D3 /* RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
 		BBD79F34247ECE1400B43E29 /* Choice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
 		BBD79F38247F36E100B43E29 /* HunchCheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HunchCheckButton.swift; sourceTree = "<group>"; };
 		BBDBE74F247593450076458A /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -236,6 +244,8 @@
 				BB71C2792604E98600E72BA4 /* TableMenuItem.swift */,
 				BBE6555426050A3600A0082F /* ChatMessageView.swift */,
 				BBE655572605119F00A0082F /* ChatViewModel.swift */,
+				BBCE4025260805AC0056C4D3 /* StandingsView.swift */,
+				BBCE4028260831A00056C4D3 /* SelfPlayerView.swift */,
 			);
 			path = tableGame;
 			sourceTree = "<group>";
@@ -245,6 +255,7 @@
 			children = (
 				BB7CE4892601338A00C7F42E /* PopupView.swift */,
 				BB7CE48C2601360D00C7F42E /* ResponsePopupView.swift */,
+				BBCE40222607A9D90056C4D3 /* ChatTextField.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -263,6 +274,7 @@
 				BB58F3DF260000E800BFD314 /* ListSeparatorHelper.swift */,
 				BB6A2BC126027DF800EDA439 /* AppleAuthHelper.swift */,
 				BBE6555A2605207B00A0082F /* KeyboardHelper.swift */,
+				BBCE402B260841A00056C4D3 /* RoundedCorners.swift */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -441,7 +453,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBCE4026260805AC0056C4D3 /* StandingsView.swift in Sources */,
 				BBE6555526050A3600A0082F /* ChatMessageView.swift in Sources */,
+				BBCE402C260841A00056C4D3 /* RoundedCorners.swift in Sources */,
 				BB1939DD2449FF9300BA8210 /* AppDelegate.swift in Sources */,
 				BB7CE48D2601360D00C7F42E /* ResponsePopupView.swift in Sources */,
 				BB58F3E0260000E800BFD314 /* ListSeparatorHelper.swift in Sources */,
@@ -472,6 +486,7 @@
 				BB6A2BC726027FCB00EDA439 /* AuthDelegates.swift in Sources */,
 				BB6A2BD32602DE2300EDA439 /* CreateGameView.swift in Sources */,
 				BBE6555B2605207B00A0082F /* KeyboardHelper.swift in Sources */,
+				BBCE4029260831A00056C4D3 /* SelfPlayerView.swift in Sources */,
 				BB94E0D124534624008DE1F4 /* Extensions.swift in Sources */,
 				BBF0A943246E1AAC00C682F8 /* LoginView.swift in Sources */,
 				BB9BD58325FFCBD9001D7F7A /* ResizeButtonStyle.swift in Sources */,
@@ -480,6 +495,7 @@
 				BB1465222472D33C00609B48 /* PrimaryButton.swift in Sources */,
 				BB22796125EFF7C300FFB90B /* GameListSocket.swift in Sources */,
 				BBD79F35247ECE1400B43E29 /* Choice.swift in Sources */,
+				BBCE40232607A9D90056C4D3 /* ChatTextField.swift in Sources */,
 				BB5AFF3B247090D40024824F /* ActivityIndicator.swift in Sources */,
 				BBE655582605119F00A0082F /* ChatViewModel.swift in Sources */,
 				BB1939F4244E202D00BA8210 /* AvailableGamesViewModel.swift in Sources */,
@@ -625,7 +641,7 @@
 				CODE_SIGN_ENTITLEMENTS = Truquero.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Fodinha/Preview Content\"";
 				DEVELOPMENT_TEAM = 662Z4JVQ73;
 				ENABLE_PREVIEWS = YES;
@@ -651,7 +667,7 @@
 				CODE_SIGN_ENTITLEMENTS = Truquero.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Fodinha/Preview Content\"";
 				DEVELOPMENT_TEAM = 662Z4JVQ73;
 				ENABLE_PREVIEWS = YES;

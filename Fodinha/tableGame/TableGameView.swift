@@ -10,6 +10,8 @@ import SwiftUI
 
 struct TableGameView: View {
     
+    @Environment(\.presentationMode) var presentation
+    
     @StateObject private var keyboardHelper = KeyboardResponder()
     
     @ObservedObject var viewModel: TableGameViewModel
@@ -73,70 +75,97 @@ struct TableGameView: View {
                                         .clipShape(
                                             RoundedRectangle(cornerRadius: 150, style: .circular)
                                         ))
-                                .offset(x: self.activeMenu[1] ? geometry.size.width / 4 : geometry.size.width / 5, y: 20.0)
+                                .offset(x: self.activeMenu[0] || self.activeMenu[1] || self.activeMenu[2] ? geometry.size.width / 4 : geometry.size.width / 5, y: 20.0)
                         }
                     }
                 }
                 .zIndex(1)
                 
-                //Chat
-                if self.activeMenu[1] {
-                    ZStack (alignment: .bottom) {
+                //Side menu shape view
+                if self.activeMenu[0] || self.activeMenu[1] || self.activeMenu[2] {
+                    ZStack (alignment: .topLeading) {
                         LinearGradient(gradient:
                                         Gradient(colors: [Color.dark8, Color.dark8.opacity(0)]), startPoint: .leading, endPoint: .trailing)
                             .edgesIgnoringSafeArea(.all)
                         
-                        VStack (alignment: .leading) {
-                            Text("Chat")
-                                .font(Font.custom("Avenir-Medium", size: 24))
-                                .bold()
-                                .padding(8)
-                                .padding(.top, 12)
-                                .foregroundColor(Color.white)
-                            
-                            Spacer()
-                            
-                            VStack {
-                                ScrollView {
-                                    ScrollViewReader { scrollView in
-                                        LazyVStack {
-                                            ForEach(chatViewModel.messages, id: \.self) { message in
-                                                ChatMessageView(message: message)
-                                            }
-                                        }
-                                        .onAppear {
-                                            if !chatViewModel.messages.isEmpty {
-                                                scrollView.scrollTo(chatViewModel.messages.count - 1, anchor: .center)
+                        //Chat View
+                        if self.activeMenu[1] {
+                            ZStack (alignment: .bottom) {
+                                VStack (alignment: .leading) {
+                                    
+                                    Text("Chat")
+                                        .font(Font.custom("Avenir-Medium", size: 28))
+                                        .bold()
+                                        .padding(.leading, 8)
+                                        .padding(.top, 12)
+                                        .foregroundColor(Color.white)
+                                    
+                                    Spacer()
+                                    
+                                    VStack {
+                                        ScrollView {
+                                            ScrollViewReader { scrollView in
+                                                ForEach(chatViewModel.messages, id: \.self) { message in
+                                                    ChatMessageView(message: message).id(message.id)
+                                                }
+                                                .onChange(of: chatViewModel.messageCounterUpdate, perform: { value in
+                                                    if !chatViewModel.messages.isEmpty {
+                                                        withAnimation {
+                                                            scrollView.scrollTo(chatViewModel.messages.last?.id)
+                                                        }
+                                                    }
+                                                })
+                                                .onAppear {
+                                                    if !chatViewModel.messages.isEmpty {
+                                                        scrollView.scrollTo(chatViewModel.messages.last?.id)
+                                                    }
+                                                }
                                             }
                                         }
                                     }
-                                }
-                            }
-                            
-                            VStack {
-                                HStack {
-                                    TextField("Escreva uma mensagem", text: self.$chatMessageToSend)
-                                        .cornerRadius(4)
-                                        .foregroundColor(.white)
-                                        .font(Font.custom("Avenir-Regular", size: 16))
-                                        .padding(8)
                                     
-                                    Button(action: {
-                                        chatViewModel.sendMessage(message: self.chatMessageToSend)
-                                        
-                                        self.chatMessageToSend = ""
-                                    }, label: {
-                                        Image(systemName: "paperplane.fill")
-                                            .foregroundColor(Color.dark3)
-                                            .padding(.trailing, 8)
-                                    })
+                                    VStack {
+                                        HStack {
+                                            ChatTextField(text: self.$chatViewModel.messageToSend, placeHolder: "Escreva uma mensagem", chatViewModel: self.chatViewModel)
+                                                .cornerRadius(4)
+                                                .foregroundColor(.white)
+                                                .font(Font.custom("Avenir-Regular", size: 14))
+                                                .padding(8)
+                                                .frame(height: 40)
+                                            
+                                            Button(action: {
+                                                chatViewModel.sendMessage()
+                                            }, label: {
+                                                Image(systemName: "paperplane.fill")
+                                                    .foregroundColor(Color.dark3)
+                                                    .padding(.trailing, 8)
+                                            })
+                                        }
+                                        .background(Color.dark4)
+                                        .cornerRadius(4)
+                                    }
+                                    .padding(8)
+                                    .padding(.bottom, self.keyboardHelper.keyboardHeight != 0 ? self.keyboardHelper.keyboardHeight : 16)
+                                    .animation(.default)
                                 }
-                                .background(Color.dark4)
-                                .cornerRadius(4)
                             }
-                            .padding(8)
-                            .padding(.bottom, self.keyboardHelper.keyboardHeight != 0 ? self.keyboardHelper.keyboardHeight : 16)
-                            .animation(.default)
+                        }
+                        
+                        //Standing View
+                        if self.activeMenu[0] {
+                            VStack (alignment: .leading) {
+                                Text("Placar")
+                                    .font(Font.custom("Avenir-Medium", size: 28))
+                                    .bold()
+                                    .foregroundColor(Color.white)
+                                    .padding(.bottom, 16)
+                                
+                                StandingsView(players: self.$viewModel.players)
+                                
+                                Spacer()
+                            }
+                            .padding(.top, 12)
+                            .padding(.leading, 8)
                         }
                     }
                     .padding(.trailing, 48)
@@ -145,7 +174,7 @@ struct TableGameView: View {
                     .frame(minWidth: 0, maxWidth: 300, minHeight: 0, maxHeight: .infinity, alignment: .leading)
                 }
                 
-                if viewModel.game != nil {
+                if false {
                     ZStack{
                         // Table
                         GeometryReader { geometry in
@@ -363,6 +392,37 @@ struct TableGameView: View {
             }
         }
     }
+}
+
+struct VisualEffectView: UIViewRepresentable {
+    var effect: UIVisualEffect?
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
+    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
+}
+
+struct BlurView: UIViewRepresentable {
+    
+    let style: UIBlurEffect.Style
+    
+    func makeUIView(context: UIViewRepresentableContext<BlurView>) -> UIView {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .clear
+        let blurEffect = UIBlurEffect(style: style)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+        view.insertSubview(blurView, at: 0)
+        NSLayoutConstraint.activate([
+            blurView.heightAnchor.constraint(equalTo: view.heightAnchor),
+            blurView.widthAnchor.constraint(equalTo: view.widthAnchor),
+        ])
+        return view
+    }
+    
+    func updateUIView(_ uiView: UIView,
+                      context: UIViewRepresentableContext<BlurView>) {
+        
+    }
+    
 }
 
 struct TableGameView_Previews: PreviewProvider {

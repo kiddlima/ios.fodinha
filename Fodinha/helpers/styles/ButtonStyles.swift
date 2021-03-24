@@ -23,7 +23,7 @@ struct GoldenButtonStyle: ButtonStyle {
         .foregroundColor(Color.dark8)
         .cornerRadius(8)
         .opacity(isEnabled ? 1 : 0.5)
-        .padding(.init(top: 12, leading: 48, bottom: 12, trailing: 48))
+        .padding(.init(top: 12, leading: 24, bottom: 12, trailing: 24))
         .scaleEffect(configuration.isPressed ? 0.95 : 1)
         .background(Color.golden0)
         .cornerRadius(4.0)

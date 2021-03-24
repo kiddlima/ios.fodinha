@@ -10,7 +10,7 @@ import SwiftUI
 
 struct HandCards: View {
     
-    @State var cards: [Card]
+    @State var cards = [Card]()
     
     @State var active = 0
     @State var destinations: [Int: CGRect] = [:]
@@ -105,7 +105,7 @@ struct HandCards: View {
             
             HStack {
                 if cards.count != 0 {
-                    HandCardView()
+                    HandCardView(card: self.cards[0])
                         .padding(.bottom, self.card1Padding)
                         .rotationEffect(.degrees(self.card1Angle))
                         .offset(x: self.card1OffSet.width, y: self.card1OffSet.height)
@@ -140,7 +140,7 @@ struct HandCards: View {
                 }
                 
                 if cards.count > 1 {
-                    HandCardView()
+                    HandCardView(card: self.cards[1])
                         .padding(.bottom, self.card2Padding)
                         .rotationEffect(.degrees(card2Angle))
                         .offset(x: self.card2OffSet.width, y: self.card2OffSet.height)
@@ -175,7 +175,7 @@ struct HandCards: View {
                 }
                 
                 if cards.count > 2 {
-                    HandCardView()
+                    HandCardView(card: self.cards[2])
                         .padding(.bottom, self.card3Padding)
                         .rotationEffect(.degrees(card3Angle))
                         .offset(x: self.card3OffSet.width, y: self.card3OffSet.height)
@@ -210,7 +210,7 @@ struct HandCards: View {
                 }
                 
                 if cards.count > 3 {
-                    HandCardView()
+                    HandCardView(card: self.cards[3])
                         .padding(.bottom, self.card4Padding)
                         .rotationEffect(.degrees(card4Angle))
                         .offset(x: self.card4OffSet.width, y: self.card4OffSet.height)
@@ -245,7 +245,7 @@ struct HandCards: View {
                 }
                 
                 if cards.count > 4 {
-                    HandCardView()
+                    HandCardView(card: self.cards[4])
                         .padding(.bottom, self.card5Padding)
                         .rotationEffect(.degrees(card5Angle))
                         .offset(x: self.card5OffSet.width, y: self.card5OffSet.height)
@@ -292,6 +292,7 @@ struct HandCards: View {
         }
     }
 }
+
 struct DroppableAreaView: View {
     @Binding var active: Int
     let id: Int
@@ -303,9 +304,10 @@ struct DroppableAreaView: View {
             .frame(width: 83, height: 120, alignment: .center)
             .offset(x: 0, y: 0)
             .overlay(
-                RoundedRectangle(cornerRadius: 4)
-                    .fill(self.card == nil ? Color.black.opacity(0.5) : Color.red)
-                    .frame(width: 50, height: 75, alignment: .center)
+                Image("\(self.card?.imageName ?? "")")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 75)
             )
             .background(DestinationDataSetter(destination: id))
     }
@@ -313,10 +315,10 @@ struct DroppableAreaView: View {
 
 struct HandCardView: View {
     
-    //    var card: Card
+    var card: Card
     
     var body: some View{
-        Image("paus1")
+        Image("\(card.imageName ?? ""))")
             .resizable()
             .scaledToFit()
             .padding(.leading, -10)

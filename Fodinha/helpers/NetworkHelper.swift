@@ -196,8 +196,34 @@ class NetworkHelper: NSObject {
                 headers: authHeader)
                 .responseString { response in
                     
-                    if response.response!.statusCode >= 400 {
+                    if response.response?.statusCode ?? 500 >= 400 {
                         callback("Erro ao entrar no jogo")
+                    } else {
+                        callback(nil)
+                    }
+                }
+        }
+    }
+    
+    func makeHunch(gameId: String, hunch: Int, callback: @escaping (String?) -> Void) {
+        
+        let parameters: Parameters =
+            [
+                "gameId": gameId,
+                "hunch": hunch
+            ]
+        
+        getAuthHeader { authHeader in
+            Alamofire.request(
+                "\(self.URL)/game/player/hunch",
+                method: .post,
+                parameters: parameters,
+                encoding: JSONEncoding.default,
+                headers: authHeader)
+                .responseString { response in
+                    
+                    if response.response?.statusCode ?? 500 >= 400 {
+                        callback("Erro ao realizar hunch")
                     } else {
                         callback(nil)
                     }

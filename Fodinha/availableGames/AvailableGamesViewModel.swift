@@ -29,12 +29,17 @@ class AvailableGamesViewModel: ObservableObject {
     
     func listenToGames(){
         self.socket.on(clientEvent: .connect) { data, act in
-            self.socket.emit("joinHome")
             
+            self.socket.emit("joinHome")
+        
             self.socket.on("attGame") { data, ack in
                 NetworkHelper().getGames(networkDelegate: self)
             }
         }
+    }
+    
+    func removeListener() {
+        self.socket.off("attGame")
     }
 }
 

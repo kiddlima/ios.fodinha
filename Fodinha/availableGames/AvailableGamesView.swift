@@ -57,12 +57,14 @@ struct ContentView: View {
                                         
                                         NetworkHelper().joinGame(gameId: (self.viewModel.selectedGame?._id)!, password: nil) { error in
                                             if error == nil {
+                                                self.viewModel.removeListener()
                                                 self.showingGame = true
                                             } else {
                                                 self.showJoinGameBlur = false
                                             }
                                         }
                                     } else {
+                                        self.viewModel.removeListener()
                                         self.showingGame = true
                                     }
                                 }
@@ -181,6 +183,7 @@ struct ContentView: View {
                                             
                                             NetworkHelper().joinGame(gameId: (self.viewModel.selectedGame?._id)!, password: self.joinGamePassword) { error in
                                                 if error == nil {
+                                                    self.viewModel.removeListener()
                                                     self.showingGame = true
                                                 } else {
                                                     withAnimation {

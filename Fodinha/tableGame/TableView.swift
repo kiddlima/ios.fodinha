@@ -23,7 +23,12 @@ struct TableView: View {
                     .shadow(color: Color.black, radius: 25, x: 0, y: 0)
                     .clipShape(
                         RoundedRectangle(cornerRadius: 150, style: .circular)
-                    ))
+                    )).overlay(
+                        Image("truquero-water-mark")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 30)
+                    )
     }
 }
 

@@ -68,17 +68,43 @@ struct TableGameView: View {
                             ZStack {
                                 TableView(width: geometry.size.width / 1.6,
                                           height: geometry.size.height / 2.1)
-                                    .offset(y: -40.0)
+                                    .offset(y: 0.0)
                                 
-                                SelfPlayerView(player: .constant(Player(mockedPlayer: true)),
-                                               isTurn: .constant(false),
-                                               isWinner: .constant(false),
-                                               isEliminated: .constant(false),
-                                               isWaiting: .constant(true))
-                                    .offset(y: 70.0)
+                                //Player
+                                ZStack {
+                                    PlayerView(player: self.$viewModel.player7)
+                                        .offset(x: geometry.size.width * -0.29, y: 80)
+                                    
+                                    PlayerView(player: self.$viewModel.player6)
+                                        .offset(x: geometry.size.width * -0.35, y: 0)
+
+                                    PlayerView(player: self.$viewModel.player5)
+                                        .offset(x: geometry.size.width * -0.29, y: -80)
+                                    
+                                    //Topo
+                                    PlayerView(player: self.$viewModel.player4)
+                                        .offset(x: 0, y: -90)
+                                    
+                                    PlayerView(player: self.$viewModel.player3)
+                                        .offset(x: geometry.size.width * 0.29, y: -80)
+
+                                    PlayerView(player: self.$viewModel.player2)
+                                        .offset(x: geometry.size.width * 0.35, y: 0)
+
+                                    //Canto inferior direito
+                                    PlayerView(player: self.$viewModel.player1)
+                                        .offset(x: geometry.size.width * 0.29, y: 80)
+                                }
                                 
+                                SelfPlayerView(player: self.$viewModel.currentPlayer, showingHunch: self.$viewModel.showHunchView)
+                                    .offset(y: 90.0)
+                                
+                                if self.viewModel.showHunchView {
+                                    HunchView(choices: self.viewModel.choices, viewModel: self.viewModel)
+                                        .offset(y: 160.0)
+                                }
                             
-                            }.offset(x: self.activeMenu[0] || self.activeMenu[1] || self.activeMenu[2] ? geometry.size.width / 4 : geometry.size.width / 5, y: 0)
+                            }.offset(x: self.activeMenu[0] || self.activeMenu[1] || self.activeMenu[2] ? geometry.size.width / 4 : geometry.size.width / 6, y: 0)
                         }
                     }
                 }

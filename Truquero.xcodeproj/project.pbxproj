@@ -25,6 +25,7 @@
 		BB58F3E0260000E800BFD314 /* ListSeparatorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB58F3DF260000E800BFD314 /* ListSeparatorHelper.swift */; };
 		BB58F3E32600065600BFD314 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB58F3E22600065600BFD314 /* ButtonStyles.swift */; };
 		BB5AFF3B247090D40024824F /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5AFF3A247090D40024824F /* ActivityIndicator.swift */; };
+		BB695908260ABFE50005996F /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB695907260ABFE50005996F /* PlayerView.swift */; };
 		BB6A2BC226027DF800EDA439 /* AppleAuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A2BC126027DF800EDA439 /* AppleAuthHelper.swift */; };
 		BB6A2BC726027FCB00EDA439 /* AuthDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A2BC626027FCB00EDA439 /* AuthDelegates.swift */; };
 		BB6A2BCA26028C4E00EDA439 /* AppleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A2BC926028C4E00EDA439 /* AppleLoginButton.swift */; };
@@ -89,6 +90,7 @@
 		BB58F3DF260000E800BFD314 /* ListSeparatorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSeparatorHelper.swift; sourceTree = "<group>"; };
 		BB58F3E22600065600BFD314 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		BB5AFF3A247090D40024824F /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		BB695907260ABFE50005996F /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		BB6A2BC126027DF800EDA439 /* AppleAuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthHelper.swift; sourceTree = "<group>"; };
 		BB6A2BC426027F3800EDA439 /* Truquero.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Truquero.entitlements; sourceTree = "<group>"; };
 		BB6A2BC626027FCB00EDA439 /* AuthDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDelegates.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				BBCE4028260831A00056C4D3 /* SelfPlayerView.swift */,
 				BB9E4A072608FF9E00D49A8A /* TableView.swift */,
 				BB9E4A0D2609180800D49A8A /* HandCards.swift */,
+				BB695907260ABFE50005996F /* PlayerView.swift */,
 			);
 			path = tableGame;
 			sourceTree = "<group>";
@@ -495,6 +498,7 @@
 				BB146524247348A800609B48 /* NavigationLazyView.swift in Sources */,
 				BBA24F5A2464E2E800AF3001 /* PlayerItem.swift in Sources */,
 				BB22793725EF21D300FFB90B /* NetworkHelper.swift in Sources */,
+				BB695908260ABFE50005996F /* PlayerView.swift in Sources */,
 				BB6A2BC726027FCB00EDA439 /* AuthDelegates.swift in Sources */,
 				BB6A2BD32602DE2300EDA439 /* CreateGameView.swift in Sources */,
 				BBE6555B2605207B00A0082F /* KeyboardHelper.swift in Sources */,

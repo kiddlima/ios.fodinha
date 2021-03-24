@@ -11,62 +11,60 @@ import SwiftUI
 struct HunchView: View {
     
     var choices: [Choice]?
-    var players: [Player]?
     var viewModel: TableGameViewModel
+    @State var selected: Bool = false
     
     var body: some View {
-        VStack (alignment: .leading) {
+        VStack (alignment: .center) {
             Text("Quantas você faz?")
-                .font(.subheadline)
+                .font(Font.custom("Avenir-Medium", size: 18))
                 .foregroundColor(Color.white)
             
-            Spacer()
-            
-//            HStack (spacing: 0) {
-//                ForEach(0 ..< self.choices!.count) { index in
-//                    Button(action: {
-//                        self.viewModel.setChoice(selectedChoice: self.choices![index])
-//                    }) {
-//                        Text("\(self.choices![index].number)")
-//                    }
-//                    .padding(2)
-//                    .disabled(!self.choices![index].available!)
-//                    .buttonStyle(SelectedButton(selected: self.choices![index].selected, disabled: !self.choices![index].available!))
-//                }
-//            }
-            
-            Spacer()
-            
-//            VStack (alignment: .leading) {
-//                ForEach (players!, id: \.playerId) { player in
-//                    PlayerHunchView(player: player)
-//                }
-//            }
-            
-            Spacer()
-            
-            Button(action: {
-                self.viewModel.setPlayerHunch()
-            }) {
-                Text("Confirmar")
+            HStack {
+                ForEach(0 ..< self.choices!.count) { index in
+                    Button(action: {
+                        withAnimation {
+                            self.selected = true
+                        }
+                        
+                        self.viewModel.setChoice(selectedChoice: self.choices![index])
+                    }) {
+                        Text("\(self.choices![index].number!)")
+                    }
+                    .padding(2)
+                    .disabled(!self.choices![index].available!)
+                    .buttonStyle(SelectedButton(selected: self.choices![index].selected!, disabled: !self.choices![index].available!))
+                }
             }
-            .padding(2)
-            .buttonStyle(PrimaryButton())
+            
+            if self.selected {
+                Button(action: {
+                    self.viewModel.setPlayerHunch()
+                }) {
+                    Text("Enviar")
+                }
+                .padding(.top, 12)
+                .buttonStyle(GoldenButtonStyle())
+            }
         }
-        .transition(.slide)
-        .cornerRadius(8)
+        .frame(width: 215)
         .padding(16)
         .background(
             RoundedRectangle(cornerRadius: 4)
-                .fill(Color.customDarkGray)
-                .shadow(radius: 4)
+                .fill(Color.dark8)
+                .shadow(radius: 16)
         )
+        .cornerRadius(16)
     }
     
 }
 
 struct HunchView_Previews: PreviewProvider {
     static var previews: some View {
-        HunchView(choices: [], players: [], viewModel: TableGameViewModel(gameId: ""))
+        let choices = [Choice](
+            arrayLiteral: Choice(number: 1), Choice(number: 2), Choice(number: 3)
+        )
+        
+        HunchView(choices: choices, viewModel: TableGameViewModel(gameId: ""))
     }
 }

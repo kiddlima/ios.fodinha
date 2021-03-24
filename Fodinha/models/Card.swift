@@ -18,8 +18,12 @@ struct Card: Decodable, Hashable{
         self.imageName = self.suit!.lowercased() + String(self.value!)
     }
     
-    init() {
+    init(data: [String: Any]) {
+        self.rank = data["rank"] as? Int
+        self.suit = data["suit"] as? String
+        self.value = data["value"] as? Int
         
+        self.imageName = self.suit!.lowercased() + String(self.value!)
     }
     
     var id: UUID = UUID()

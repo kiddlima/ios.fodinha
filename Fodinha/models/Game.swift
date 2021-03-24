@@ -9,16 +9,43 @@
 import Foundation
 import FirebaseAuth
 
-class Game: Decodable {
+class Game: Decodable, Equatable {
+    static func == (lhs: Game, rhs: Game) -> Bool {
+        return lhs._id == rhs._id
+    }
+    
+    init(data: [String: Any]) {
+        self._id = data["_id"] as? String
+        self.smallRoundWinner = data["smallRoundWinner"] as? String
+        self.turn = data["turn"] as? String
+        self.name = data["name"] as? String
+        self.hunchTime = data["hunchTime"] as? Bool
+        self.cardAmount = data["cardAmount"] as? Int
+        self.createdBy = data["createdBy"] as? String
+        self.active = data["active"] as? Bool
+        self.winner = data["winner"] as? String
+        
+        if let playersArray = data["players"] as? NSMutableArray {
+            playersArray.forEach { player in
+                if let dictPlayer = player as? [String: Any] {
+                    self.players?.append(Player(data: dictPlayer))
+                }
+            }
+        }
+    }
+    
+    init() {
+        
+    }
     
     func isLastPlay() -> Bool {
         var hunchesLeft = 0
         
-//        self.players.forEach { player in
-//            if player.hunch == nil {
-//                hunchesLeft += 1
-//            }
-//        }
+        self.players!.forEach { player in
+            if player.hunch == nil {
+                hunchesLeft += 1
+            }
+        }
         
         return hunchesLeft == 1
     }
@@ -26,18 +53,17 @@ class Game: Decodable {
     func getUnavailableChoice() -> Choice {
         var totalHunches = 0;
         
-//        self.players.forEach { player in
-//            if let hunch = player.hunch {
-//                totalHunches += hunch
-//            }
-//            
-//        }
+        self.players!.forEach { player in
+            if let hunch = player.hunch {
+                totalHunches += hunch
+            }
+        }
         
         return Choice(number: abs(self.cardAmount! - totalHunches))
     }
     
     func isPlayerInTheGame() -> Bool {
-        var uid = Auth.auth().currentUser?.uid
+        let uid = Auth.auth().currentUser?.uid
         
         var playerInTheGame = false
         
@@ -66,5 +92,5 @@ class Game: Decodable {
     var activePlayers: Int?
     var totalPlayers: Int?
     var someoneLeft: Bool?
-    var players: [Player]?
+    var players: [Player]? = [Player]()
 }

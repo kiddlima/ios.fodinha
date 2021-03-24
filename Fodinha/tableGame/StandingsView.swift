@@ -84,7 +84,7 @@ struct GroupedStandingView: View {
                 .padding(.bottom, 4)
             
             ForEach(self.samePointPlayers, id: \.id) { player in
-                Text("\(player.name)")
+                Text("\(player.name!)")
                     .font(Font.custom("Avenir-Regular", size: 20))
                     .foregroundColor(Color.dark3)
             }

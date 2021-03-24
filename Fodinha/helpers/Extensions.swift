@@ -18,6 +18,10 @@ extension Color{
     static let dark4 = Color("dark-4")
     static let dark3 = Color("dark-3")
     
+    static let darkWhite = Color("dark-white")
+    static let winnerGreen = Color("winner-green")
+    static let darkGreen = Color("dark-green")
+    
     static let notificationGreen = Color("notification-green")
     static let notificationRed = Color("notification-red")
     
@@ -30,7 +34,6 @@ extension Color{
     static let customLighter2Gray = Color("customLighter2Gray")
     static let customLightGray = Color("customLightGray")
     static let lightGreen = Color("lightGreen")
-    static let darkGreen = Color("darkGreen")
     static let lighterGreen = Color("lighterGreen")
     
     static let tableDefaultGreen = Color("tableDefaultGreen")

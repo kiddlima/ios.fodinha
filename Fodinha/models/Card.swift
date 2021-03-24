@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-class Card: Decodable{
+struct Card: Decodable, Hashable{
     
     init(rank: Int?, suit: String?, value: Int?) {
         self.rank = rank
@@ -22,6 +22,7 @@ class Card: Decodable{
         
     }
     
+    var id: UUID = UUID()
     var rank: Int?
     var suit: String?
     var value: Int?

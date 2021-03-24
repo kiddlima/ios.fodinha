@@ -39,6 +39,9 @@
 		BB94E0D32454B92B008DE1F4 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB94E0D22454B92B008DE1F4 /* Player.swift */; };
 		BB964DB2247DEBCB00677574 /* TableDesignHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB964DB1247DEBCB00677574 /* TableDesignHelper.swift */; };
 		BB9BD58325FFCBD9001D7F7A /* ResizeButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9BD58225FFCBD9001D7F7A /* ResizeButtonStyle.swift */; };
+		BB9E4A082608FF9E00D49A8A /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9E4A072608FF9E00D49A8A /* TableView.swift */; };
+		BB9E4A0B2609079B00D49A8A /* HomeIndicatorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9E4A0A2609079B00D49A8A /* HomeIndicatorHelper.swift */; };
+		BB9E4A0E2609180800D49A8A /* HandCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9E4A0D2609180800D49A8A /* HandCards.swift */; };
 		BBA160922465CA4700395E18 /* TableGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA160912465CA4700395E18 /* TableGameViewModel.swift */; };
 		BBA160942465D15900395E18 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA160932465D15900395E18 /* Card.swift */; };
 		BBA24F5A2464E2E800AF3001 /* PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA24F592464E2E800AF3001 /* PlayerItem.swift */; };
@@ -102,6 +105,9 @@
 		BB94E0D22454B92B008DE1F4 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		BB964DB1247DEBCB00677574 /* TableDesignHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDesignHelper.swift; sourceTree = "<group>"; };
 		BB9BD58225FFCBD9001D7F7A /* ResizeButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeButtonStyle.swift; sourceTree = "<group>"; };
+		BB9E4A072608FF9E00D49A8A /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
+		BB9E4A0A2609079B00D49A8A /* HomeIndicatorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIndicatorHelper.swift; sourceTree = "<group>"; };
+		BB9E4A0D2609180800D49A8A /* HandCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandCards.swift; sourceTree = "<group>"; };
 		BBA160912465CA4700395E18 /* TableGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableGameViewModel.swift; sourceTree = "<group>"; };
 		BBA160932465D15900395E18 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		BBA24F592464E2E800AF3001 /* PlayerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerItem.swift; sourceTree = "<group>"; };
@@ -246,6 +252,8 @@
 				BBE655572605119F00A0082F /* ChatViewModel.swift */,
 				BBCE4025260805AC0056C4D3 /* StandingsView.swift */,
 				BBCE4028260831A00056C4D3 /* SelfPlayerView.swift */,
+				BB9E4A072608FF9E00D49A8A /* TableView.swift */,
+				BB9E4A0D2609180800D49A8A /* HandCards.swift */,
 			);
 			path = tableGame;
 			sourceTree = "<group>";
@@ -275,6 +283,7 @@
 				BB6A2BC126027DF800EDA439 /* AppleAuthHelper.swift */,
 				BBE6555A2605207B00A0082F /* KeyboardHelper.swift */,
 				BBCE402B260841A00056C4D3 /* RoundedCorners.swift */,
+				BB9E4A0A2609079B00D49A8A /* HomeIndicatorHelper.swift */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -461,12 +470,14 @@
 				BB58F3E0260000E800BFD314 /* ListSeparatorHelper.swift in Sources */,
 				BBD79F39247F36E200B43E29 /* HunchCheckButton.swift in Sources */,
 				BBA160922465CA4700395E18 /* TableGameViewModel.swift in Sources */,
+				BB9E4A082608FF9E00D49A8A /* TableView.swift in Sources */,
 				BB1939F8244E209C00BA8210 /* Game.swift in Sources */,
 				BB71C27A2604E98600E72BA4 /* TableMenuItem.swift in Sources */,
 				BB1939E22449FF9300BA8210 /* Fodinha.xcdatamodeld in Sources */,
 				BBA160942465D15900395E18 /* Card.swift in Sources */,
 				BB71C2822605058C00E72BA4 /* Message.swift in Sources */,
 				BB82293A246388090076FD20 /* TableGameView.swift in Sources */,
+				BB9E4A0E2609180800D49A8A /* HandCards.swift in Sources */,
 				BB38EDA9247DFD2000A02DC4 /* SelectedButton.swift in Sources */,
 				BB1939E42449FF9300BA8210 /* AvailableGamesView.swift in Sources */,
 				BBF0A93F246DFD6D00C682F8 /* HunchView.swift in Sources */,
@@ -478,6 +489,7 @@
 				BB8A2A6F25FEB3BA006074E2 /* SocketIOManager.swift in Sources */,
 				BB1939DF2449FF9300BA8210 /* SceneDelegate.swift in Sources */,
 				BBCBC7962600E497000324B6 /* InputStyles.swift in Sources */,
+				BB9E4A0B2609079B00D49A8A /* HomeIndicatorHelper.swift in Sources */,
 				BBF0A941246E161A00C682F8 /* PlayerHunchView.swift in Sources */,
 				BB6A2BC226027DF800EDA439 /* AppleAuthHelper.swift in Sources */,
 				BB146524247348A800609B48 /* NavigationLazyView.swift in Sources */,

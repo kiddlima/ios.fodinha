@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseAuth
 import SocketIO
+import SwiftUI
 
 struct Message: Hashable, Identifiable {
     
@@ -17,6 +18,7 @@ struct Message: Hashable, Identifiable {
     var senderId: String = ""
     var time: String = ""
     var username: String = ""
+    var senderColor: Color = Color.white
     
     init(message: String, senderId: String, time: String, username: String) {
         self.id = UUID()

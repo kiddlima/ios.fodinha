@@ -31,29 +31,29 @@ struct StandingsView: View {
     }
     
     var body: some View {
-        VStack {
-            if !zeroPointPlayers!.isEmpty {
-                GroupedStandingView(samePointPlayers: zeroPointPlayers!)
-            }
-            
-            if !onePointPlayers!.isEmpty {
-                GroupedStandingView(samePointPlayers: onePointPlayers!)
-            }
-            
-            if !twoPointPlayers!.isEmpty {
-                GroupedStandingView(samePointPlayers: twoPointPlayers!)
-            }
-            
-            if !threePointPlayers!.isEmpty {
-                GroupedStandingView(samePointPlayers: threePointPlayers!)
+        VStack (alignment: .leading) {
+            if !fiveOrMorePointPlayers!.isEmpty {
+                GroupedStandingView(samePointPlayers: fiveOrMorePointPlayers!)
             }
             
             if !fourPointPlayers!.isEmpty {
                 GroupedStandingView(samePointPlayers: fourPointPlayers!)
             }
             
-            if !fiveOrMorePointPlayers!.isEmpty {
-                GroupedStandingView(samePointPlayers: fiveOrMorePointPlayers!)
+            if !threePointPlayers!.isEmpty {
+                GroupedStandingView(samePointPlayers: threePointPlayers!)
+            }
+            
+            if !twoPointPlayers!.isEmpty {
+                GroupedStandingView(samePointPlayers: twoPointPlayers!)
+            }
+            
+            if !onePointPlayers!.isEmpty {
+                GroupedStandingView(samePointPlayers: onePointPlayers!)
+            }
+            
+            if !zeroPointPlayers!.isEmpty {
+                GroupedStandingView(samePointPlayers: zeroPointPlayers!)
             }
         }
     }
@@ -80,20 +80,30 @@ struct GroupedStandingView: View {
             Text("\(samePointPlayers[0].points!) pontos")
                 .foregroundColor(.white)
                 .bold()
-                .font(Font.custom("Avenir-Medium", size: 22))
-                .padding(.bottom, 4)
+                .font(Font.custom("Avenir-Medium", size: 18))
+                .padding(.bottom, 3)
             
             ForEach(self.samePointPlayers, id: \.id) { player in
                 Text("\(player.name!)")
-                    .font(Font.custom("Avenir-Regular", size: 20))
-                    .foregroundColor(Color.dark3)
+                    .font(Font.custom("Avenir-Regular", size: 16))
+                    .strikethrough(self.samePointPlayers[0].points == 5)
+                    .foregroundColor(self.samePointPlayers[0].points == 5 ? Color.dark5 : Color.dark3)
             }
         }
+        .padding(.top, 4)
+        
     }
 }
 
 struct StandingsView_Previews: PreviewProvider {
     static var previews: some View {
-        StandingsView(players: .constant([Player]()))
+        let player1 = Player(mockedPlayer: true)
+        let player2 = Player(mockedPlayer: true)
+        let player3 = Player(mockedPlayer: true)
+        let player4 = Player(mockedPlayer: true, points: 2)
+        
+        StandingsView(players: .constant([Player](arrayLiteral:
+            player1, player2, player3, player4
+        )))
     }
 }

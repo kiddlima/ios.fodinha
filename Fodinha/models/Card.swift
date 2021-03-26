@@ -26,6 +26,9 @@ struct Card: Decodable, Hashable{
         self.imageName = self.suit!.lowercased() + String(self.value!)
     }
     
+    init()  {
+    }
+    
     var id: UUID = UUID()
     var rank: Int?
     var suit: String?

@@ -16,39 +16,58 @@ struct HunchView: View {
     
     var body: some View {
         VStack (alignment: .center) {
-            Text("Quantas você faz?")
+            Text("Quantas rodadas você ganha?")
                 .font(Font.custom("Avenir-Medium", size: 18))
                 .foregroundColor(Color.white)
             
             HStack {
                 ForEach(0 ..< self.choices!.count) { index in
                     Button(action: {
-                        withAnimation {
-                            self.selected = true
+                        if self.selected {
+                            self.viewModel.removeChoice()
+                            self.choices?.forEach({ choice in
+                                choice.selected = false
+                            })
+                            
+                            withAnimation {
+                                self.selected = false
+                            }
+                        } else {
+                            withAnimation {
+                                self.selected = true
+                            }
+                            
+                            self.viewModel.setChoice(selectedChoice: self.choices![index])
+                            
+                            self.choices![index].selected = true
                         }
                         
-                        self.viewModel.setChoice(selectedChoice: self.choices![index])
                     }) {
                         Text("\(self.choices![index].number!)")
                     }
+                    .animation(.easeOut(duration: 0.4))
                     .padding(2)
                     .disabled(!self.choices![index].available!)
                     .buttonStyle(SelectedButton(selected: self.choices![index].selected!, disabled: !self.choices![index].available!))
+                    .isHidden(self.selected && !(self.choices![index].selected!), remove: true)
+                    
                 }
-            }
-            
-            if self.selected {
-                Button(action: {
-                    self.viewModel.setPlayerHunch()
-                }) {
-                    Text("Enviar")
+                
+                if self.selected {
+                    Button(action: {
+                        self.viewModel.setPlayerHunch()
+                    }) {
+                        Text("Confirmar")
+                    }
+                    .padding(.top, 2)
+                    .padding(.leading, 16)
+                    .buttonStyle(GoldenButtonStyle())
                 }
-                .padding(.top, 12)
-                .buttonStyle(GoldenButtonStyle())
             }
         }
-        .frame(width: 215)
-        .padding(16)
+        .padding(12)
+        .padding(.leading, 16)
+        .padding(.trailing, 16)
         .background(
             RoundedRectangle(cornerRadius: 4)
                 .fill(Color.dark8)
@@ -61,8 +80,9 @@ struct HunchView: View {
 
 struct HunchView_Previews: PreviewProvider {
     static var previews: some View {
+        
         let choices = [Choice](
-            arrayLiteral: Choice(number: 1), Choice(number: 2), Choice(number: 3)
+            arrayLiteral: Choice(number: 1)
         )
         
         HunchView(choices: choices, viewModel: TableGameViewModel(gameId: ""))

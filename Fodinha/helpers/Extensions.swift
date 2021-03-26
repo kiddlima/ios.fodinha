@@ -18,6 +18,15 @@ extension Color{
     static let dark4 = Color("dark-4")
     static let dark3 = Color("dark-3")
     
+    static let chatColor1 = Color("chatColor1")
+    static let chatColor2 = Color("chatColor2")
+    static let chatColor3 = Color("chatColor3")
+    static let chatColor4 = Color("chatColor4")
+    static let chatColor5 = Color("chatColor5")
+    static let chatColor6 = Color("chatColor6")
+    static let chatColor7 = Color("chatColor7")
+    static let chatColor8 = Color("chatColor8")
+    
     static let darkWhite = Color("dark-white")
     static let winnerGreen = Color("winner-green")
     static let darkGreen = Color("dark-green")
@@ -63,4 +72,34 @@ extension View {
     }
 }
 #endif
+
+
+extension View {
+    
+    /// Hide or show the view based on a boolean value.
+    ///
+    /// Example for visibility:
+    ///
+    ///     Text("Label")
+    ///         .isHidden(true)
+    ///
+    /// Example for complete removal:
+    ///
+    ///     Text("Label")
+    ///         .isHidden(true, remove: true)
+    ///
+    /// - Parameters:
+    ///   - hidden: Set to `false` to show the view. Set to `true` to hide the view.
+    ///   - remove: Boolean value indicating whether or not to remove the view.
+    @ViewBuilder func isHidden(_ hidden: Bool, remove: Bool = false) -> some View {
+        if hidden {
+            if !remove {
+                self.hidden()
+            }
+        } else {
+            self
+        }
+    }
+}
+
 

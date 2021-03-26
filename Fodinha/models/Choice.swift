@@ -15,6 +15,10 @@ class Choice: Decodable {
         self.number = number
     }
     
+    init() {
+        
+    }
+    
     var number: Int?
     var selected: Bool? = false
     var available: Bool? = true

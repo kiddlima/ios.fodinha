@@ -10,13 +10,21 @@ import SwiftUI
 
 struct SelfPlayerView: View {
     
+    @Environment(\.presentationMode) var presentation
+    
     @Binding var player: Player
+    @State var game: Game
+    @State var currentCards: [Card?]
     @Binding var showingHunch: Bool
+    @ObservedObject var viewModel: TableGameViewModel
     
     var body: some View {
         VStack {
-            HandCards(cards: player.cards ?? [Card]())
-            
+            HandCards(game: self.$viewModel.game,
+                      currentPlayer: self.$viewModel.currentPlayer,
+                      currentCards: self.$viewModel.currentPlayerCards,
+                      viewModel: self.viewModel)
+
             ZStack (alignment: .topTrailing) {
                 ZStack {
                     if !(self.player.status != nil) && self.player.status == 1 {
@@ -68,15 +76,12 @@ struct SelfPlayerView: View {
                             .stroke(getProps().1, lineWidth: 3))
             )
             .opacity(self.showingHunch ? 0 : 1)
-            .offset(y: -19)
+            .offset(y: -5)
             .frame(minWidth: 215, maxWidth: 215, minHeight: 65, idealHeight: 65, maxHeight: 65,
                    alignment: .center)
             
         }
-        
         .animation(.easeOut(duration: 0.3))
-        
-        
     }
     
     func getMiddleText() -> String {
@@ -102,7 +107,7 @@ struct SelfPlayerView: View {
         } else if self.player.status == 2 {
             return (Color.dark5.opacity(0.9), .dark5, .white, true)
         } else {
-            return (Color.dark7, .dark5, .white, false)
+            return (Color.dark8, .dark5, .white, false)
         }
     }
     
@@ -121,6 +126,10 @@ struct SelfPlayerView: View {
 
 struct SelfPlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        SelfPlayerView(player: .constant(Player(mockedPlayer: true)), showingHunch: .constant(false))
+        SelfPlayerView(player: .constant(Player(mockedPlayer: true)),
+                       game: Game(),
+                       currentCards: [Card](),
+                       showingHunch: .constant(false),
+                       viewModel: TableGameViewModel(gameId: ""))
     }
 }

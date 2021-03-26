@@ -20,16 +20,22 @@ class Player: Decodable {
             self.name = "Jimmy"
             self.hunch = 1
             self.wins = 1
-//
-//            let card1 = Card(rank: 1, suit: "Paus", value: 2)
-//            let card2 = Card(rank: 1, suit: "Espada", value: 1)
-//            let card3 = Card(rank: 1, suit: "Ouro", value: 3)
-//            let card4 = Card(rank: 1, suit: "Paus", value: 2)
-//            let card5 = Card(rank: 1, suit: "Paus", value: 2)
-            
-//            self.cards = [Card](arrayLiteral: card1, card2, card3, card4, card5)
+            self.points = 0
+
         }
     }
+    
+    init(mockedPlayer: Bool, points: Int) {
+        if mockedPlayer {
+            self.name = "Jimmy"
+            self.hunch = 1
+            self.wins = 1
+            self.points = points
+
+        }
+    }
+    
+    
     
     init(data: [String: Any]) {
         self.status = data["status"] as? Int

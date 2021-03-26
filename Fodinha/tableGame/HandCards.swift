@@ -10,7 +10,10 @@ import SwiftUI
 
 struct HandCards: View {
     
-    @State var cards = [Card]()
+    @Binding var game: Game
+    @Binding var currentPlayer: Player
+    @Binding var currentCards: [Card?]
+    @ObservedObject var viewModel: TableGameViewModel
     
     @State var active = 0
     @State var destinations: [Int: CGRect] = [:]
@@ -20,268 +23,312 @@ struct HandCards: View {
     @State var card4OffSet = CGSize.zero
     @State var card5OffSet = CGSize.zero
     
-    @State var card1Angle = Double.zero
-    @State var card2Angle = Double.zero
-    @State var card3Angle = Double.zero
-    @State var card4Angle = Double.zero
-    @State var card5Angle = Double.zero
-    
-    @State var card1Padding = CGFloat.zero
-    @State var card2Padding = CGFloat.zero
-    @State var card3Padding = CGFloat.zero
-    @State var card4Padding = CGFloat.zero
-    @State var card5Padding = CGFloat.zero
-    
     @State var selectedCard: Card?
     
-    func getAngleAndPadding(position: Int) -> (Double, CGFloat) {
-        switch cards.count {
-        case 1:
-            
-            return (0, 0)
-        case 2:
-            if position == 0 {
-                return (-5, 0)
-            } else {
-                return (5, 0)
-            }
-            
-        case 3:
-            if position == 0 {
-                return (-5, -12)
-            } else if position == 1 {
-                return (0, 0)
-            } else {
-                return (5, -12)
-            }
-            
-        case 4:
-            if position == 0 {
-                return (-20, -24)
-            } else if position == 1 {
-                return (-5, 0)
-            } else if position == 2 {
-                return (5, 0)
-            } else {
-                return (20, -24)
-            }
-            
-        default:
-            if position == 0 {
-                return (-20, -24)
-            } else if position == 1 {
-                return (-5, -6)
-            } else if position == 2 {
-                return (0, 0)
-            } else if position == 3 {
-                return (5, -6)
-            } else {
-                return (20, -24)
-            }
-        }
-    }
-    
-    func calculateLayout() {
-        self.card1Angle = getAngleAndPadding(position: 0).0
-        self.card1Padding = getAngleAndPadding(position: 0).1
-        
-        self.card2Angle = getAngleAndPadding(position: 1).0
-        self.card2Padding = getAngleAndPadding(position: 1).1
-        
-        self.card3Angle = getAngleAndPadding(position: 2).0
-        self.card3Padding = getAngleAndPadding(position: 2).1
-        
-        self.card4Angle = getAngleAndPadding(position: 3).0
-        self.card4Padding = getAngleAndPadding(position: 3).1
-        
-        self.card5Angle = getAngleAndPadding(position: 4).0
-        self.card5Padding = getAngleAndPadding(position: 4).1
-    }
-    
     var body: some View {
-        
         VStack {
-            DroppableAreaView(active: $active, id: 1, card: self.$selectedCard)
+            ZStack {
+                if !(self.game.hunchTime ?? true) && self.currentPlayer.id == self.game.turn{
+                    DroppableAreaView(active: $active, id: 1, card: self.$selectedCard, viewModel: self.viewModel)
+                } else {
+                    DroppableAreaView(active: $active, id: 1, card: self.$selectedCard, viewModel: self.viewModel).hidden()
+                }
+                
+            }.overlay(
+                Image("\(self.viewModel.currentPlayer.currentCard?.imageName ?? "")")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 75)
+                    .shadow(color: Color.black.opacity(0.5), radius: 5, x: 0.0, y: 0.0)
+                    .isHidden(self.viewModel.currentPlayer.currentCard == nil || ((self.viewModel.game.cardAmount ?? 1 == 1) && self.viewModel.game.hunchTime ?? false))
+            )
             
             HStack {
-                if cards.count != 0 {
-                    HandCardView(card: self.cards[0])
-                        .padding(.bottom, self.card1Padding)
-                        .rotationEffect(.degrees(self.card1Angle))
-                        .offset(x: self.card1OffSet.width, y: self.card1OffSet.height)
-                        .gesture(DragGesture(minimumDistance: 0.1, coordinateSpace: .global)
-                                    .onChanged { value in
-                                        self.active = 0
-                                        
-                                        self.card1OffSet = value.translation
-                                        
-                                        for (id, frame) in self.destinations {
-                                            if frame.contains(value.location) {
-                                                self.active = id
-                                            }
-                                        }
-                                    }
-                                    .onEnded { value in
-                                        if self.active != 1 {
-                                            self.card1OffSet = .zero
-                                            
-                                            self.card1Angle = getAngleAndPadding(position: 0).0
-                                        } else {
-                                            self.selectedCard = cards[0]
-                                            
-                                            self.cards.remove(at: 0)
-                                            
-                                            calculateLayout()
-                                        }
-                                        
-                                        self.active = 0
-                                    }
-                        )
+                if self.viewModel.currentPlayerCards.count == 0
+                    && (self.viewModel.game.cardAmount ?? 0) == 1
+                    && (self.viewModel.game.active ?? false)
+                    && self.viewModel.currentPlayer.currentCard != nil
+                    && (self.viewModel.game.hunchTime ?? false){
+                    Image("verso")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 75)
+                        .shadow(color: Color.black.opacity(0.5), radius: 5, x: 0.0, y: 0.0)
                 }
                 
-                if cards.count > 1 {
-                    HandCardView(card: self.cards[1])
-                        .padding(.bottom, self.card2Padding)
-                        .rotationEffect(.degrees(card2Angle))
-                        .offset(x: self.card2OffSet.width, y: self.card2OffSet.height)
-                        .gesture(DragGesture(minimumDistance: 0.1, coordinateSpace: .global)
-                                    .onChanged { value in
-                                        self.active = 0
-                                        
-                                        self.card2OffSet = value.translation
-                                        
-                                        for (id, frame) in self.destinations {
-                                            if frame.contains(value.location) {
-                                                self.active = id
+                if self.viewModel.currentPlayerCards.compactMap({$0}).count == 0
+                    && ((self.viewModel.game.cardAmount ?? 0 != 1) || !(self.viewModel.game.hunchTime ?? false)) {
+                    Image("paus1")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 75)
+                        .hidden()
+                }
+              
+                if let count = self.viewModel.currentPlayerCards.compactMap({$0}).count {
+                    if self.viewModel.currentPlayerCards.count > 0 {
+                        if let card = self.viewModel.currentPlayerCards[0] {
+                            Image("\(card.imageName ?? "")")
+                                .resizable()
+                                .scaledToFit()
+                                .padding(.leading, -10)
+                                .padding(.trailing, -10)
+                                .frame(height: 75)
+                                .shadow(color: Color.black.opacity(0.5), radius: 5, x: 0.0, y: 0.0)
+                                .padding(.bottom,
+                                         (count <= 2 || self.card1OffSet != .zero) ? 0 : (count == 3 ? -12 : -24))
+                                
+                                
+                                .rotationEffect(
+                                    .degrees((count == 1 || self.card1OffSet != .zero) ? 0 : (count > 3 ? -20 : -5)))
+                                
+                                
+                                .offset(x: self.card1OffSet.width, y: self.card1OffSet.height)
+                                .gesture(DragGesture(minimumDistance: 0.1, coordinateSpace: .global)
+                                            .onChanged { value in
+                                                self.active = 0
+                                                
+                                                self.card1OffSet = value.translation
+                                                
+                                                for (id, frame) in self.destinations {
+                                                    if frame.contains(value.location) {
+                                                        self.active = id
+                                                        
+                                                    }
+                                                }
                                             }
-                                        }
-                                    }
-                                    .onEnded { value in
-                                        if self.active != 1 {
-                                            self.card2OffSet = .zero
-                                            
-                                            self.card2Angle = getAngleAndPadding(position: 1).0
-                                        } else {
-                                            self.selectedCard = cards[1]
-                                            
-                                            self.cards.remove(at: 1)
-                                            
-                                            calculateLayout()
-                                        }
-                                        
-                                        self.active = 0
-                                    }
-                        )
+                                            .onEnded { value in
+                                                if self.active != 1 {
+                                                    self.card1OffSet = .zero
+                                                } else {
+                                                    if !(self.viewModel.game.hunchTime ?? true) && (self.viewModel.game.turn == self.viewModel.currentPlayer.id) {
+                                                        self.selectedCard = self.viewModel.currentPlayerCards[0]
+                                                        
+                                                        self.viewModel.currentPlayerCards[0] = nil
+                                                        
+                                                        self.viewModel.playCard(card: self.selectedCard!)
+                                                    }
+                                                    
+                                                    self.card1OffSet = .zero
+                                                }
+                                                
+                                                self.active = 0
+                                            }
+                                )
+                        }
+                    }
                 }
                 
-                if cards.count > 2 {
-                    HandCardView(card: self.cards[2])
-                        .padding(.bottom, self.card3Padding)
-                        .rotationEffect(.degrees(card3Angle))
-                        .offset(x: self.card3OffSet.width, y: self.card3OffSet.height)
-                        .gesture(DragGesture(minimumDistance: 0.1, coordinateSpace: .global)
-                                    .onChanged { value in
-                                        self.active = 0
-                                        
-                                        self.card3OffSet = value.translation
-                                        
-                                        for (id, frame) in self.destinations {
-                                            if frame.contains(value.location) {
-                                                self.active = id
+                if let count = self.viewModel.currentPlayerCards.compactMap({$0}).count {
+                    if self.viewModel.currentPlayerCards.count > 1 {
+                        if let card = self.viewModel.currentPlayerCards[1] {
+                            Image("\(card.imageName ?? "")")
+                                .resizable()
+                                .scaledToFit()
+                                .padding(.leading, -10)
+                                .padding(.trailing, -10)
+                                .frame(height: 75)
+                                .shadow(color: Color.black.opacity(0.5), radius: 5, x: 0.0, y: 0.0)
+                                .padding(.bottom,
+                                         (count < 5 || card2OffSet != .zero) ? 0 : -6)
+                                
+                                
+                                .rotationEffect(
+                                    .degrees((count == 3 || card2OffSet != .zero) ? 0 : (count == 2 ? 5 : -5)))
+                                
+                                .offset(x: self.card2OffSet.width, y: self.card2OffSet.height)
+                                .gesture(DragGesture(minimumDistance: 0.1, coordinateSpace: .global)
+                                            .onChanged { value in
+                                                self.active = 0
+                                                
+                                                self.card2OffSet = value.translation
+                                                
+                                                for (id, frame) in self.destinations {
+                                                    if frame.contains(value.location) {
+                                                        self.active = id
+                                                    }
+                                                }
                                             }
-                                        }
-                                    }
-                                    .onEnded { value in
-                                        if self.active != 1 {
-                                            self.card3OffSet = .zero
-                                            
-                                            self.card3Angle = getAngleAndPadding(position: 2).0
-                                        } else {
-                                            self.selectedCard = cards[2]
-                                            
-                                            self.cards.remove(at: 2)
-                                            
-                                            calculateLayout()
-                                        }
-                                        
-                                        self.active = 0
-                                    }
-                        )
+                                            .onEnded { value in
+                                                if self.active != 1 {
+                                                    self.card2OffSet = .zero
+                                                } else {
+                                                    if !(self.viewModel.game.hunchTime ?? true) && (self.viewModel.game.turn == self.viewModel.currentPlayer.id) {
+                                                        self.selectedCard = self.viewModel.currentPlayerCards[1]
+                                                        
+                                                        self.viewModel.currentPlayerCards[1] = nil
+                                                        
+                                                        self.viewModel.playCard(card: self.selectedCard!)
+                                                        
+                                                    }
+                                                    
+                                                    self.card2OffSet = .zero
+                                                }
+                                                
+                                                self.active = 0
+                                            }
+                                )
+                        }
+                    }
                 }
                 
-                if cards.count > 3 {
-                    HandCardView(card: self.cards[3])
-                        .padding(.bottom, self.card4Padding)
-                        .rotationEffect(.degrees(card4Angle))
-                        .offset(x: self.card4OffSet.width, y: self.card4OffSet.height)
-                        .gesture(DragGesture(minimumDistance: 0.1, coordinateSpace: .global)
-                                    .onChanged { value in
-                                        self.active = 0
-                                        
-                                        self.card4OffSet = value.translation
-                                        
-                                        for (id, frame) in self.destinations {
-                                            if frame.contains(value.location) {
-                                                self.active = id
+                if let count = self.viewModel.currentPlayerCards.compactMap({$0}).count {
+                    if self.viewModel.currentPlayerCards.count > 2 {
+                        if let card = self.viewModel.currentPlayerCards[2] {
+                            Image("\(card.imageName ?? "")")
+                                .resizable()
+                                .scaledToFit()
+                                .padding(.leading, -10)
+                                .padding(.trailing, -10)
+                                .frame(height: 75)
+                                .shadow(color: Color.black.opacity(0.5), radius: 5, x: 0.0, y: 0.0)
+                                .padding(.bottom,
+                                         (count >= 4 || self.card3OffSet != .zero) ? 0 : -12)
+                                
+                                
+                                .rotationEffect(
+                                    .degrees((count == 5 || self.card3OffSet != .zero) ? 0 : 5))
+                                
+                                
+                                .offset(x: self.card3OffSet.width, y: self.card3OffSet.height)
+                                .gesture(DragGesture(minimumDistance: 0.1, coordinateSpace: .global)
+                                            .onChanged { value in
+                                                self.active = 0
+                                                
+                                                self.card3OffSet = value.translation
+                                                
+                                                for (id, frame) in self.destinations {
+                                                    if frame.contains(value.location) {
+                                                        self.active = id
+                                                    }
+                                                }
                                             }
-                                        }
-                                    }
-                                    .onEnded { value in
-                                        if self.active != 1 {
-                                            self.card4OffSet = .zero
-                                            
-                                            self.card4Angle = getAngleAndPadding(position: 3).0
-                                        } else {
-                                            self.selectedCard = cards[3]
-                                            
-                                            self.cards.remove(at: 3)
-                                            
-                                            calculateLayout()
-                                        }
-                                        
-                                        self.active = 0
-                                    }
-                        )
+                                            .onEnded { value in
+                                                if self.active != 1 {
+                                                    self.card3OffSet = .zero
+                                                } else {
+                                                    if !(self.viewModel.game.hunchTime ?? true) && (self.viewModel.game.turn == self.viewModel.currentPlayer.id){
+                                                        
+                                                        self.selectedCard = self.viewModel.currentPlayerCards[2]
+                                                        
+                                                        self.viewModel.currentPlayerCards[2] = nil
+                                                        
+                                                        self.viewModel.playCard(card: self.selectedCard!)
+                                                        
+                                                    }
+                                                    
+                                                    self.card3OffSet = .zero
+                                                }
+                                                
+                                                self.active = 0
+                                            }
+                                )
+                        }
+                    }
                 }
                 
-                if cards.count > 4 {
-                    HandCardView(card: self.cards[4])
-                        .padding(.bottom, self.card5Padding)
-                        .rotationEffect(.degrees(card5Angle))
-                        .offset(x: self.card5OffSet.width, y: self.card5OffSet.height)
-                        .gesture(DragGesture(minimumDistance: 0.1, coordinateSpace: .global)
-                                    .onChanged { value in
-                                        self.active = 0
-                                        
-                                        self.card5Angle = .zero
-                                        self.card5OffSet = value.translation
-                                        
-                                        for (id, frame) in self.destinations {
-                                            if frame.contains(value.location) {
-                                                self.active = id
+                if let count = self.viewModel.currentPlayerCards.compactMap({$0}).count {
+                    if self.viewModel.currentPlayerCards.count > 3 {
+                        if let card = self.viewModel.currentPlayerCards[3] {
+                            Image("\(card.imageName ?? "")")
+                                .resizable()
+                                .scaledToFit()
+                                .padding(.leading, -10)
+                                .padding(.trailing, -10)
+                                .frame(height: 75)
+                                .shadow(color: Color.black.opacity(0.5), radius: 5, x: 0.0, y: 0.0)
+                                .padding(.bottom,
+                                         (card4OffSet != .zero ? 0 : (count == 4 ? -24 : -6)))
+                                
+                                
+                                .rotationEffect(
+                                    .degrees(card4OffSet != .zero ? 0 : (count == 4 ? 20 : 5)))
+                                
+                                .offset(x: self.card4OffSet.width, y: self.card4OffSet.height)
+                                .gesture(DragGesture(minimumDistance: 0.1, coordinateSpace: .global)
+                                            .onChanged { value in
+                                                self.active = 0
+                                                
+                                                self.card4OffSet = value.translation
+                                                
+                                                for (id, frame) in self.destinations {
+                                                    if frame.contains(value.location) {
+                                                        self.active = id
+                                                    }
+                                                }
                                             }
-                                        }
-                                    }
-                                    .onEnded { value in
-                                        if self.active != 1 {
-                                            self.card5OffSet = .zero
-                                            
-                                            self.card5Angle = getAngleAndPadding(position: 4).0
-                                        } else {
-                                            self.selectedCard = cards[4]
-                                            
-                                            self.cards.remove(at: 4)
-                                            
-                                            calculateLayout()
-                                        }
-                                        
-                                        self.active = 0
-                                    }
-                        )
+                                            .onEnded { value in
+                                                if self.active != 1 {
+                                                    self.card4OffSet = .zero
+                                                } else {
+                                                    if !(self.viewModel.game.hunchTime ?? true) && (self.viewModel.game.turn == self.viewModel.currentPlayer.id) {
+                                                        self.selectedCard = self.viewModel.currentPlayerCards[3]
+                                                        
+                                                        self.viewModel.currentPlayerCards[3] = nil
+                                                        
+                                                        self.viewModel.playCard(card: self.selectedCard!)
+                                                    }
+                                                    
+                                                    self.card4OffSet = .zero
+                                                }
+                                                
+                                                self.active = 0
+                                            }
+                                )
+                        }
+                    }
                 }
                 
-            }.onAppear {
-                calculateLayout()
+                if self.viewModel.currentPlayerCards.count > 4 {
+                    if let card = self.viewModel.currentPlayerCards[4] {
+                        Image("\(card.imageName ?? "")")
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.leading, -10)
+                            .padding(.trailing, -10)
+                            .frame(height: 75)
+                            .shadow(color: Color.black.opacity(0.5), radius: 5, x: 0.0, y: 0.0)
+                            .padding(.bottom,
+                                     card5OffSet != .zero ? 0 : -24)
+                            
+                            
+                            .rotationEffect(
+                                .degrees(card5OffSet != .zero ? 0 : 20))
+                            
+                            .offset(x: self.card5OffSet.width, y: self.card5OffSet.height)
+                            .gesture(DragGesture(minimumDistance: 0.1, coordinateSpace: .global)
+                                        .onChanged { value in
+                                            self.active = 0
+                                            self.card5OffSet = value.translation
+                                            
+                                            for (id, frame) in self.destinations {
+                                                if frame.contains(value.location) {
+                                                    self.active = id
+                                                }
+                                            }
+                                        }
+                                        .onEnded { value in
+                                            if self.active != 1 {
+                                                self.card5OffSet = .zero
+                                            } else {
+                                                if !(self.viewModel.game.hunchTime ?? true) && (self.viewModel.game.turn == self.viewModel.currentPlayer.id) {
+                                                    self.selectedCard = self.viewModel.currentPlayerCards[4]
+                                                    
+                                                    self.viewModel.currentPlayerCards[4] = nil
+                                                    
+                                                    self.viewModel.playCard(card: self.selectedCard!)
+                                                }
+                                                
+                                                self.card5OffSet = .zero
+                                            }
+                                            
+                                            self.active = 0
+                                        }
+                            )
+                    }
+                }
+                
+                
             }
             .frame(height: 73)
             
@@ -289,7 +336,7 @@ struct HandCards: View {
             for p in preferences {
                 self.destinations[p.destination] = p.frame
             }
-        }
+        }.animation(.easeIn(duration: 0.3))
     }
 }
 
@@ -297,36 +344,16 @@ struct DroppableAreaView: View {
     @Binding var active: Int
     let id: Int
     @Binding var card: Card?
+    @ObservedObject var viewModel: TableGameViewModel
     
     var body: some View {
         Rectangle()
-            .fill(self.active != id ? Color.black.opacity(0) : Color.black.opacity(0.5))
-            .frame(width: 83, height: 120, alignment: .center)
-            .offset(x: 0, y: 0)
-            .overlay(
-                Image("\(self.card?.imageName ?? "")")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 75)
-            )
-            .background(DestinationDataSetter(destination: id))
-    }
-}
-
-struct HandCardView: View {
-    
-    var card: Card
-    
-    var body: some View{
-        Image("\(card.imageName ?? ""))")
-            .resizable()
+            .fill(self.active != id ? Color.black.opacity(0.4) : Color.black.opacity(0.8))
+            .frame(width: 50, height: 75)
             .scaledToFit()
-            .padding(.leading, -10)
-            .padding(.trailing, -10)
-            .frame(height: 75)
-            .animation(.easeOut(duration: 0.3))
-            .shadow(color: Color.black.opacity(0.5), radius: 5, x: 0.0, y: 0.0)
-        
+            .offset(x: 0, y: 0)
+            .cornerRadius(4)
+            .background(DestinationDataSetter(destination: id))
     }
 }
 
@@ -359,15 +386,11 @@ struct DestinationDataSetter: View {
 }
 
 
-
 struct HandCards_Previews: PreviewProvider {
     static var previews: some View {
-        let card1 = Card(rank: 1, suit: "Paus", value: 2)
-        let card2 = Card(rank: 1, suit: "Espada", value: 1)
-        let card3 = Card(rank: 1, suit: "Ouro", value: 3)
-        let card4 = Card(rank: 1, suit: "Paus", value: 2)
-        let card5 = Card(rank: 1, suit: "Paus", value: 2)
-        
-        HandCards(cards: ([Card](arrayLiteral: card1, card2, card3, card4, card5)))
+        HandCards(game: .constant(Game()),
+                  currentPlayer: .constant(Player()),
+                  currentCards: .constant([Card]()),
+                  viewModel: TableGameViewModel(gameId: ""))
     }
 }

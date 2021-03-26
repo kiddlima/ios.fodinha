@@ -17,7 +17,8 @@ struct SelectedButton: ButtonStyle {
         configuration.label
             .foregroundColor(self.disabled ? Color.customDarkGray : Color.customLighter2Gray)
             .font(.callout)
-            .padding(.init(top: 8, leading: 16, bottom: 8, trailing: 16))
+            .padding(.init(top: 9, leading: 16, bottom: 9, trailing: 16))
+            .animation(.easeInOut(duration: 0.2))
             .background(
                 RoundedRectangle(cornerRadius: 4, style: .continuous)
                     .stroke(self.disabled ? Color.customDarkGray : Color.customLighterGray)
@@ -25,6 +26,7 @@ struct SelectedButton: ButtonStyle {
                         RoundedRectangle(cornerRadius: 4, style: .continuous)
                             .fill(self.disabled ? Color.customBlack : Color.customLighterGray.opacity(self.selected ? 1 : 0))
             ))
+            .scaleEffect(configuration.isPressed ? 0.95 : 1)
     }
 }
 

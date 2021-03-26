@@ -28,6 +28,10 @@ class TableGameViewModel: ObservableObject {
     @Published var player7: Player?
     
     @Published var currentPlayer = Player()
+    @Published var currentPlayerCards = [Card?]()
+    @Published var toShowCards = [Card]()
+    @Published var showGhostView = false
+    
     @Published var showHunchView = false
     
     @Published var choices: [Choice] = []
@@ -38,6 +42,9 @@ class TableGameViewModel: ObservableObject {
     
     @Published var loadingStartGame: Bool = false
     @Published var loadingPlay: Bool = false
+    
+    @Published var loadingGame: Bool = true
+    
     var firstLoad: Bool = true
     var isPlayerInTheGameAlready: Bool = false
     
@@ -74,8 +81,18 @@ class TableGameViewModel: ObservableObject {
             game.players?.forEach({ player in
                 if player.id == uid {
                     self.currentPlayer = player
+                    
+                    //Mostra a view para jogar a carta
+                    if !(game.hunchTime ?? true) && self.uid == game.turn {
+                        self.showGhostView = true
+                    } else {
+                        self.showGhostView = false
+                    }
+                    
                     checkPlayerStatus(player: self.currentPlayer)
                     
+                    self.currentPlayerCards = player.cards ?? [Card]()
+                
                     if self.isPlayersTurnToHunch() {
                         if self.choices.isEmpty {
                             self.populateChoices(cardAmount: game.cardAmount!)
@@ -135,6 +152,8 @@ class TableGameViewModel: ObservableObject {
             } else {
                  player7 = nil
             }
+            
+            self.loadingGame = false
         }
     }
     
@@ -159,8 +178,8 @@ class TableGameViewModel: ObservableObject {
         for i in 0...cardAmount {
             let choice = Choice(number: i)
 
-            if unavailableChoice != nil {
-                if unavailableChoice!.number == choice.number {
+            if let notAvailableChoice = unavailableChoice {
+                if notAvailableChoice.number == choice.number {
                     choice.available = false
                 }
             }
@@ -184,37 +203,10 @@ class TableGameViewModel: ObservableObject {
         self.choices = newChoices
     }
     
-    func selectCard(position: Int){
-        // Unselect previous card
-//        for index in 0 ..< ((currentPlayer?.cards.count)!) {
-//            currentPlayer?.cards[index]?.selected = false
-//        }
-        
-        // Select new card
-//        currentPlayer?.cards[position]?.selected = true
-        
-//        selectedCard = currentPlayer?.cards[position]
-    }
-    
-    func getTurnPlayerName() -> String{
-        
-//        for player in self.game!.players {
-//            if player.playerId == self.game!.turn {
-//                return player.name!
-//            }
-//        }
-        
-        return ""
-    }
-    
-    func setTurnAndWinnerPlayer() {
-//        for index in 0 ..< ((game!.players.count)) {
-//            game!.players[index].isTurn = game!.players[index].playerId == game!.turn
-//
-//            if smallRoundWinner != nil {
-//                game!.players[index].smallRoundWinner = game!.players[index].playerId == smallRoundWinner?.playerId
-//            }
-//        }
+    func removeChoice(){
+        self.choices.forEach { choice in
+            choice.selected = false
+        }
     }
     
     func isPlayersTurnToHunch() -> Bool{
@@ -224,34 +216,9 @@ class TableGameViewModel: ObservableObject {
             currentPlayer.hunch == nil
     }
     
-    func hasPlayerInThatPosition(position: Int) -> Bool{
-//        for player in self.game!.players {
-//            if player.position == position {
-//                return true
-//            }
-//        }
-        
-        return false
-    }
-    
-    func getPlayerByPosition(position: Int) -> Player?{
-//        for player in self.game!.players {
-//            if player.position == position {
-//                return player
-//            }
-//        }
-        
-        return nil
-    }
-    
 //    func shouldShowStartGameButton() -> Bool{
 //        return !game!.active!
 //    }
-    
-    func isPlayersTurnToPlay() -> Bool{
-        return true
-//        return !game!.hunchTime! && game!.turn == currentPlayer?.playerId
-    }
     
     // Requests
     func setPlayerHunch(){
@@ -276,8 +243,6 @@ class TableGameViewModel: ObservableObject {
                 self.choices = [Choice]()
             }
         }
-    
-
     }
     
     func startGame(gameId: String) {
@@ -289,37 +254,13 @@ class TableGameViewModel: ObservableObject {
 //        }
     }
     
-    func playCard() {
-//        self.loadingPlay = true
-//
-//        let cardObject: [String: Any] =
-//            ["rank": selectedCard!.rank! as Int,
-//             "suit": selectedCard!.suit! as String,
-//             "value": selectedCard!.value! as Int]
-//
-//        functions.httpsCallable("startGame").call(
-//            ["gameId": game!.gameId!,
-//             "card": cardObject]) { (result, error) in
-//
-//        }
+    func playCard(card: Card) {
+        self.currentPlayer.currentCard = card
+        
+        NetworkHelper().playCard(gameId: self.game._id!, card: card) { error in
+            if error == nil {
+                print()
+            }
+        }
     }
-    
-    func addPlayerToGame(){
-//        functions.httpsCallable("join").call(
-//        ["gameId": game!.gameId!]) { (result, error) in
-//            if let error = error as NSError? {
-//                if error.domain == FunctionsErrorDomain {
-//                    let code = FunctionsErrorCode(rawValue: error.code)
-//                    let message = error.localizedDescription
-//                    let details = error.userInfo[FunctionsErrorDetailsKey]
-//                }
-//                // ...
-//            }
-//
-//            if let data = (result?.data as? [String: Any]) {
-//                print(data)
-//            }
-//        }
-    }
-    
 }

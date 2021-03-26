@@ -230,4 +230,33 @@ class NetworkHelper: NSObject {
                 }
         }
     }
+    
+    func playCard(gameId: String, card: Card, callback: @escaping (String?) -> Void) {
+        let parameters: Parameters =
+            [
+                "gameId": gameId,
+                "card": [
+                    "value": card.value!,
+                    "rank": card.rank!,
+                    "suit": card.suit!
+                ]
+            ]
+        
+        getAuthHeader { authHeader in
+            Alamofire.request(
+                "\(self.URL)/game/player/play",
+                method: .post,
+                parameters: parameters,
+                encoding: JSONEncoding.default,
+                headers: authHeader)
+                .responseString { response in
+                    
+                    if response.response?.statusCode ?? 500 >= 400 {
+                        callback("Erro ao jogar carta")
+                    } else {
+                        callback(nil)
+                    }
+                }
+        }
+    }
 }

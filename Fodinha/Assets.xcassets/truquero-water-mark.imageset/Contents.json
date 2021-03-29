@@ -1,12 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "truquero-water-mark-1.png",
+      "filename" : "truquero-watermark-1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "truquero-water-mark.png",
+      "filename" : "truquero-watermark.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

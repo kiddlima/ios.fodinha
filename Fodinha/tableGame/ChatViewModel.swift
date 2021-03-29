@@ -26,6 +26,8 @@ class ChatViewModel: ObservableObject {
     let uid = (Auth.auth().currentUser?.uid)!
     let username = (Auth.auth().currentUser?.displayName)!
     
+    @Published var newMessage = false
+    
     init (gameId: String) {
         self.gameId = gameId
         
@@ -45,6 +47,12 @@ class ChatViewModel: ObservableObject {
                 self.messageCounterUpdate = self.messageCounterUpdate + 1
                 
                 self.messages.append(Message(message: text!, senderId: uid!, time: time!, username: username!))
+                
+                if uid != self.uid {
+                    withAnimation {
+                        self.newMessage = true
+                    }
+                }
             }
         }
     }
@@ -55,7 +63,16 @@ class ChatViewModel: ObservableObject {
         }
         
         let now = Date()
-        let time =  "\(Calendar.current.component(.hour, from: now)):\(Calendar.current.component(.minute, from: now))"
+        
+        let minutes = Calendar.current.component(.minute, from: now)
+        
+        var stringMinutes = "\(minutes)"
+        
+        if minutes < 10 {
+            stringMinutes = "0\(minutes)"
+        }
+        
+        let time =  "\(Calendar.current.component(.hour, from: now)):\(stringMinutes)"
         
         self.socket.emit("messageToServer", SendMessageData(
                             gameId: self.gameId,

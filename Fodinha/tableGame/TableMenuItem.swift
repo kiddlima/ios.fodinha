@@ -11,24 +11,40 @@ import SwiftUI
 struct TableMenuItem: View {
     
     @Binding var active: Bool
+    @Binding var notification: Bool
     
-    var icon: String
+    var icon: String?
+    var systemName: String?
     
     var selected: () -> Void
     
-    init(icon: String, active: Binding<Bool>, selected: @escaping () -> Void) {
+    init(active: Binding<Bool>, notification: Binding<Bool>, systemName: String, selected: @escaping () -> Void) {
+        self._active = active
+        self._notification = notification
+        self.systemName = systemName
+        self.selected = selected
+    }
+    
+    init(icon: String, active: Binding<Bool>, notification: Binding<Bool>, selected: @escaping () -> Void) {
         self.selected = selected
         self.icon = icon
         self._active = active
+        self._notification = notification
         
         if self.active {
-            self.icon = "\(self.icon)-dark8"
+            if let menuIcon = self.icon {
+                self.icon = "\(menuIcon)-dark8"
+            }
         }
     }
     
     var body: some View {
         Button(action: {
             self.selected()
+            
+            withAnimation {
+                self.notification = false
+            }
         }){
             ZStack {
                 Capsule()
@@ -36,12 +52,31 @@ struct TableMenuItem: View {
                     .frame(width: 50, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .cornerRadius(.infinity)
             }
-            .animation(.easeInOut(duration: 0.2))
             .overlay(
-                Image(icon)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 16)
+                Group {
+                    if self.systemName != nil {
+                    Image(systemName: self.systemName!)
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundColor(.dark3)
+                            .frame(height: 16)
+                    } else {
+                        Image(icon!)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 16)
+                    }
+                }
+            )
+            .overlay(
+                Group {
+                    if self.notification && !self.active {
+                        Capsule()
+                            .fill(Color.red)
+                            .frame(width: 15, height: 15, alignment: .trailing)
+                            .shadow(color: Color/*@START_MENU_TOKEN@*/.black/*@END_MENU_TOKEN@*/.opacity(0.4), radius: 2, x: 0.0, y: 0.0)
+                    }
+                }.frame(width: 50, height: 50, alignment: .topTrailing)
             )
         }
     }
@@ -49,7 +84,7 @@ struct TableMenuItem: View {
 
 struct TableMenuItem_Previews: PreviewProvider {
     static var previews: some View {
-        TableMenuItem(icon: "chat", active: .constant(true), selected: {
+        TableMenuItem(icon: "chat", active: .constant(true), notification: .constant(true), selected: {
             
         })
     }

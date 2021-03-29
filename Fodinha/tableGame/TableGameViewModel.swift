@@ -19,6 +19,8 @@ class TableGameViewModel: ObservableObject {
     
     @Published var players: [Player]?
     
+    @Published var timeRemainingToPlay = 40
+    
     @Published var player1: Player?
     @Published var player2: Player?
     @Published var player3: Player?
@@ -33,14 +35,14 @@ class TableGameViewModel: ObservableObject {
     @Published var showGhostView = false
     
     @Published var showHunchView = false
+    @Published var showLeaveGameModal = false
     
     @Published var choices: [Choice] = []
     
     var selectedCard: Card?
     
-    @Published var userHunchChoice: Int = -2
-    
     @Published var loadingStartGame: Bool = false
+    @Published var loadingLeaveGame: Bool = false
     @Published var loadingPlay: Bool = false
     
     @Published var loadingGame: Bool = true
@@ -77,6 +79,10 @@ class TableGameViewModel: ObservableObject {
         withAnimation(.easeOut(duration: 0.3)) {
             self.game = game
             self.players = game.players
+            
+            self.loadingGame = false
+            
+            self.timeRemainingToPlay = 40
             
             game.players?.forEach({ player in
                 if player.id == uid {
@@ -245,13 +251,15 @@ class TableGameViewModel: ObservableObject {
         }
     }
     
-    func startGame(gameId: String) {
+    func startGame() {
         self.loadingStartGame = true
-        
-//        functions.httpsCallable("startGame").call(
-//        ["gameId": gameId as Any]) { (result, error) in
-//
-//        }
+            
+        NetworkHelper().startGame(gameId: self.game._id!) { error in
+            if error != nil {
+                //TODO: Show error creating game
+            }
+        }
+
     }
     
     func playCard(card: Card) {

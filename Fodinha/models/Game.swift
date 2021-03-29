@@ -41,7 +41,7 @@ class Game: Decodable, Equatable {
     func isLastPlay() -> Bool {
         var hunchesLeft = 0
         
-        self.players!.forEach { player in
+        self.players!.filter {$0.status == 1} .forEach { player in
             if player.hunch == nil {
                 hunchesLeft += 1
             }
@@ -68,7 +68,7 @@ class Game: Decodable, Equatable {
         var playerInTheGame = false
         
         self.players?.forEach({ player in
-            if uid == player.id {
+            if uid == player.id && player.status != 0 {
                 playerInTheGame = true
             }
         })

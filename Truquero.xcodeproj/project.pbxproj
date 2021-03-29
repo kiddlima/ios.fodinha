@@ -25,6 +25,7 @@
 		BB58F3E0260000E800BFD314 /* ListSeparatorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB58F3DF260000E800BFD314 /* ListSeparatorHelper.swift */; };
 		BB58F3E32600065600BFD314 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB58F3E22600065600BFD314 /* ButtonStyles.swift */; };
 		BB5AFF3B247090D40024824F /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5AFF3A247090D40024824F /* ActivityIndicator.swift */; };
+		BB6644222611741D0024C94B /* WinnerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6644212611741D0024C94B /* WinnerModal.swift */; };
 		BB695908260ABFE50005996F /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB695907260ABFE50005996F /* PlayerView.swift */; };
 		BB6A2BC226027DF800EDA439 /* AppleAuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A2BC126027DF800EDA439 /* AppleAuthHelper.swift */; };
 		BB6A2BC726027FCB00EDA439 /* AuthDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A2BC626027FCB00EDA439 /* AuthDelegates.swift */; };
@@ -47,6 +48,8 @@
 		BBA160942465D15900395E18 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA160932465D15900395E18 /* Card.swift */; };
 		BBA24F5A2464E2E800AF3001 /* PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA24F592464E2E800AF3001 /* PlayerItem.swift */; };
 		BBA24F5C2465A74400AF3001 /* CardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA24F5B2465A74400AF3001 /* CardItem.swift */; };
+		BBAAF3F42611243E008AE739 /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAAF3F32611243D008AE739 /* ModalView.swift */; };
+		BBAAF3F826113F23008AE739 /* ConfirmModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAAF3F726113F23008AE739 /* ConfirmModal.swift */; };
 		BBCBC7962600E497000324B6 /* InputStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCBC7952600E497000324B6 /* InputStyles.swift */; };
 		BBCE40232607A9D90056C4D3 /* ChatTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCE40222607A9D90056C4D3 /* ChatTextField.swift */; };
 		BBCE4026260805AC0056C4D3 /* StandingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCE4025260805AC0056C4D3 /* StandingsView.swift */; };
@@ -90,6 +93,7 @@
 		BB58F3DF260000E800BFD314 /* ListSeparatorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSeparatorHelper.swift; sourceTree = "<group>"; };
 		BB58F3E22600065600BFD314 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		BB5AFF3A247090D40024824F /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		BB6644212611741D0024C94B /* WinnerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerModal.swift; sourceTree = "<group>"; };
 		BB695907260ABFE50005996F /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		BB6A2BC126027DF800EDA439 /* AppleAuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthHelper.swift; sourceTree = "<group>"; };
 		BB6A2BC426027F3800EDA439 /* Truquero.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Truquero.entitlements; sourceTree = "<group>"; };
@@ -114,6 +118,8 @@
 		BBA160932465D15900395E18 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		BBA24F592464E2E800AF3001 /* PlayerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerItem.swift; sourceTree = "<group>"; };
 		BBA24F5B2465A74400AF3001 /* CardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardItem.swift; sourceTree = "<group>"; };
+		BBAAF3F32611243D008AE739 /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
+		BBAAF3F726113F23008AE739 /* ConfirmModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmModal.swift; sourceTree = "<group>"; };
 		BBCBC7952600E497000324B6 /* InputStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputStyles.swift; sourceTree = "<group>"; };
 		BBCE40222607A9D90056C4D3 /* ChatTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTextField.swift; sourceTree = "<group>"; };
 		BBCE4025260805AC0056C4D3 /* StandingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsView.swift; sourceTree = "<group>"; };
@@ -274,6 +280,7 @@
 		BB94E0CF24534612008DE1F4 /* helpers */ = {
 			isa = PBXGroup;
 			children = (
+				BBAAF3F626113F14008AE739 /* modal */,
 				BB921F8D2600F7EC008FE3B6 /* views */,
 				BB22796325EFFD6100FFB90B /* socket */,
 				BB38EDA7247DFD0A00A02DC4 /* styles */,
@@ -287,8 +294,18 @@
 				BBE6555A2605207B00A0082F /* KeyboardHelper.swift */,
 				BBCE402B260841A00056C4D3 /* RoundedCorners.swift */,
 				BB9E4A0A2609079B00D49A8A /* HomeIndicatorHelper.swift */,
+				BBAAF3F32611243D008AE739 /* ModalView.swift */,
 			);
 			path = helpers;
+			sourceTree = "<group>";
+		};
+		BBAAF3F626113F14008AE739 /* modal */ = {
+			isa = PBXGroup;
+			children = (
+				BBAAF3F726113F23008AE739 /* ConfirmModal.swift */,
+				BB6644212611741D0024C94B /* WinnerModal.swift */,
+			);
+			name = modal;
 			sourceTree = "<group>";
 		};
 		BBD79F33247ECD6A00B43E29 /* models */ = {
@@ -468,8 +485,10 @@
 				BBCE4026260805AC0056C4D3 /* StandingsView.swift in Sources */,
 				BBE6555526050A3600A0082F /* ChatMessageView.swift in Sources */,
 				BBCE402C260841A00056C4D3 /* RoundedCorners.swift in Sources */,
+				BBAAF3F42611243E008AE739 /* ModalView.swift in Sources */,
 				BB1939DD2449FF9300BA8210 /* AppDelegate.swift in Sources */,
 				BB7CE48D2601360D00C7F42E /* ResponsePopupView.swift in Sources */,
+				BB6644222611741D0024C94B /* WinnerModal.swift in Sources */,
 				BB58F3E0260000E800BFD314 /* ListSeparatorHelper.swift in Sources */,
 				BBD79F39247F36E200B43E29 /* HunchCheckButton.swift in Sources */,
 				BBA160922465CA4700395E18 /* TableGameViewModel.swift in Sources */,
@@ -484,6 +503,7 @@
 				BB38EDA9247DFD2000A02DC4 /* SelectedButton.swift in Sources */,
 				BB1939E42449FF9300BA8210 /* AvailableGamesView.swift in Sources */,
 				BBF0A93F246DFD6D00C682F8 /* HunchView.swift in Sources */,
+				BBAAF3F826113F23008AE739 /* ConfirmModal.swift in Sources */,
 				BB6A2BCA26028C4E00EDA439 /* AppleLoginButton.swift in Sources */,
 				BBA24F5C2465A74400AF3001 /* CardItem.swift in Sources */,
 				BB94E0D32454B92B008DE1F4 /* Player.swift in Sources */,
@@ -657,7 +677,7 @@
 				CODE_SIGN_ENTITLEMENTS = Truquero.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"Fodinha/Preview Content\"";
 				DEVELOPMENT_TEAM = 662Z4JVQ73;
 				ENABLE_PREVIEWS = YES;
@@ -683,7 +703,7 @@
 				CODE_SIGN_ENTITLEMENTS = Truquero.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"Fodinha/Preview Content\"";
 				DEVELOPMENT_TEAM = 662Z4JVQ73;
 				ENABLE_PREVIEWS = YES;

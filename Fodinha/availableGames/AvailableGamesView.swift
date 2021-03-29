@@ -33,8 +33,6 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            ActivityIndicator(shouldAnimate: self.$viewModel.loading)
-            
             NavigationView {
                 List {
                     ForEach(self.viewModel.games, id: \._id) { game in
@@ -58,6 +56,7 @@ struct ContentView: View {
                                         NetworkHelper().joinGame(gameId: (self.viewModel.selectedGame?._id)!, password: nil) { error in
                                             if error == nil {
                                                 self.viewModel.removeListener()
+                                                self.showJoinGameBlur = false
                                                 self.showingGame = true
                                             } else {
                                                 self.showJoinGameBlur = false
@@ -88,7 +87,6 @@ struct ContentView: View {
                         }
                     }
                 }
-                
                 .listStyle(PlainListStyle())
                 .listSeparatorStyle(.none)
                 .navigationBarItems(
@@ -184,6 +182,7 @@ struct ContentView: View {
                                             NetworkHelper().joinGame(gameId: (self.viewModel.selectedGame?._id)!, password: self.joinGamePassword) { error in
                                                 if error == nil {
                                                     self.viewModel.removeListener()
+                                                    self.showJoinGameBlur = false
                                                     self.showingGame = true
                                                 } else {
                                                     withAnimation {

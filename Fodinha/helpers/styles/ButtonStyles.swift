@@ -50,7 +50,7 @@ struct SecondaryButtonStyle: ButtonStyle {
             .font(Font.footnote.weight(.semibold))
             .textCase(.uppercase)
             .foregroundColor(Color.white)
-            .padding(.init(top: 12, leading: 48, bottom: 12, trailing: 48))
+            .padding(.init(top: 12, leading: 24, bottom: 12, trailing: 24))
             .scaleEffect(configuration.isPressed ? 0.95 : 1)
     }
 }

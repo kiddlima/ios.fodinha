@@ -7,12 +7,13 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 class AvailableGamesViewModel: ObservableObject {
     
     let socket = SocketIOManager.sharedInstance.socket!
     
-    @Published var loading: Bool
+    @Published var loading: Bool = true
     
     var selectedGame: Game?
     
@@ -31,6 +32,12 @@ class AvailableGamesViewModel: ObservableObject {
         self.socket.on(clientEvent: .connect) { data, act in
             
             self.socket.emit("joinHome")
+            
+            if let gameId = UserDefaults.standard.string(forKey: "CurrentGameId") {
+                self.socket.emit("joinGame", JoinGameData(gameId: gameId, userId: Auth.auth().currentUser!.uid))
+                
+                print("joinGame \(gameId) - \(Auth.auth().currentUser!.uid)")
+            }
         
             self.socket.on("attGame") { data, ack in
                 NetworkHelper().getGames(networkDelegate: self)

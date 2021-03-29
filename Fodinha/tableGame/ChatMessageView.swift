@@ -27,7 +27,9 @@ struct ChatMessageView: View {
                     Text("\(message.message)")
                         .foregroundColor(.white)
                         .font(Font.custom("Avenir-Regular", size: 16))
-                        .padding(.trailing, 8)
+                    
+                    Spacer()
+                        .frame(width: 16)
                     
                     Text("\(message.time)")
                         .font(Font.custom("Avenir-Light", size: 14))
@@ -37,8 +39,13 @@ struct ChatMessageView: View {
             .padding(8)
             .background(self.message.isSelfMessage() ? Color.dark3 : Color.dark5)
             .cornerRadius(10)
+            .fixedSize(horizontal: false, vertical: false)
+            .frame(maxWidth: 180, alignment:
+                    self.message.isSelfMessage() ? .trailing : .leading)
         }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .none, alignment:
+        .animation(nil)
+        .padding(.trailing, 16)
+        .frame(width: 244, alignment:
                 self.message.isSelfMessage() ? .trailing : .leading)
     }
     

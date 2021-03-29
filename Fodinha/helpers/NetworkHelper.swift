@@ -259,4 +259,53 @@ class NetworkHelper: NSObject {
                 }
         }
     }
+    
+    func startGame(gameId: String, callback: @escaping (String?) -> Void) {
+        
+        let parameters: Parameters =
+            [
+                "gameId": gameId
+            ]
+        
+        getAuthHeader { authHeader in
+            Alamofire.request(
+                "\(self.URL)/game/start",
+                method: .post,
+                parameters: parameters,
+                encoding: JSONEncoding.default,
+                headers: authHeader)
+                .responseString { response in
+                    
+                    if response.response?.statusCode ?? 500 >= 400 {
+                        callback("Erro ao iniciar jogo")
+                    } else {
+                        callback(nil)
+                    }
+                }
+        }
+    }
+    
+    func leaveGame(gameId: String, callback: @escaping (String?) -> Void) {
+        let parameters: Parameters =
+            [
+                "gameId": gameId
+            ]
+        
+        getAuthHeader { authHeader in
+            Alamofire.request(
+                "\(self.URL)/game/player/leave",
+                method: .post,
+                parameters: parameters,
+                encoding: JSONEncoding.default,
+                headers: authHeader)
+                .responseString { response in
+                    
+                    if response.response?.statusCode ?? 500 >= 400 {
+                        callback("Erro ao sair do jogo")
+                    } else {
+                        callback(nil)
+                    }
+                }
+        }
+    }
 }

@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct SelfPlayerView: View {
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     @Environment(\.presentationMode) var presentation
     
@@ -25,61 +26,83 @@ struct SelfPlayerView: View {
                       currentCards: self.$viewModel.currentPlayerCards,
                       viewModel: self.viewModel)
 
-            ZStack (alignment: .topTrailing) {
-                ZStack {
-                    if !(self.player.status != nil) && self.player.status == 1 {
-                        Text("\(self.player.points ?? 0) pts")
-                            .font(Font.custom("Avenir-Medium", size: 18))
-                            .foregroundColor(getProps().2)
-                            .padding(10)
-                    }
-                }
-                .background(
-                    RoundedCorners(tl: 0, tr: 12, bl: 12, br: 0).fill(getProps().1))
-                
-                VStack (alignment: .leading) {
-                    Spacer()
+            ZStack (alignment: .leading) {
+                ZStack (alignment: .topTrailing) {
                     
-                    HStack {
-                        Text("\(player.name!)")
-                            .font(Font.custom("Avenir-Medium", size: 18))
-                            .bold()
-                            .foregroundColor(self.getProps().2)
-                    }
-                    
-                    if self.player.hunch != nil {
-                        Text("\(getMiddleText())")
-                            .foregroundColor((self.player.smallRoundWinner ?? false) ? .white : .dark3)
-                            .font(Font.custom("Avenir-Regular", size: 14))
-                        
-                        if !self.getProps().3 {
-                            Text("\(player.wins ?? 0) / \(player.hunch ?? 0)")
+                    ZStack {
+                        if !(self.player.status != nil) && self.player.status == 1 {
+                            Text("\(self.player.points ?? 0) pts")
                                 .font(Font.custom("Avenir-Medium", size: 18))
-                                .bold()
-                                .foregroundColor(self.getColorByPointStatus())
+                                .foregroundColor(getProps().2)
+                                .padding(10)
                         }
                     }
+                    .background(
+                        RoundedCorners(tl: 0, tr: 12, bl: 12, br: 0).fill(getProps().1))
                     
-                    Spacer()
+                    VStack (alignment: .leading) {
+                        Spacer()
+                        
+                        HStack {
+                            Text("\(player.name!)")
+                                .font(Font.custom("Avenir-Medium", size: 18))
+                                .bold()
+                                .foregroundColor(self.getProps().2)
+                        }
+                        
+                        if self.player.hunch != nil {
+                            Text("\(getMiddleText())")
+                                .foregroundColor((self.player.smallRoundWinner ?? false) ? .white : .dark3)
+                                .font(Font.custom("Avenir-Regular", size: 14))
+                            
+                            if !self.getProps().3 {
+                                Text("\(player.wins ?? 0) / \(player.hunch ?? 0)")
+                                    .font(Font.custom("Avenir-Medium", size: 18))
+                                    .bold()
+                                    .foregroundColor(self.getColorByPointStatus())
+                            }
+                        }
+                        
+                        Spacer()
+                    }
+                    .frame(width: 215, height: 65, alignment: .leading)
+                    .padding(.top, 6)
+                    .padding(.bottom, 6)
+                    .padding(.trailing, 12)
+                    .padding(.leading, 16)
                 }
-                .frame(width: 215, height: 65, alignment: .leading)
-                .padding(.top, 6)
-                .padding(.bottom, 6)
-                .padding(.trailing, 12)
-                .padding(.leading, 12)
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(self.getProps().0)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(getProps().1, lineWidth: 3))
+                )
+                
+                .frame(minWidth: 215, maxWidth: 215, minHeight: 65, idealHeight: 65, maxHeight: 65,
+                       alignment: .center)
+                
+                if self.viewModel.timeRemainingToPlay != 0 && (self.player.isTurn ?? false) {
+                    Capsule()
+                        .fill(self.viewModel.timeRemainingToPlay > 5 ? Color.dark5 : Color.notificationRed)
+                        .frame(width: 35, height: 35, alignment: .center)
+                        .overlay(
+                            Text("\(self.viewModel.timeRemainingToPlay)")
+                                .foregroundColor(.white)
+                                .font(Font.custom("Avenir-Medium", size: 16))
+                                .onReceive(timer) { _ in
+                                    if self.viewModel.timeRemainingToPlay > 0 {
+                                        self.viewModel.timeRemainingToPlay -= 1
+                                    }
+                                }
+                        )
+                        .animation(.easeInOut(duration: 0.3))
+                        .shadow(color: .black, radius: 10, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: 2.0)
+                        .offset(x: -40)
+                }
             }
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(self.getProps().0)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(getProps().1, lineWidth: 3))
-            )
-            .opacity(self.showingHunch ? 0 : 1)
             .offset(y: -5)
-            .frame(minWidth: 215, maxWidth: 215, minHeight: 65, idealHeight: 65, maxHeight: 65,
-                   alignment: .center)
-            
+            .opacity(self.showingHunch ? 0 : 1)
         }
         .animation(.easeOut(duration: 0.3))
     }

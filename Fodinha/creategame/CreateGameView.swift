@@ -125,6 +125,7 @@ struct CreateGameView: View {
                                         
                                         NetworkHelper().joinGame(gameId: self.gameId, password: self.password) { error in
                                             if error == nil {
+                                                self.joinGameLoading = false
                                                 self.showingGame = true
                                             } else {
                                                 self.presentationMode.wrappedValue.dismiss()
@@ -160,6 +161,10 @@ struct CreateGameView: View {
                 .navigationBarTitle(Text(!self.gameCreated ? "Criar jogo" : "Jogo criado!"))
                 
             }
+            .onAppear {
+                self.joinGameLoading = false
+            }
+            
             .blur(radius: self.joinGameLoading ? 15 : 0)
             .popup(isPresented: self.$showPopup, type: .floater(verticalPadding: 48), autohideIn: 3){
                 ResponsePopupView(message: self.popupMessage, type: self.popupType)

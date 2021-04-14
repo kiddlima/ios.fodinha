@@ -19,12 +19,6 @@ struct TableGameView: View {
     
     @State var gameLoaded = false
     
-    @State var activeMenu = [
-        false, false, false
-    ]
-    
-    var chatMessages = [Message]()
-    
     @State var chatMessageToSend = ""
     
     init(gameId: String) {
@@ -44,29 +38,29 @@ struct TableGameView: View {
                         HStack {
                             //Side menu
                             VStack {
-                                TableMenuItem(icon: "standings", active: self.$activeMenu[0], notification: .constant(false)) {
-                                    let newValue = self.activeMenu[0] ? false : true
+                                TableMenuItem(icon: "standings", active: self.$viewModel.activeMenu[0], notification: .constant(false)) {
+                                    let newValue = self.viewModel.activeMenu[0] ? false : true
                                     
                                     withAnimation (.easeIn(duration: 0.1)) {
-                                        self.activeMenu = [newValue, false, false]
+                                        self.viewModel.activeMenu = [newValue, false, false]
                                     }
                                 }
                                 
-                                TableMenuItem(icon: "chat", active: self.$activeMenu[1], notification: self.$chatViewModel.newMessage) {
+                                TableMenuItem(icon: "chat", active: self.$viewModel.activeMenu[1], notification: self.$chatViewModel.newMessage) {
                                     
-                                    let newValue = self.activeMenu[1] ? false : true
+                                    let newValue = self.viewModel.activeMenu[1] ? false : true
                                     
                                     withAnimation (.easeIn(duration: 0.1)) {
-                                        self.activeMenu = [false, newValue, false]
+                                        self.viewModel.activeMenu = [false, newValue, false]
                                     }
                                 }
                                 
-                                TableMenuItem(icon: "cards", active: self.$activeMenu[2], notification: .constant(false)) {
+                                TableMenuItem(icon: "cards", active: self.$viewModel.activeMenu[2], notification: .constant(false)) {
                                 
-                                    let newValue = self.activeMenu[2] ? false : true
+                                    let newValue = self.viewModel.activeMenu[2] ? false : true
                                     
                                     withAnimation (.easeIn(duration: 0.1)) {
-                                        self.activeMenu = [false, false, newValue]
+                                        self.viewModel.activeMenu = [false, false, newValue]
                                     }
                                 }
                                 
@@ -147,14 +141,14 @@ struct TableGameView: View {
                                         }
                                     }
                                     .animation(.easeOut(duration: 0.3))
-                                    .offset(x: self.activeMenu[0] || self.activeMenu[1] || self.activeMenu[2] ? geometry.size.width / 4 : geometry.size.width / 6, y: 0)
+                                    .offset(x: self.viewModel.activeMenu[0] || self.viewModel.activeMenu[1] || self.viewModel.activeMenu[2] ? geometry.size.width / 4 : geometry.size.width / 6, y: 0)
                                 }
                             }
                         }
                         .zIndex(1)
                         
                         //Side menu shape view
-                        if self.activeMenu[0] || self.activeMenu[1] || self.activeMenu[2] {
+                        if self.viewModel.activeMenu[0] || self.viewModel.activeMenu[1] || self.viewModel.activeMenu[2] {
                             ZStack (alignment: .topLeading) {
                                 LinearGradient(gradient:
                                                 Gradient(colors: [Color.dark8,
@@ -165,7 +159,7 @@ struct TableGameView: View {
                                     .edgesIgnoringSafeArea(.all)
                                 
                                 //Chat View
-                                if self.activeMenu[1] {
+                                if self.viewModel.activeMenu[1] {
                                     ZStack (alignment: .bottom) {
                                         VStack (alignment: .leading) {
                                             
@@ -228,7 +222,7 @@ struct TableGameView: View {
                                 }
                                 
                                 //Standing View
-                                if self.activeMenu[0] {
+                                if self.viewModel.activeMenu[0] {
                                     VStack (alignment: .leading) {
                                         Text("Placar")
                                             .font(Font.custom("Avenir-Medium", size: 28))
@@ -254,7 +248,8 @@ struct TableGameView: View {
                         }
                     }
                 }
-                .blur(radius: self.viewModel.showLeaveGameModal ? 25 : 0)
+                .blur(radius: self.viewModel.showLeaveGameModal || self.viewModel.showWinnerModal
+                        ? 25 : 0)
                 .onTapGesture {
                     withAnimation {
                         self.viewModel.showLeaveGameModal = false
@@ -277,6 +272,42 @@ struct TableGameView: View {
                     }
                 }
                 
+                ModalView(show: self.$viewModel.showWinnerModal) {
+                    if !self.viewModel.players!.isEmpty {
+                        WinnerModal(winner: self.viewModel.players![0],
+                                    currentPlayer: self.$viewModel.currentPlayer,
+                                    players: self.$viewModel.players,
+                                    loadingLeave: self.$viewModel.loadingLeaveGame,
+                                    loadingRematch: self.$viewModel.loadingRematch,
+                                    viewModel: self.viewModel) {
+                            //On leave game
+                            self.viewModel.loadingLeaveGame = true
+                            
+                            self.viewModel.leaveGame { error in
+                                if error == nil {
+                                    self.viewModel.showWinnerModal = false
+                                    self.presentation.wrappedValue.dismiss()
+                                    
+                                    AppDelegate.orientationLock = UIInterfaceOrientationMask.portrait
+                                    UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+                                    UINavigationController.attemptRotationToDeviceOrientation()
+                                } else {
+                                    withAnimation {
+                                        self.viewModel.loadingLeaveGame = false
+                                    }
+                                }
+                            }
+                                        
+                            } onPlayAgain: {
+                                self.viewModel.loadingRematch = true
+                                
+                                NetworkHelper().rejoinGame(gameId: self.viewModel.game._id!) { error in
+                                    self.viewModel.loadingRematch = false
+                                }
+                            }
+                    }
+                }
+                
                 ModalView(show: self.$viewModel.showLeaveGameModal) {
                     ConfirmModal(title: "Deseja sair do jogo?",
                                  subtitle: "Você ainda poderá voltar ao jogo",
@@ -288,12 +319,11 @@ struct TableGameView: View {
                         
                     } confirmAction: {
                         withAnimation {
-                            self.activeMenu = [false, false, false]
+                            self.viewModel.activeMenu = [false, false, false]
                             self.viewModel.loadingLeaveGame = true
                         }
                         
-                        NetworkHelper().leaveGame(gameId: self.viewModel.game._id!) { error in
-                            
+                        self.viewModel.leaveGame { error in
                             if error == nil {
                                 self.presentation.wrappedValue.dismiss()
                                 
@@ -313,11 +343,10 @@ struct TableGameView: View {
                 }
             }
             
-            
-            
         }
-        
-        
+        else {
+            TableLoadingView()
+        }
     }
 }
 

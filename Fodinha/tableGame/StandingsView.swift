@@ -85,7 +85,7 @@ struct GroupedStandingView: View {
             
             ForEach(self.samePointPlayers, id: \.id) { player in
                 Text("\(player.name!)")
-                    .font(Font.custom("Avenir-Regular", size: 16))
+                    .font(Font.custom("Avenir-Medium", size: 16))
                     .strikethrough(self.samePointPlayers[0].points == 5)
                     .foregroundColor(self.samePointPlayers[0].points == 5 ? Color.dark5 : Color.dark3)
             }

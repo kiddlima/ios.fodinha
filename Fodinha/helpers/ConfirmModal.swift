@@ -41,10 +41,10 @@ struct ConfirmModal: View {
                     self.confirmAction()
                 }, label: {
                     HStack {
-                        Text("Confirmar")
-                        
                         if self.loading {
                             ActivityIndicator(shouldAnimate: self.$loading)
+                        } else {
+                            Text("Confirmar")
                         }
                     }
                 })

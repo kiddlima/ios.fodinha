@@ -24,6 +24,7 @@ class Game: Decodable, Equatable {
         self.createdBy = data["createdBy"] as? String
         self.active = data["active"] as? Bool
         self.winner = data["winner"] as? String
+        self.timer = data["timer"] as? Int
         
         if let playersArray = data["players"] as? NSMutableArray {
             playersArray.forEach { player in
@@ -32,6 +33,22 @@ class Game: Decodable, Equatable {
                 }
             }
         }
+        
+        if let confirmedPlayers = data["confirmedPlayers"] as? NSMutableArray {
+            confirmedPlayers.forEach { player in
+                if let dictPlayerId = player as? String {
+                    self.confirmedPlayers?.append(dictPlayerId)
+                }
+            }
+        }
+        
+        self.players?.forEach({ player in
+            self.confirmedPlayers?.forEach({ confirmedPlayer in
+                if player.id == confirmedPlayer {
+                    player.confirmed = true
+                }
+            })
+        })
     }
     
     init() {
@@ -89,8 +106,7 @@ class Game: Decodable, Equatable {
     var name: String?
     var turn: String?
     var winner: String?
-    var activePlayers: Int?
-    var totalPlayers: Int?
-    var someoneLeft: Bool?
+    var confirmedPlayers: [String]? = [String]()
     var players: [Player]? = [Player]()
+    var timer: Int?
 }

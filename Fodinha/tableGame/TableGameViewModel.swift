@@ -18,8 +18,14 @@ class TableGameViewModel: ObservableObject {
     @Published var game: Game = Game()
     
     @Published var players: [Player]?
+    @Published var winnerPlayers: [Player] = [Player]()
+    @Published var confirmedPlayers: [String]?
     
     @Published var timeRemainingToPlay = 40
+    
+    @Published var activeMenu = [
+        false, false, false
+    ]
     
     @Published var player1: Player?
     @Published var player2: Player?
@@ -36,6 +42,8 @@ class TableGameViewModel: ObservableObject {
     
     @Published var showHunchView = false
     @Published var showLeaveGameModal = false
+    @Published var showWinnerModal = false
+    @Published var showWinnerModa2 = true
     
     @Published var choices: [Choice] = []
     
@@ -43,16 +51,18 @@ class TableGameViewModel: ObservableObject {
     
     @Published var loadingStartGame: Bool = false
     @Published var loadingLeaveGame: Bool = false
+    @Published var loadingRematch: Bool = false
     @Published var loadingPlay: Bool = false
     
     @Published var loadingGame: Bool = true
     
     var firstLoad: Bool = true
-    var isPlayerInTheGameAlready: Bool = false
     
     let socket = SocketIOManager.sharedInstance.socket!
     
     init(gameId: String) {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.startApp), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.stopApp), name: UIApplication.didEnterBackgroundNotification, object: nil)
         
         NetworkHelper().getGame(gameId: gameId) { game, error in
             if error == nil {
@@ -63,6 +73,24 @@ class TableGameViewModel: ObservableObject {
         self.socket.on("updateGame") { (data, ack) in
             if let gameDict = data[0] as? [String: Any] {
                 self.onGameUpdate(game: Game(data: gameDict))
+            }
+        }
+    }
+    
+    @objc func stopApp() {
+        self.loadingGame = true
+    }
+    
+    @objc func startApp() {
+        if let id = game._id {
+            self.loadingGame = true
+            
+            NetworkHelper().getGame(gameId: id) { game, error in
+                if error == nil {
+                    self.onGameUpdate(game: game!)
+                }
+                
+                self.loadingGame = false
             }
         }
     }
@@ -79,10 +107,24 @@ class TableGameViewModel: ObservableObject {
         withAnimation(.easeOut(duration: 0.3)) {
             self.game = game
             self.players = game.players
+            self.timeRemainingToPlay = game.timer ?? 40
+            self.confirmedPlayers = game.confirmedPlayers
+            self.winnerPlayers = game.players!
             
-            self.loadingGame = false
+            withAnimation {
+                self.loadingGame = false
+            }
             
-            self.timeRemainingToPlay = 40
+            if game.winner != nil {
+                if !self.players!.isEmpty {
+                    self.players?.sort { $0.points! < $1.points! }
+                    
+                    self.activeMenu = [false, false, false]
+                    self.showWinnerModal = true
+                }
+            } else {
+                self.showWinnerModal = false
+            }
             
             game.players?.forEach({ player in
                 if player.id == uid {
@@ -102,74 +144,81 @@ class TableGameViewModel: ObservableObject {
                     if self.isPlayersTurnToHunch() {
                         if self.choices.isEmpty {
                             self.populateChoices(cardAmount: game.cardAmount!)
-                            withAnimation {
-                                self.showHunchView = true
-                            }
+                            
+                            self.showHunchView = true
                         }
                     }
                 }
             })
         
-            if positionHasPlayer(position: 1) {
-                player1 = game.players![getRelativePosition(nextSelfPlayerPosition: self.currentPlayer.position! + 1)]
-                checkPlayerStatus(player: player1)
-            } else {
-                player1 = nil
+            if let players = game.players {
+                if positionHasPlayer(position: 1) {
+                    player1 = players[getRelativePosition(nextSelfPlayerPosition: self.currentPlayer.position! + 1)]
+                    checkPlayerStatus(player: player1)
+                } else {
+                    player1 = nil
+                }
+                
+                if positionHasPlayer(position: 2) {
+                    player2 = players[getRelativePosition(nextSelfPlayerPosition: self.currentPlayer.position! + 2)]
+                    checkPlayerStatus(player: player2)
+                } else {
+                    player2 = nil
+                }
+                
+                if positionHasPlayer(position: 3) {
+                    player3 = players[getRelativePosition(nextSelfPlayerPosition: self.currentPlayer.position! + 3)]
+                    checkPlayerStatus(player: player3)
+                } else {
+                    player3 = nil
+                }
+                
+                if positionHasPlayer(position: 4) {
+                    player4 = players[getRelativePosition(nextSelfPlayerPosition: self.currentPlayer.position! + 4)]
+                    checkPlayerStatus(player: player4)
+                } else {
+                    player4 = nil
+                }
+                
+                if positionHasPlayer(position: 5) {
+                    player5 = players[getRelativePosition(nextSelfPlayerPosition: self.currentPlayer.position! + 5)]
+                    checkPlayerStatus(player: player5)
+                } else {
+                    player5 = nil
+                }
+                
+                if positionHasPlayer(position: 6) {
+                    player6 = players[getRelativePosition(nextSelfPlayerPosition: self.currentPlayer.position! + 6)]
+                    checkPlayerStatus(player: player6)
+                } else {
+                    player6 = nil
+                }
+                
+                if positionHasPlayer(position: 7) {
+                    player7 = players[getRelativePosition(nextSelfPlayerPosition: self.currentPlayer.position! + 7)]
+                    checkPlayerStatus(player: player7)
+                } else {
+                     player7 = nil
+                }
             }
             
-            if positionHasPlayer(position: 2) {
-                player2 = game.players![getRelativePosition(nextSelfPlayerPosition: self.currentPlayer.position! + 2)]
-                checkPlayerStatus(player: player2)
-            } else {
-                player2 = nil
+            withAnimation {
+                self.loadingGame = false
             }
-            
-            if positionHasPlayer(position: 3) {
-                player3 = game.players![getRelativePosition(nextSelfPlayerPosition: self.currentPlayer.position! + 3)]
-                checkPlayerStatus(player: player3)
-            } else {
-                player3 = nil
-            }
-            
-            if positionHasPlayer(position: 4) {
-                player4 = game.players![getRelativePosition(nextSelfPlayerPosition: self.currentPlayer.position! + 4)]
-                checkPlayerStatus(player: player4)
-            } else {
-                player4 = nil
-            }
-            
-            if positionHasPlayer(position: 5) {
-                player5 = game.players![getRelativePosition(nextSelfPlayerPosition: self.currentPlayer.position! + 5)]
-                checkPlayerStatus(player: player5)
-            } else {
-                player5 = nil
-            }
-            
-            if positionHasPlayer(position: 6) {
-                player6 = game.players![getRelativePosition(nextSelfPlayerPosition: self.currentPlayer.position! + 6)]
-                checkPlayerStatus(player: player6)
-            } else {
-                player6 = nil
-            }
-            
-            if positionHasPlayer(position: 7) {
-                player7 = game.players![getRelativePosition(nextSelfPlayerPosition: self.currentPlayer.position! + 7)]
-                checkPlayerStatus(player: player7)
-            } else {
-                 player7 = nil
-            }
-            
-            self.loadingGame = false
         }
     }
-    
+     
     func checkPlayerStatus(player: Player?) {
         player?.isTurn = self.game.turn == player?.id
         player?.smallRoundWinner = self.game.smallRoundWinner == player?.id
     }
     
     func positionHasPlayer (position: Int) -> Bool {
-        return (getRelativePosition(nextSelfPlayerPosition: self.currentPlayer.position! + position)) <= self.players!.count - 1
+        if let currentPlayerPosition = self.currentPlayer.position {
+            return (getRelativePosition(nextSelfPlayerPosition: currentPlayerPosition + position)) <= self.players!.count - 1
+        }
+        
+        return false
     }
     
     func populateChoices(cardAmount: Int){
@@ -269,6 +318,13 @@ class TableGameViewModel: ObservableObject {
             if error == nil {
                 print()
             }
+        }
+    }
+    
+    func leaveGame (callback: @escaping (String?) -> Void) {
+        NetworkHelper().leaveGame(gameId: self.game._id!) { error in
+            self.socket.emit("joinHome")
+            callback(error)
         }
     }
 }

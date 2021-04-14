@@ -21,6 +21,8 @@ class Player: Decodable {
             self.hunch = 1
             self.wins = 1
             self.points = 0
+            self.confirmed = true
+            self.status = 3
 
         }
     }
@@ -73,4 +75,5 @@ class Player: Decodable {
     var smallRoundWinner: Bool? = false
     var isTurn: Bool? = false
     var choices: [Choice]?
+    var confirmed: Bool? = false
 }

@@ -30,6 +30,27 @@ struct GoldenButtonStyle: ButtonStyle {
     }
 }
 
+struct GreenButtonStyle: ButtonStyle {
+    private let isEnabled: Bool
+    
+    init(isEnabled: Bool = true) {
+            self.isEnabled = isEnabled
+        }
+    
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+        .font(Font.footnote.weight(.bold))
+        .textCase(.uppercase)
+        .foregroundColor(Color.darkGreen)
+        .cornerRadius(8)
+        .opacity(isEnabled ? 1 : 0.5)
+        .padding(.init(top: 12, leading: 24, bottom: 12, trailing: 24))
+        .scaleEffect(configuration.isPressed ? 0.95 : 1)
+        .background(Color.winnerGreen)
+        .cornerRadius(4.0)
+    }
+}
+
 // Then make a ViewModifier to inject the state
 struct GoldenButtonModifier: ViewModifier {
     @Environment(\.isEnabled) var isEnabled

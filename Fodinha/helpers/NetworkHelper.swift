@@ -78,6 +78,12 @@ class NetworkHelper: NSObject {
                 
                 case .success( _):
                     
+//                    do {
+//                        try JSONDecoder().decode([Game].self, from: response.data!)
+//                    } catch let error {
+//                        print(error)
+//                    }
+                    
                     if let gamesResponse = try? JSONDecoder().decode([Game].self, from: response.data!){
                         networkDelegate.success(response: gamesResponse)
                     } else {
@@ -123,7 +129,7 @@ class NetworkHelper: NSObject {
                 headers: authHeader)
                 .responseString { response in
                     
-                    if response.response!.statusCode >= 400 {
+                    if (response.response?.statusCode ?? 500) >= 400 {
                         networkDelegate.fail(errorMessage: "Erro ao logar")
                     } else {
                         networkDelegate.success(response: nil)
@@ -302,6 +308,30 @@ class NetworkHelper: NSObject {
                     
                     if response.response?.statusCode ?? 500 >= 400 {
                         callback("Erro ao sair do jogo")
+                    } else {
+                        callback(nil)
+                    }
+                }
+        }
+    }
+    
+    func rejoinGame(gameId: String, callback: @escaping (String?) -> Void) {
+        let parameters: Parameters =
+            [
+                "gameId": gameId
+            ]
+        
+        getAuthHeader { authHeader in
+            Alamofire.request(
+                "\(self.URL)/game/player/confirm",
+                method: .post,
+                parameters: parameters,
+                encoding: JSONEncoding.default,
+                headers: authHeader)
+                .responseString { response in
+                    
+                    if response.response?.statusCode ?? 500 >= 400 {
+                        callback("Erro ao confirmar rematch")
                     } else {
                         callback(nil)
                     }

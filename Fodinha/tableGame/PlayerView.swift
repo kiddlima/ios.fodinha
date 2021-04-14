@@ -28,14 +28,14 @@ struct PlayerView: View {
                                 .bold()
                                 .foregroundColor(self.getProps().1)
                             
+                            if self.getProps().2 {
+                                Text("\(getMiddleText())")
+                                    .foregroundColor(self.player!.smallRoundWinner! ? .white : .dark3)
+                                    .font(Font.custom("Avenir-Regular", size: 12))
+                                    .padding(.bottom, 6)
+                            }
+                            
                             if self.player?.hunch != nil {
-                                if self.getProps().2 {
-                                    Text("\(getMiddleText())")
-                                        .foregroundColor(self.player!.smallRoundWinner! ? .white : .dark3)
-                                        .font(Font.custom("Avenir-Regular", size: 12))
-                                        .padding(.bottom, 6)
-                                }
-                                
                                 if !self.getProps().2 {
                                     Text("\(player!.wins ?? 0) / \(player!.hunch ?? 0)")
                                         .font(Font.custom("Avenir-Medium", size: 14))
@@ -86,7 +86,6 @@ struct PlayerView: View {
             }
             .animation(.easeOut(duration: 0.3))
         }
-        
     }
     
     func getMiddleText() -> String {
@@ -96,6 +95,8 @@ struct PlayerView: View {
             return "Eliminado"
         } else if self.player?.status == 2 {
             return "Aguardando rodada"
+        } else if self.player?.status == 3 {
+            return "Saindo"
         } else {
             return "Vitórias / Palpíte"
         }
@@ -107,9 +108,9 @@ struct PlayerView: View {
             return (.white, .dark5, false)
         } else if self.player?.smallRoundWinner ?? false {
             return (.winnerGreen, .white, true)
-        } else if self.player?.status == 0 {
+        } else if self.player?.status == 0  {
             return (.dark8, .dark3, true)
-        } else if self.self.player?.status == 2 {
+        } else if self.self.player?.status == 2 || self.player?.status == 3 {
             return (Color.dark5.opacity(0.9), .white, true)
         } else {
             return (Color.dark5, .white, false)

@@ -29,11 +29,11 @@ struct Card: Decodable, Hashable{
     init()  {
     }
     
-    var id: UUID = UUID()
+    var id: UUID? = UUID()
     var rank: Int?
     var suit: String?
     var value: Int?
     var imageName: String?
-    var selected: Bool = false
+    var selected: Bool? = false
     
 }

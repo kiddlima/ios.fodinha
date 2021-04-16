@@ -72,7 +72,8 @@ struct ContentView: View {
                                     }
                                     
                                 }){
-                                    RowView(game: game)
+//                                    RowView(game: game)
+                                    RowView(game: self.$viewModel.games[self.viewModel.games.firstIndex(of: game)!])
                                 }
                                 .buttonStyle(ResizeButtonStyle())
                                 .listRowBackground(Color.dark8)
@@ -81,7 +82,8 @@ struct ContentView: View {
                                 Button(action: {
                                     self.showingLogin.toggle()
                                 }) {
-                                    RowView(game: game)
+//                                    RowView(game: game)
+                                    RowView(game: self.$viewModel.games[self.viewModel.games.firstIndex(of: game)!])
                                 }.sheet(isPresented: self.$showingLogin) {
                                     LoginView(viewModel: self.loginViewModel)
                                 }
@@ -255,7 +257,7 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 struct RowView: View{
-    var game: Game
+    @Binding var game: Game
     
     var body: some View {
         

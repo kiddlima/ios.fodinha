@@ -82,7 +82,7 @@ struct SelfPlayerView: View {
                 .frame(minWidth: 215, maxWidth: 215, minHeight: 65, idealHeight: 65, maxHeight: 65,
                        alignment: .center)
                 
-                if self.viewModel.timeRemainingToPlay != 0 && (self.player.isTurn ?? false) {
+                if self.viewModel.timeRemainingToPlay != 0 && (self.player.isTurn ?? false) && !(self.viewModel.game.hunchTime ?? false) {
                     Capsule()
                         .fill(self.viewModel.timeRemainingToPlay > 5 ? Color.dark5 : Color.notificationRed)
                         .frame(width: 35, height: 35, alignment: .center)

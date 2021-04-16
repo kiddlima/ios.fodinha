@@ -147,6 +147,8 @@ class TableGameViewModel: ObservableObject {
                             
                             self.showHunchView = true
                         }
+                    } else {
+                        self.showHunchView = false
                     }
                 }
             })
@@ -225,7 +227,7 @@ class TableGameViewModel: ObservableObject {
         var unavailableChoice: Choice?
 
         if self.game.cardAmount != 1 {
-            if self.game.isLastPlay() {
+            if self.game.isLastPlay() && (self.players?.count ?? 1) > 2 {
                 unavailableChoice = self.game.getUnavailableChoice()
             }
         }
@@ -287,7 +289,6 @@ class TableGameViewModel: ObservableObject {
         
         withAnimation {
             self.showHunchView = false
-            self.choices = [Choice]()
         }
             
         NetworkHelper().makeHunch(gameId: self.game._id!, hunch: selectedChoice!.number!) { error in
@@ -323,6 +324,8 @@ class TableGameViewModel: ObservableObject {
     
     func leaveGame (callback: @escaping (String?) -> Void) {
         NetworkHelper().leaveGame(gameId: self.game._id!) { error in
+            self.socket.emit("leaveGame", self.game._id!)
+            self.socket.off("updateGame")
             self.socket.emit("joinHome")
             callback(error)
         }

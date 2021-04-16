@@ -23,54 +23,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "56896500-0B18-47D8-90CF-42890FD1E50D"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fodinha/tableGame/HunchView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "body"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "56896500-0B18-47D8-90CF-42890FD1E50D - 9b4537df1da18dec"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.HStack&lt;SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of (extension in SwiftUI):SwiftUI.View.buttonStyle&lt;A where A1: SwiftUI.ButtonStyle&gt;(A1) -&gt; some&gt;&gt;.0&gt;&gt;, SwiftUI.Spacer, SwiftUI.VStack&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Fodinha.Player&gt;, Swift.String, Fodinha.PlayerHunchView&gt;&gt;, SwiftUI.Spacer, &lt;&lt;opaque return type of (extension in SwiftUI):SwiftUI.View.buttonStyle&lt;A where A1: SwiftUI.ButtonStyle&gt;(A1) -&gt; some&gt;&gt;.0)&gt; in Fodinha.HunchView.body.getter : some"
-                  moduleName = "Fodinha"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/viniciuslima/Desktop/GitHub/ios.fodinha/Fodinha/tableGame/HunchView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25"
-                  offsetFromSymbolStart = "1068">
-               </Location>
-               <Location
-                  uuid = "56896500-0B18-47D8-90CF-42890FD1E50D - dab5a3b5c5482c21"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of (extension in SwiftUI):SwiftUI.View.buttonStyle&lt;A where A1: SwiftUI.ButtonStyle&gt;(A1) -&gt; some&gt;&gt;.0&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.HStack&lt;SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of (extension in SwiftUI):SwiftUI.View.buttonStyle&lt;A where A1: SwiftUI.ButtonStyle&gt;(A1) -&gt; some&gt;&gt;.0&gt;&gt;, SwiftUI.Spacer, SwiftUI.VStack&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Fodinha.Player&gt;, Swift.String, Fodinha.PlayerHunchView&gt;&gt;, SwiftUI.Spacer, &lt;&lt;opaque return type of (extension in SwiftUI):SwiftUI.View.buttonStyle&lt;A where A1: SwiftUI.ButtonStyle&gt;(A1) -&gt; some&gt;&gt;.0)&gt; in Fodinha.HunchView.body.getter : some"
-                  moduleName = "Fodinha"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/viniciuslima/Desktop/GitHub/ios.fodinha/Fodinha/tableGame/HunchView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26"
-                  offsetFromSymbolStart = "88">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "FF7BB882-C945-42F7-8537-5E0B0D8D225B"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -78,8 +30,8 @@
             filePath = "Fodinha/tableGame/HunchView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -241,6 +193,38 @@
             startingLineNumber = "119"
             endingLineNumber = "119"
             landmarkName = "onGameUpdate(game:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6A866FAD-0933-42BC-B275-AA9015D70D8D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fodinha/tableGame/TableGameViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "onGameUpdate(game:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "75447406-4591-454B-8417-77BFE4B74A7C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fodinha/tableGame/TableGameViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "270"
+            endingLineNumber = "270"
+            landmarkName = "isPlayersTurnToHunch()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

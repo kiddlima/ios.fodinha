@@ -32,21 +32,19 @@ class AvailableGamesViewModel: ObservableObject {
         self.socket.on(clientEvent: .connect) { data, act in
             
             self.socket.emit("joinHome")
-            
-//            if let user = Auth.auth().currentUser {
-//                if let gameId = UserDefaults.standard.string(forKey: "CurrentGameId") {
-//                    self.socket.emit("joinGame", JoinGameData(gameId: gameId, userId: user.uid))
-//                }
-//            }
         
             self.socket.on("attGame") { data, ack in
-                NetworkHelper().getGames(networkDelegate: self)
+                self.getGames()
             }
         }
     }
     
     func removeListener() {
         self.socket.off("attGame")
+    }
+    
+    func getGames() {
+        NetworkHelper().getGames(networkDelegate: self)
     }
 }
 

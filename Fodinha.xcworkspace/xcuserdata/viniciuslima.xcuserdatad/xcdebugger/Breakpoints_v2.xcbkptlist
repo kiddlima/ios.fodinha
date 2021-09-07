@@ -200,7 +200,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "6A866FAD-0933-42BC-B275-AA9015D70D8D"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fodinha/tableGame/TableGameViewModel.swift"
@@ -209,22 +209,6 @@
             startingLineNumber = "144"
             endingLineNumber = "144"
             landmarkName = "onGameUpdate(game:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "75447406-4591-454B-8417-77BFE4B74A7C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fodinha/tableGame/TableGameViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
-            landmarkName = "isPlayersTurnToHunch()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

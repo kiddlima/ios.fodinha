@@ -50,26 +50,30 @@ struct ChatMessageView: View {
     }
     
     func getPlayerColor(messageSenderId: String) -> Color {
-        let position = self.players.filter { $0.id == messageSenderId}[0].position
-        
-        switch position {
-        case 1:
-            return Color.chatColor1
-        case 2:
-            return Color.chatColor2
-        case 3:
-            return Color.chatColor3
-        case 4:
-            return Color.chatColor4
-        case 5:
-            return Color.chatColor5
-        case 6:
-            return Color.chatColor6
-        case 7:
-            return Color.chatColor7
-        default:
-            return Color.chatColor8
+        if !players.isEmpty {
+            let position = self.players.filter { $0.id == messageSenderId}[0].position
+            
+            switch position {
+            case 1:
+                return Color.chatColor1
+            case 2:
+                return Color.chatColor2
+            case 3:
+                return Color.chatColor3
+            case 4:
+                return Color.chatColor4
+            case 5:
+                return Color.chatColor5
+            case 6:
+                return Color.chatColor6
+            case 7:
+                return Color.chatColor7
+            default:
+                return Color.chatColor8
+            }
         }
+        
+        return Color.chatColor1
     }
 }
 

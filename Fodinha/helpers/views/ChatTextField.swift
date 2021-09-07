@@ -18,7 +18,9 @@ struct ChatTextField: UIViewRepresentable {
     func makeUIView(context: Context) -> UITextField {
         let textField = UITextField()
         textField.delegate = context.coordinator
-        textField.placeholder = placeHolder
+        textField.attributedPlaceholder = NSAttributedString(string: placeHolder,
+                                                             attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(Color.customLighter2Gray)])
+        textField.textColor = UIColor.init(.white)
 
         return textField
     }

@@ -72,7 +72,6 @@ struct ContentView: View {
                                     }
                                     
                                 }){
-//                                    RowView(game: game)
                                     RowView(game: self.$viewModel.games[self.viewModel.games.firstIndex(of: game)!])
                                 }
                                 .buttonStyle(ResizeButtonStyle())
@@ -82,11 +81,12 @@ struct ContentView: View {
                                 Button(action: {
                                     self.showingLogin.toggle()
                                 }) {
-//                                    RowView(game: game)
                                     RowView(game: self.$viewModel.games[self.viewModel.games.firstIndex(of: game)!])
-                                }.sheet(isPresented: self.$showingLogin) {
+                                }.sheet(isPresented: self.$showingLogin, onDismiss: {
+                                    self.viewModel.getGames()
+                                }, content: {
                                     LoginView(viewModel: self.loginViewModel)
-                                }
+                                })
                                 .buttonStyle(ResizeButtonStyle())
                                 .listRowBackground(Color.dark8)
                             }
@@ -131,7 +131,9 @@ struct ContentView: View {
                                         Image(systemName: "plus.circle.fill")
                                             .foregroundColor(Color.golden0)
                                             .imageScale(.large)
-                                    }.sheet(isPresented: self.$showCreateGame) {
+                                    }.sheet(isPresented: self.$showCreateGame, onDismiss: {
+                                        self.viewModel.getGames()
+                                    }) {
                                         CreateGameView()
                                     }
                                 }
@@ -140,9 +142,11 @@ struct ContentView: View {
                     )
                     .navigationBarTitle(Text("Jogos"))
                 }
-                .fullScreenCover(isPresented: self.$showingGame, content: {
+                .fullScreenCover(isPresented: self.$showingGame, onDismiss: {
+                    self.viewModel.getGames()
+                }) {
                     TableGameView(gameId: (self.viewModel.selectedGame?._id)!)
-                })
+                }
                 .blur(radius: self.showJoinGameBlur ? 25 : 0)
                 
                 if self.showJoinGameBlur {
@@ -222,8 +226,6 @@ struct ContentView: View {
                     }
                 }
             }
-            
-            
         }
         .popup(isPresented: self.$showPopup, type: .floater(verticalPadding: 48), autohideIn: 3){
             ResponsePopupView(message: self.popupMessage, type: self.popupType)

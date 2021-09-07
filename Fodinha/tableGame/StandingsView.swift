@@ -11,51 +11,37 @@ import SwiftUI
 struct StandingsView: View {
     
     @Binding var players: [Player]?
-    
-    var zeroPointPlayers: [Player]?
-    var onePointPlayers: [Player]?
-    var twoPointPlayers: [Player]?
-    var threePointPlayers: [Player]?
-    var fourPointPlayers: [Player]?
-    var fiveOrMorePointPlayers: [Player]?
+    var groupedPlayers = [Int: [Player]]()
     
     init(players: Binding<[Player]?>) {
         self._players = players
         
-        self.zeroPointPlayers = getPlayersByPoint(point: 0)
-        self.onePointPlayers = getPlayersByPoint(point: 1)
-        self.twoPointPlayers = getPlayersByPoint(point: 2)
-        self.threePointPlayers = getPlayersByPoint(point: 3)
-        self.fourPointPlayers = getPlayersByPoint(point: 4)
-        self.fiveOrMorePointPlayers = getPlayersByPoint(point: 5)
+        self.players?.forEach({ player in
+            if let points = player.points {
+                if groupedPlayers[points] == nil {
+                  groupedPlayers[points] = [Player]()
+                }
+                
+                groupedPlayers[points]?.append(player)
+            }
+        })
+        
+        self.groupedPlayers.forEach { key, players in
+            if players.isEmpty {
+                self.groupedPlayers.removeValue(forKey: key)
+            }
+        }
     }
     
     var body: some View {
         VStack (alignment: .leading) {
-            if !fiveOrMorePointPlayers!.isEmpty {
-                GroupedStandingView(samePointPlayers: fiveOrMorePointPlayers!)
-            }
-            
-            if !fourPointPlayers!.isEmpty {
-                GroupedStandingView(samePointPlayers: fourPointPlayers!)
-            }
-            
-            if !threePointPlayers!.isEmpty {
-                GroupedStandingView(samePointPlayers: threePointPlayers!)
-            }
-            
-            if !twoPointPlayers!.isEmpty {
-                GroupedStandingView(samePointPlayers: twoPointPlayers!)
-            }
-            
-            if !onePointPlayers!.isEmpty {
-                GroupedStandingView(samePointPlayers: onePointPlayers!)
-            }
-            
-            if !zeroPointPlayers!.isEmpty {
-                GroupedStandingView(samePointPlayers: zeroPointPlayers!)
+            ForEach(Array(groupedPlayers.keys).sorted(by: { $0 > $1 }), id: \.self) { key in
+                if let players = self.groupedPlayers[key] {
+                    GroupedStandingView(samePointPlayers: players)
+                }
             }
         }
+        .animation(.none)
     }
     
     func getPlayersByPoint(point: Int) -> [Player] {
@@ -86,8 +72,8 @@ struct GroupedStandingView: View {
             ForEach(self.samePointPlayers, id: \.id) { player in
                 Text("\(player.name!)")
                     .font(Font.custom("Avenir-Medium", size: 16))
-                    .strikethrough(self.samePointPlayers[0].points == 5)
-                    .foregroundColor(self.samePointPlayers[0].points == 5 ? Color.dark5 : Color.dark3)
+                    .strikethrough(player.status == 0)
+                    .foregroundColor(player.status == 0 ? Color.dark5 : Color.dark3)
             }
         }
         .padding(.top, 4)
@@ -101,9 +87,12 @@ struct StandingsView_Previews: PreviewProvider {
         let player2 = Player(mockedPlayer: true)
         let player3 = Player(mockedPlayer: true)
         let player4 = Player(mockedPlayer: true, points: 2)
+        let player5 = Player(mockedPlayer: true, points: 2)
+        let player6 = Player(mockedPlayer: true, points: 2)
+        let player7 = Player(mockedPlayer: true, points: 3)
         
         StandingsView(players: .constant([Player](arrayLiteral:
-            player1, player2, player3, player4
+            player1, player2, player3, player4, player5, player6, player7
         )))
     }
 }

@@ -19,6 +19,7 @@ class Game: Decodable, Equatable {
         self.smallRoundWinner = data["smallRoundWinner"] as? String
         self.turn = data["turn"] as? String
         self.name = data["name"] as? String
+        self.maxPoints = data["maxPoints"] as? Int
         self.hunchTime = data["hunchTime"] as? Bool
         self.cardAmount = data["cardAmount"] as? Int
         self.createdBy = data["createdBy"] as? String
@@ -106,6 +107,7 @@ class Game: Decodable, Equatable {
     var name: String?
     var turn: String?
     var winner: String?
+    var maxPoints: Int?
     var confirmedPlayers: [String]? = [String]()
     var players: [Player]? = [Player]()
     var timer: Int?

@@ -82,31 +82,51 @@ struct LoginView: View {
                         .frame(height: 70)
                         .padding(32)
                     
-                    TextField("Email", text: self.$email)
+                    TextField("", text: self.$email)
                         .textFieldStyle(PrimaryInput(invalid: !self._email.isValid))
                         .keyboardType(.emailAddress)
                         .autocapitalization(.none)
                         .textContentType(.emailAddress)
+                        .placeholder(when: email.isEmpty) {
+                               Text("Email")
+                                .padding(.leading, 16)
+                                .foregroundColor(.customLighterGray)
+                       }
                     
                     if self.isSignUp {
-                        TextField("Nome", text: self.$name)
+                        TextField("", text: self.$name)
                             .textFieldStyle(PrimaryInput(invalid: !self._name.isValid))
                             .keyboardType(.emailAddress)
                             .autocapitalization(.none)
                             .textContentType(.name)
+                            .placeholder(when: name.isEmpty) {
+                                   Text("Nome")
+                                    .padding(.leading, 16)
+                                    .foregroundColor(.customLighterGray)
+                           }
                     }
                     
-                    SecureField("Senha", text: self.$password)
+                    SecureField("", text: self.$password)
                         .textFieldStyle(PrimaryInput(invalid: !self._password.isValid))
                         .textContentType(.password)
                         .autocapitalization(.none)
+                        .placeholder(when: password.isEmpty) {
+                               Text("Senha")
+                                .padding(.leading, 16)
+                                .foregroundColor(.customLighterGray)
+                       }
                     
                     
                     if self.isSignUp {
-                        SecureField("Confirmar senha", text: self.$confirmPassword)
+                        SecureField("", text: self.$confirmPassword)
                             .textFieldStyle(PrimaryInput(invalid: false))
                             .textContentType(.password)
                             .autocapitalization(.none)
+                            .placeholder(when: confirmPassword.isEmpty) {
+                                   Text("Confirmar senha")
+                                    .padding(.leading, 16)
+                                    .foregroundColor(.customLighterGray)
+                           }
                     }
                     
                     VStack {

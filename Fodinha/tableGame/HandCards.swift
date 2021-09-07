@@ -349,7 +349,7 @@ struct DroppableAreaView: View {
     var body: some View {
         Rectangle()
             .fill(self.active != id ? Color.black.opacity(0.4) : Color.black.opacity(0.8))
-            .frame(width: 50, height: 75)
+            .frame(width: 48, height: 75)
             .scaledToFit()
             .offset(x: 0, y: 0)
             .cornerRadius(4)
